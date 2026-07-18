@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StayBooker 360 — Página principal</title>
+</head>
+<body>
+
+<header>
+  <h1>StayBooker 360</h1>
+
+  <form role="search" action="resultados-busqueda.html" method="get">
+    <label for="search-main">Buscar alojamiento</label>
+    <input type="search" id="search-main" name="q" placeholder="Destino, propiedad o tipo de alojamiento">
+    <button type="submit">Buscar</button>
+  </form>
+
+  <nav aria-label="Cuenta de usuario">
+    <ul>
+      <li><a href="registro.html">Regístrate</a></li>
+      <li><a href="inicio-sesion.html">Iniciar sesión</a></li>
+      <li><a href="perfil.html">Perfil</a></li>
+      <li><a href="reservas.html">Mis reservas</a></li>
+    </ul>
+  </nav>
+
+  <nav aria-label="Selector de idioma">
+    <ul>
+      <li><a href="index.html" hreflang="es">ES</a></li>
+      <li><a href="index-en.html" hreflang="en">EN</a></li>
+      <li><a href="index-fr.html" hreflang="fr">FR</a></li>
+    </ul>
+  </nav>
+</header>
+
+<nav aria-label="Menú principal de exploración">
+  <ul>
+    <li><a href="catalogo.html?filtro=tipo">Tipo de propiedad</a></li>
+    <li><a href="catalogo.html?filtro=destino">Destino</a></li>
+    <li><a href="catalogo.html?filtro=precio">Rango de precio</a></li>
+    <li><a href="catalogo.html?filtro=huespedes">Cantidad de huéspedes</a></li>
+    <li><a href="catalogo.html?filtro=servicios">Servicios</a></li>
+    <li><a href="promociones.html">Experiencias destacadas</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section aria-labelledby="hero-heading">
+    <h2 id="hero-heading">Encuentra tu próximo hospedaje</h2>
+    <p>Explora casas, apartamentos, villas, cabañas y glampings alrededor del mundo. StayBooker 360 conecta a
+    huéspedes que buscan hospedaje temporal con anfitriones que desean promocionar sus propiedades, todo dentro
+    de una misma plataforma digital.</p>
+  </section>
+
+  <section aria-labelledby="destacados-heading">
+    <h2 id="destacados-heading">Alojamientos destacados</h2>
+
+    <article>
+      <figure>
+        <img src="assets/propiedad-1.jpg" alt="Vista exterior de Villa Los Sueños en Guanacaste">
+        <figcaption>Villa Los Sueños — Guanacaste, Costa Rica</figcaption>
+      </figure>
+      <h3>Villa Los Sueños</h3>
+      <p>Capacidad para 6 huéspedes · Desde $85 por noche · Valoración 4.8 de 5</p>
+      <a href="propiedad-detalle.html?id=1">Ver detalles y reservar</a>
+    </article>
+
+    <article>
+      <figure>
+        <img src="assets/propiedad-2.jpg" alt="Interior de apartamento moderno en San José">
+        <figcaption>Apartamento Central — San José, Costa Rica</figcaption>
+      </figure>
+      <h3>Apartamento Central</h3>
+      <p>Capacidad para 2 huéspedes · Desde $40 por noche · Valoración 4.6 de 5</p>
+      <a href="propiedad-detalle.html?id=2">Ver detalles y reservar</a>
+    </article>
+
+    <article>
+      <figure>
+        <img src="assets/propiedad-3.jpg" alt="Cabaña de madera rodeada de bosque en Monteverde">
+        <figcaption>Cabaña del Bosque — Monteverde, Costa Rica</figcaption>
+      </figure>
+      <h3>Cabaña del Bosque</h3>
+      <p>Capacidad para 4 huéspedes · Desde $60 por noche · Valoración 4.9 de 5</p>
+      <a href="propiedad-detalle.html?id=3">Ver detalles y reservar</a>
+    </article>
+
+    <article>
+      <figure>
+        <img src="assets/propiedad-4.jpg" alt="Glamping frente al mar en Puntarenas">
+        <figcaption>Glamping Costa Azul — Puntarenas, Costa Rica</figcaption>
+      </figure>
+      <h3>Glamping Costa Azul</h3>
+      <p>Capacidad para 3 huéspedes · Desde $70 por noche · Valoración 4.7 de 5</p>
+      <a href="propiedad-detalle.html?id=4">Ver detalles y reservar</a>
+    </article>
+  </section>
+
+  <section aria-labelledby="tipos-heading">
+    <h2 id="tipos-heading">Tipos de alojamiento</h2>
+    <article>
+      <h3>Casa</h3>
+      <p>Espacios completos ideales para familias y grupos.</p>
+    </article>
+    <article>
+      <h3>Apartamento</h3>
+      <p>Opciones compactas en zonas urbanas, ideales para estadías cortas.</p>
+    </article>
+    <article>
+      <h3>Villa</h3>
+      <p>Propiedades amplias con servicios exclusivos.</p>
+    </article>
+    <article>
+      <h3>Cabaña</h3>
+      <p>Alojamientos rústicos en entornos naturales.</p>
+    </article>
+    <article>
+      <h3>Glamping</h3>
+      <p>Experiencias de camping con comodidades de hotel.</p>
+    </article>
+  </section>
+
+  <section aria-labelledby="anfitrion-heading">
+    <h2 id="anfitrion-heading">¿Tienes una propiedad? Publícala en StayBooker 360</h2>
+    <p>Conoce los beneficios, requisitos y el proceso de afiliación para convertirte en anfitrión dentro de la
+    plataforma.</p>
+
+    <form action="publicar-propiedad.html" method="post">
+      <fieldset>
+        <legend>Postulación de propiedad</legend>
+
+        <label for="tipo-propiedad">Tipo de alojamiento</label>
+        <input type="text" id="tipo-propiedad" name="tipo_propiedad">
+
+        <label for="ubicacion-propiedad">Ubicación</label>
+        <input type="text" id="ubicacion-propiedad" name="ubicacion">
+
+        <label for="capacidad-propiedad">Capacidad máxima de huéspedes</label>
+        <input type="number" id="capacidad-propiedad" name="capacidad">
+
+        <label for="disponibilidad-propiedad">Disponibilidad inicial</label>
+        <input type="date" id="disponibilidad-propiedad" name="disponibilidad">
+
+        <label for="servicios-propiedad">Servicios incluidos</label>
+        <input type="text" id="servicios-propiedad" name="servicios">
+
+        <label for="contacto-anfitrion">Correo de contacto</label>
+        <input type="email" id="contacto-anfitrion" name="contacto">
+
+        <button type="submit">Enviar postulación</button>
+      </fieldset>
+    </form>
+  </section>
+
+  <section aria-labelledby="resenas-heading">
+    <h2 id="resenas-heading">Reseñas y testimonios</h2>
+
+    <article>
+      <blockquote cite="propiedad-detalle.html?id=1">
+        <p>La reserva fue muy sencilla y la propiedad superó nuestras expectativas.</p>
+      </blockquote>
+      <p>— Huésped verificado · Valoración 5 de 5 · <time datetime="2026-06-10">10 de junio de 2026</time></p>
+    </article>
+
+    <article>
+      <blockquote cite="propiedad-detalle.html?id=3">
+        <p>El anfitrión respondió todas nuestras dudas antes de llegar. Muy recomendado.</p>
+      </blockquote>
+      <p>— Huésped verificado · Valoración 5 de 5 · <time datetime="2026-05-22">22 de mayo de 2026</time></p>
+    </article>
+
+    <article>
+      <blockquote cite="propiedad-detalle.html?id=2">
+        <p>Buena ubicación y proceso de reserva claro de principio a fin.</p>
+      </blockquote>
+      <p>— Huésped verificado · Valoración 4 de 5 · <time datetime="2026-04-15">15 de abril de 2026</time></p>
+    </article>
+  </section>
+
+  <section aria-labelledby="promos-heading">
+    <h2 id="promos-heading">Promociones y experiencias destacadas</h2>
+    <article>
+      <h3>Escapada de temporada seca</h3>
+      <p>15% de descuento en alojamientos de Guanacaste durante diciembre y enero.</p>
+    </article>
+    <article>
+      <h3>Estadías largas</h3>
+      <p>Beneficios especiales para reservas de más de 7 noches.</p>
+    </article>
+    <article>
+      <h3>Experiencias con anfitrión</h3>
+      <p>Tours y actividades ofrecidas directamente por los anfitriones locales.</p>
+    </article>
+  </section>
+
+  <aside aria-labelledby="recos-heading">
+    <h2 id="recos-heading">Recomendado para ti según destino y temporada</h2>
+    <ul>
+      <li><a href="propiedad-detalle.html?id=5">Casa de playa — Puntarenas</a></li>
+      <li><a href="propiedad-detalle.html?id=6">Apartamento — Heredia</a></li>
+      <li><a href="propiedad-detalle.html?id=7">Villa con piscina — Guanacaste</a></li>
+      <li><a href="propiedad-detalle.html?id=8">Cabaña de montaña — Monteverde</a></li>
+    </ul>
+  </aside>
+
+</main>
+
+<footer>
+  <nav aria-label="Enlaces institucionales">
+    <ul>
+      <li><a href="politicas-privacidad.html">Políticas de privacidad</a></li>
+      <li><a href="terminos-uso.html">Términos de uso</a></li>
+      <li><a href="ayuda.html">Ayuda y preguntas frecuentes</a></li>
+      <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
+    </ul>
+  </nav>
+
+  <section aria-labelledby="redes-heading">
+    <h2 id="redes-heading">Redes sociales</h2>
+    <ul>
+      <li><a href="https://facebook.com/staybooker360">Facebook</a></li>
+      <li><a href="https://instagram.com/staybooker360">Instagram</a></li>
+      <li><a href="https://x.com/staybooker360">X (Twitter)</a></li>
+      <li><a href="https://linkedin.com/company/staybooker360">LinkedIn</a></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="boletin-heading">
+    <h2 id="boletin-heading">Boletín informativo</h2>
+    <form action="suscripcion.html" method="post">
+      <label for="correo-boletin">Correo electrónico</label>
+      <input type="email" id="correo-boletin" name="correo">
+      <button type="submit">Suscribirse</button>
+    </form>
+  </section>
+
+  <address>
+    <p>Correo: contacto@staybooker360.com</p>
+    <p>Teléfono: +506 0000-0000</p>
+    <p>San José, Costa Rica</p>
+  </address>
+
+  <p>&copy; 2026 StayBooker 360. Todos los derechos reservados.</p>
+</footer>
+
+</body>
+</html>
