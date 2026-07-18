@@ -10,40 +10,29 @@
 <header>
   <h1>StayBooker 360</h1>
 
-  <form role="search" action="resultados-busqueda.html" method="get">
-    <label for="search-main">Buscar alojamiento</label>
-    <input type="search" id="search-main" name="q" placeholder="Destino, propiedad o tipo de alojamiento">
-    <button type="submit">Buscar</button>
-  </form>
-
-  <nav aria-label="Cuenta de usuario">
+  <nav aria-label="Navegación del sitio">
     <ul>
       <li><a href="registro.html">Regístrate</a></li>
       <li><a href="inicio-sesion.html">Iniciar sesión</a></li>
       <li><a href="perfil.html">Perfil</a></li>
       <li><a href="reservas.html">Mis reservas</a></li>
     </ul>
-  </nav>
 
-  <nav aria-label="Selector de idioma">
+    <ul>
+      <li><a href="catalogo.html">Explorar</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="ayuda.html">Ayuda</a></li>
+    </ul>
+
     <ul>
       <li><a href="index.html" hreflang="es">ES</a></li>
       <li><a href="index-en.html" hreflang="en">EN</a></li>
       <li><a href="index-fr.html" hreflang="fr">FR</a></li>
+      <li><a href="index.html?moneda=crc">Colones (CRC)</a></li>
+      <li><a href="index.html?moneda=usd">Dólares (USD)</a></li>
     </ul>
   </nav>
 </header>
-
-<nav aria-label="Menú principal de exploración">
-  <ul>
-    <li><a href="catalogo.html?filtro=tipo">Tipo de propiedad</a></li>
-    <li><a href="catalogo.html?filtro=destino">Destino</a></li>
-    <li><a href="catalogo.html?filtro=precio">Rango de precio</a></li>
-    <li><a href="catalogo.html?filtro=huespedes">Cantidad de huéspedes</a></li>
-    <li><a href="catalogo.html?filtro=servicios">Servicios</a></li>
-    <li><a href="promociones.html">Experiencias destacadas</a></li>
-  </ul>
-</nav>
 
 <main>
 
@@ -52,6 +41,26 @@
     <p>Explora casas, apartamentos, villas, cabañas y glampings alrededor del mundo. StayBooker 360 conecta a
     huéspedes que buscan hospedaje temporal con anfitriones que desean promocionar sus propiedades, todo dentro
     de una misma plataforma digital.</p>
+
+    <form action="resultados-busqueda.html" method="get">
+      <fieldset>
+        <legend>Buscar alojamiento</legend>
+
+        <label for="busqueda-destino">Destino</label>
+        <input type="text" id="busqueda-destino" name="destino" placeholder="Ciudad, región o propiedad">
+
+        <label for="busqueda-entrada">Fecha de entrada</label>
+        <input type="date" id="busqueda-entrada" name="entrada">
+
+        <label for="busqueda-salida">Fecha de salida</label>
+        <input type="date" id="busqueda-salida" name="salida">
+
+        <label for="busqueda-huespedes">Huéspedes</label>
+        <input type="number" id="busqueda-huespedes" name="huespedes" min="1">
+
+        <button type="submit">Buscar</button>
+      </fieldset>
+    </form>
   </section>
 
   <section aria-labelledby="destacados-heading">
@@ -126,32 +135,7 @@
     <h2 id="anfitrion-heading">¿Tienes una propiedad? Publícala en StayBooker 360</h2>
     <p>Conoce los beneficios, requisitos y el proceso de afiliación para convertirte en anfitrión dentro de la
     plataforma.</p>
-
-    <form action="publicar-propiedad.html" method="post">
-      <fieldset>
-        <legend>Postulación de propiedad</legend>
-
-        <label for="tipo-propiedad">Tipo de alojamiento</label>
-        <input type="text" id="tipo-propiedad" name="tipo_propiedad">
-
-        <label for="ubicacion-propiedad">Ubicación</label>
-        <input type="text" id="ubicacion-propiedad" name="ubicacion">
-
-        <label for="capacidad-propiedad">Capacidad máxima de huéspedes</label>
-        <input type="number" id="capacidad-propiedad" name="capacidad">
-
-        <label for="disponibilidad-propiedad">Disponibilidad inicial</label>
-        <input type="date" id="disponibilidad-propiedad" name="disponibilidad">
-
-        <label for="servicios-propiedad">Servicios incluidos</label>
-        <input type="text" id="servicios-propiedad" name="servicios">
-
-        <label for="contacto-anfitrion">Correo de contacto</label>
-        <input type="email" id="contacto-anfitrion" name="contacto">
-
-        <button type="submit">Enviar postulación</button>
-      </fieldset>
-    </form>
+    <a href="publicar-propiedad.html">Publica tu propiedad</a>
   </section>
 
   <section aria-labelledby="resenas-heading">
