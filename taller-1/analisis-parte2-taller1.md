@@ -157,7 +157,7 @@ Base: los 13 archivos que `index.html` (Parte 1) ya promete como enlaces, más l
 | `promociones.html` *(nueva)* | General | 7 | Alojamientos recomendados, ofertas de temporada | Media |
 | `suscripcion.html` | General | 6 | Confirmación boletín | Baja |
 | `publicar-propiedad.html` | Huésped → Anfitrión | 4,6,7 | Contenido institucional (beneficios/requisitos/proceso) + formulario completo de propiedad (mismo formulario que `anfitrion-propiedad-nueva.html`) | Alta |
-| `anfitrion-panel.html` *(nueva)* | Anfitrión | 7 | Dashboard con accesos | Media |
+| `anfitrion-panel.html` *(nueva)* | Anfitrión | 7 | Dashboard: resumen (línea 212) + accesos a propiedades/reservas/perfil (línea 226). Es el destino del enlace "Panel de anfitrión" en `perfil.html` (antes apuntaba directo a `anfitrion-propiedades.html`) | Media |
 | `anfitrion-propiedades.html` *(nueva)* | Anfitrión | 4,7 | Listado de propiedades del anfitrión, con enlaces a editar/dar de baja cada una | Alta |
 | `anfitrion-propiedad-editar.html` *(nueva, renombrada 19-jul-2026)* | Anfitrión | 4,6,7 | Mismo formulario completo de propiedad que `publicar-propiedad.html`, sin el contenido institucional, precargado con los datos existentes + fieldset de Estado (Publicada/Inactiva editable; Pendiente/Rechazada informativo). Uso: editar una propiedad existente desde `anfitrion-propiedades.html`. Toda alta de propiedad nueva pasa por `publicar-propiedad.html` | Alta |
 | `anfitrion-reservas.html` *(nueva)* | Anfitrión | 4,6,7 | Gestión de solicitudes recibidas | Alta |
