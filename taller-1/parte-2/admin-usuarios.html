@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StayBooker 360 — Gestión de usuarios</title>
+</head>
+<body>
+
+<header>
+  <h1>StayBooker 360</h1>
+
+  <nav aria-label="Navegación del sitio">
+    <ul>
+      <li><a href="registro.html">Regístrate</a></li>
+      <li><a href="inicio-sesion.html">Iniciar sesión</a></li>
+      <li><a href="perfil.html">Perfil</a></li>
+      <li><a href="mis-reservas.html">Mis reservas</a></li>
+    </ul>
+
+    <ul>
+      <li><a href="catalogo.html">Explorar</a></li>
+      <li><a href="promociones.html">Promociones</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="ayuda.html">Ayuda</a></li>
+    </ul>
+
+    <ul>
+      <li><a href="index.html" hreflang="es">ES</a></li>
+      <li><a href="index.html?lang=en" hreflang="en">EN</a></li>
+      <li><a href="index.html?lang=fr" hreflang="fr">FR</a></li>
+      <li><a href="index.html?moneda=crc">Colones (CRC)</a></li>
+      <li><a href="index.html?moneda=usd">Dólares (USD)</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <h2>Gestión de usuarios</h2>
+
+  <table>
+    <caption>Cuentas registradas</caption>
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Correo</th>
+        <th scope="col">Tipo de cuenta</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>María Fernández</td>
+        <td>maria.fernandez@correo.com</td>
+        <td>Huésped y anfitrión</td>
+        <td>Activa</td>
+        <td><a href="admin-usuario-editar.html?id=1">Editar</a></td>
+      </tr>
+      <tr>
+        <td>Ana Torres</td>
+        <td>ana.torres@correo.com</td>
+        <td>Huésped</td>
+        <td>Activa</td>
+        <td><a href="admin-usuario-editar.html?id=2">Editar</a></td>
+      </tr>
+      <tr>
+        <td>Carlos Jiménez</td>
+        <td>carlos.jimenez@correo.com</td>
+        <td>Huésped</td>
+        <td>Activa</td>
+        <td><a href="admin-usuario-editar.html?id=3">Editar</a></td>
+      </tr>
+      <tr>
+        <td>Diego Vargas</td>
+        <td>diego.vargas@correo.com</td>
+        <td>Huésped</td>
+        <td>Suspendida</td>
+        <td><a href="admin-usuario-editar.html?id=4">Editar</a></td>
+      </tr>
+      <tr>
+        <td>Camila Solano</td>
+        <td>camila.solano@correo.com</td>
+        <td>Huésped y anfitrión</td>
+        <td>Activa</td>
+        <td><a href="admin-usuario-editar.html?id=5">Editar</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+</main>
+
+<footer>
+  <nav aria-labelledby="compania-heading">
+    <h2 id="compania-heading">Compañía</h2>
+    <ul>
+      <li><a href="politicas-privacidad.html">Políticas de privacidad</a></li>
+      <li><a href="terminos-uso.html">Términos de uso</a></li>
+      <li><a href="ayuda.html">Ayuda y preguntas frecuentes</a></li>
+      <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
+    </ul>
+  </nav>
+
+  <section aria-labelledby="redes-heading">
+    <h2 id="redes-heading">Redes sociales</h2>
+    <ul>
+      <li><a href="https://facebook.com/staybooker360">Facebook</a></li>
+      <li><a href="https://instagram.com/staybooker360">Instagram</a></li>
+      <li><a href="https://x.com/staybooker360">X</a></li>
+      <li><a href="https://linkedin.com/company/staybooker360">LinkedIn</a></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="boletin-heading">
+    <h2 id="boletin-heading">Boletín informativo</h2>
+    <form action="suscripcion.html" method="post">
+      <label for="correo-boletin">Correo electrónico</label>
+      <input type="email" id="correo-boletin" name="correo">
+      <button type="submit">Suscribirse</button>
+    </form>
+  </section>
+
+  <address>
+    <p>Correo: contacto@staybooker360.com</p>
+    <p>Teléfono: +506 0000-0000</p>
+    <p>San José, Costa Rica</p>
+  </address>
+
+  <p>&copy; 2026 StayBooker 360. Todos los derechos reservados.</p>
+</footer>
+
+</body>
+</html>

@@ -164,9 +164,11 @@ Base: los 13 archivos que `index.html` (Parte 1) ya promete como enlaces, más l
 | `anfitrion-reservas.html` *(nueva)* | Anfitrión | 4,6,7 | Gestión de solicitudes recibidas | Alta |
 | ~~`anfitrion-disponibilidad.html`~~ | — | — | Descartada (decisión 19-jul-2026): se integró directamente en `anfitrion-propiedad-editar.html` (sección "Disponibilidad": selector de mes/año + tabla-calendario + formulario de bloquear/habilitar), igual que se hizo del lado del huésped en `propiedad-detalle.html`. Ya no es una página aparte | — |
 | ~~`anfitrion-perfil.html`~~ | — | — | Descartada (decisión 19-jul-2026): por el modelo de cuenta única, línea 220 ya queda cubierta por la sección "Datos personales" de `perfil.html`. Se agrega ahí un enlace "Ver mis propiedades" → `anfitrion-propiedades.html` como puerta de entrada al panel de anfitrión | — |
-| `admin-panel.html` *(nueva)* | Admin | 7 | Dashboard general | Media |
-| `admin-usuarios.html` *(nueva)* | Admin | 4,7 | Gestión huéspedes/anfitriones, aprobación de afiliación | Alta |
-| `admin-alojamientos.html` *(nueva)* | Admin | 4,7 | Catálogo global, moderación de contenido | Alta |
+| `admin-panel.html` *(nueva)* | Admin | 7 | Dashboard: resumen (línea 166) + accesos a usuarios/alojamientos/reservas/reportes (línea 172, "secciones de control, formularios, listados y reportes"). Entra desde `perfil.html` (enlace "Panel de administración"), igual que el de anfitrión — la lógica de qué panel mostrar según tipo de cuenta queda para cuando se implemente lógica real en el sitio | Media |
+| `admin-usuarios.html` *(nueva)* | Admin | 4,7 | Tabla de cuentas registradas (línea 140/150): nombre, correo, tipo de cuenta (Huésped / Huésped y anfitrión), estado, y solo enlace "Editar" por fila — suspender/eliminar vive dentro de `admin-usuario-editar.html`, no en el listado | Alta |
+| `admin-usuario-editar.html` *(nueva)* | Admin | 4,6,7 | Detalle/edición de una cuenta: datos personales, tipo de cuenta (informativo), estado (Activa/Suspendida editable), formulario de restablecer contraseña, y formulario aparte para eliminar cuenta | Alta |
+| `admin-alojamientos.html` *(nueva)* | Admin | 4,7 | Tabla del catálogo global (línea 144): propiedad, anfitrión, tipo, estado (Pendiente/Publicada/Rechazada/Inactiva), solo enlace "Editar" por fila — resuelve la bandeja de aprobación pendiente de la sección 7 | Alta |
+| `admin-alojamiento-editar.html` *(nueva)* | Admin | 4,6,7 | Datos de la propiedad (lectura) + formulario de aprobar/rechazar publicación con motivo (línea 144) + listado de reseñas de la propiedad con selector de orden (valoración/recientes/antiguas) y enlace "Bloquear reseña" por cada una (línea 154: moderar valoraciones de usuarios) | Alta |
 | `admin-reservas.html` *(nueva)* | Admin | 4,6,7 | Supervisión reservas y pagos | Alta |
 | `admin-reportes.html` *(nueva)* | Admin | 7 | Reportes | Baja |
 

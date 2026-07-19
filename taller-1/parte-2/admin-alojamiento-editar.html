@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StayBooker 360 — Revisar alojamiento</title>
+</head>
+<body>
+
+<header>
+  <h1>StayBooker 360</h1>
+
+  <nav aria-label="Navegación del sitio">
+    <ul>
+      <li><a href="registro.html">Regístrate</a></li>
+      <li><a href="inicio-sesion.html">Iniciar sesión</a></li>
+      <li><a href="perfil.html">Perfil</a></li>
+      <li><a href="mis-reservas.html">Mis reservas</a></li>
+    </ul>
+
+    <ul>
+      <li><a href="catalogo.html">Explorar</a></li>
+      <li><a href="promociones.html">Promociones</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="ayuda.html">Ayuda</a></li>
+    </ul>
+
+    <ul>
+      <li><a href="index.html" hreflang="es">ES</a></li>
+      <li><a href="index.html?lang=en" hreflang="en">EN</a></li>
+      <li><a href="index.html?lang=fr" hreflang="fr">FR</a></li>
+      <li><a href="index.html?moneda=crc">Colones (CRC)</a></li>
+      <li><a href="index.html?moneda=usd">Dólares (USD)</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <section aria-labelledby="alojamiento-heading">
+    <h2 id="alojamiento-heading">Revisar alojamiento — Apartamento Heredia</h2>
+
+    <h3>Datos de la propiedad</h3>
+    <ul>
+      <li>Anfitrión: María Fernández</li>
+      <li>Tipo: Apartamento</li>
+      <li>Ubicación: Heredia, Costa Rica</li>
+      <li>Capacidad: 3 huéspedes</li>
+      <li>Estado actual: Pendiente de aprobación</li>
+    </ul>
+    <p><a href="propiedad-detalle.html?id=6">Ver ficha completa</a></p>
+  </section>
+
+  <section aria-labelledby="aprobacion-heading">
+    <h2 id="aprobacion-heading">Aprobación de publicación</h2>
+
+    <form action="admin-alojamientos.html" method="post">
+      <fieldset>
+        <legend>Decisión</legend>
+
+        <label for="alojamiento-decision">Decisión</label>
+        <select id="alojamiento-decision" name="decision">
+          <option value="aprobar">Aprobar publicación</option>
+          <option value="rechazar">Rechazar publicación</option>
+        </select>
+
+        <label for="alojamiento-motivo">Motivo (en caso de rechazo)</label>
+        <textarea id="alojamiento-motivo" name="motivo" rows="3"></textarea>
+
+        <button type="submit">Confirmar decisión</button>
+      </fieldset>
+    </form>
+  </section>
+
+  <section aria-labelledby="resenas-heading">
+    <h2 id="resenas-heading">Reseñas de esta propiedad</h2>
+
+    <form action="admin-alojamiento-editar.html" method="get">
+      <input type="hidden" name="id" value="6">
+
+      <label for="resenas-orden">Ordenar por</label>
+      <select id="resenas-orden" name="orden">
+        <option value="valoracion">Valoración</option>
+        <option value="recientes">Más recientes</option>
+        <option value="antiguas">Más antiguas</option>
+      </select>
+
+      <button type="submit">Ordenar</button>
+    </form>
+
+    <table>
+      <caption>Reseñas recibidas</caption>
+      <thead>
+        <tr>
+          <th scope="col">Huésped</th>
+          <th scope="col">Reseña</th>
+          <th scope="col">Valoración</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>María F.</td>
+          <td>"La casa estaba impecable y la piscina fue el punto favorito de los niños. Volveríamos sin dudarlo."</td>
+          <td>5 de 5</td>
+          <td><a href="admin-alojamiento-editar.html?bloquear_resena=1">Bloquear reseña</a></td>
+        </tr>
+        <tr>
+          <td>Carlos R.</td>
+          <td>"Muy buena ubicación, aunque el camino de acceso es algo angosto para autos grandes."</td>
+          <td>4 de 5</td>
+          <td><a href="admin-alojamiento-editar.html?bloquear_resena=2">Bloquear reseña</a></td>
+        </tr>
+        <tr>
+          <td>Andrea V.</td>
+          <td>"Excelente atención del anfitrión, respondió todas nuestras consultas antes de llegar."</td>
+          <td>5 de 5</td>
+          <td><a href="admin-alojamiento-editar.html?bloquear_resena=3">Bloquear reseña</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+
+<footer>
+  <nav aria-labelledby="compania-heading">
+    <h2 id="compania-heading">Compañía</h2>
+    <ul>
+      <li><a href="politicas-privacidad.html">Políticas de privacidad</a></li>
+      <li><a href="terminos-uso.html">Términos de uso</a></li>
+      <li><a href="ayuda.html">Ayuda y preguntas frecuentes</a></li>
+      <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
+    </ul>
+  </nav>
+
+  <section aria-labelledby="redes-heading">
+    <h2 id="redes-heading">Redes sociales</h2>
+    <ul>
+      <li><a href="https://facebook.com/staybooker360">Facebook</a></li>
+      <li><a href="https://instagram.com/staybooker360">Instagram</a></li>
+      <li><a href="https://x.com/staybooker360">X</a></li>
+      <li><a href="https://linkedin.com/company/staybooker360">LinkedIn</a></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="boletin-heading">
+    <h2 id="boletin-heading">Boletín informativo</h2>
+    <form action="suscripcion.html" method="post">
+      <label for="correo-boletin">Correo electrónico</label>
+      <input type="email" id="correo-boletin" name="correo">
+      <button type="submit">Suscribirse</button>
+    </form>
+  </section>
+
+  <address>
+    <p>Correo: contacto@staybooker360.com</p>
+    <p>Teléfono: +506 0000-0000</p>
+    <p>San José, Costa Rica</p>
+  </address>
+
+  <p>&copy; 2026 StayBooker 360. Todos los derechos reservados.</p>
+</footer>
+
+</body>
+</html>

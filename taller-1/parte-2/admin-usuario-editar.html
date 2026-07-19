@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StayBooker 360 — Gestionar disponibilidad</title>
+<title>StayBooker 360 — Editar usuario</title>
 </head>
 <body>
 
@@ -37,45 +37,62 @@
 
 <main>
 
-  <section aria-labelledby="disponibilidad-heading">
-    <h2 id="disponibilidad-heading">Gestionar disponibilidad — Villa Los Sueños</h2>
+  <section aria-labelledby="usuario-heading">
+    <h2 id="usuario-heading">Editar usuario — María Fernández</h2>
 
-    <h3>Períodos ocupados</h3>
-    <ul>
-      <li>12 al 18 de agosto de 2026 — reservado</li>
-      <li>3 al 6 de setiembre de 2026 — reservado</li>
-      <li>20 al 27 de diciembre de 2026 — reservado</li>
-    </ul>
+    <form action="admin-usuarios.html" method="post">
+      <fieldset>
+        <legend>Datos de la cuenta</legend>
 
-    <p>El resto de las fechas se encuentra disponible para reserva, salvo los períodos bloqueados
-    manualmente que se listan a continuación.</p>
+        <label for="usuario-nombre">Nombre completo</label>
+        <input type="text" id="usuario-nombre" name="nombre" value="María Fernández">
 
-    <h3>Períodos bloqueados manualmente</h3>
-    <ul>
-      <li>1 al 5 de noviembre de 2026 — bloqueado por mantenimiento</li>
-    </ul>
+        <label for="usuario-correo">Correo electrónico</label>
+        <input type="email" id="usuario-correo" name="correo" value="maria.fernandez@correo.com">
+
+        <label for="usuario-telefono">Teléfono</label>
+        <input type="tel" id="usuario-telefono" name="telefono" value="+506 8888-0000">
+      </fieldset>
+
+      <fieldset>
+        <legend>Tipo de cuenta</legend>
+        <p>Huésped y anfitrión</p>
+      </fieldset>
+
+      <fieldset>
+        <legend>Estado de la cuenta</legend>
+
+        <label for="usuario-estado">Estado</label>
+        <select id="usuario-estado" name="estado">
+          <option value="activa" selected>Activa</option>
+          <option value="suspendida">Suspendida</option>
+        </select>
+      </fieldset>
+
+      <button type="submit">Guardar cambios</button>
+    </form>
   </section>
 
-  <section aria-labelledby="ajuste-heading">
-    <h2 id="ajuste-heading">Bloquear o habilitar fechas</h2>
+  <section aria-labelledby="contrasena-heading">
+    <h2 id="contrasena-heading">Restablecer contraseña</h2>
 
-    <form action="anfitrion-disponibilidad.html" method="post">
+    <form action="admin-usuarios.html" method="post">
       <fieldset>
-        <legend>Ajuste manual de disponibilidad</legend>
+        <legend>Restablecer contraseña</legend>
+        <p>Se enviará un enlace de restablecimiento de contraseña al correo de la cuenta.</p>
+        <button type="submit">Restablecer contraseña</button>
+      </fieldset>
+    </form>
+  </section>
 
-        <label for="disponibilidad-inicio">Fecha de inicio</label>
-        <input type="date" id="disponibilidad-inicio" name="fecha_inicio">
+  <section aria-labelledby="eliminar-heading">
+    <h2 id="eliminar-heading">Eliminar cuenta</h2>
 
-        <label for="disponibilidad-fin">Fecha de fin</label>
-        <input type="date" id="disponibilidad-fin" name="fecha_fin">
-
-        <label for="disponibilidad-accion">Acción</label>
-        <select id="disponibilidad-accion" name="accion">
-          <option value="bloquear">Bloquear fechas</option>
-          <option value="habilitar">Habilitar fechas</option>
-        </select>
-
-        <button type="submit">Aplicar</button>
+    <form action="admin-usuarios.html" method="post">
+      <fieldset>
+        <legend>Eliminar cuenta</legend>
+        <p>Esta acción elimina permanentemente la cuenta y no se puede deshacer.</p>
+        <button type="submit">Eliminar cuenta</button>
       </fieldset>
     </form>
   </section>
