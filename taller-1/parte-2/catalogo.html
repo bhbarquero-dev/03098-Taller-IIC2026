@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StayBooker 360 — Página principal</title>
+<title>StayBooker 360 — Catálogo de alojamientos</title>
 </head>
 <body>
 
@@ -19,7 +19,7 @@
     </ul>
 
     <ul>
-      <li><a href="catalogo.html">Explorar</a></li>
+      <li><a href="catalogo.html" aria-current="page">Explorar</a></li>
       <li><a href="promociones.html">Promociones</a></li>
       <li><a href="agenda.html">Agenda</a></li>
       <li><a href="blog.html">Blog</a></li>
@@ -27,7 +27,7 @@
     </ul>
 
     <ul>
-      <li><a href="index.html" hreflang="es" aria-current="page">ES</a></li>
+      <li><a href="index.html" hreflang="es">ES</a></li>
       <li><a href="index.html?lang=en" hreflang="en">EN</a></li>
       <li><a href="index.html?lang=fr" hreflang="fr">FR</a></li>
       <li><a href="index.html?moneda=crc">Colones (CRC)</a></li>
@@ -38,37 +38,63 @@
 
 <main>
 
-  <section aria-labelledby="hero-heading">
-    <h2 id="hero-heading">Encuentra tu próximo hospedaje</h2>
-    <p>Explora casas, apartamentos, villas, cabañas y glampings alrededor del mundo. StayBooker 360 conecta a
-    huéspedes que buscan hospedaje temporal con anfitriones que desean promocionar sus propiedades, todo dentro
-    de una misma plataforma digital.</p>
+  <h2>Catálogo de alojamientos</h2>
+
+  <aside aria-labelledby="filtro-heading">
+    <h3 id="filtro-heading">Filtrar resultados</h3>
 
     <form action="catalogo.html" method="get">
       <fieldset>
-        <legend>Buscar alojamiento</legend>
+        <legend>Filtros</legend>
 
-        <label for="busqueda-destino">Destino</label>
-        <input type="text" id="busqueda-destino" name="destino" placeholder="Ciudad, región o propiedad">
+        <label for="filtro-tipo">Tipo de alojamiento</label>
+        <select id="filtro-tipo" name="tipo">
+          <option value="">Cualquiera</option>
+          <option value="casa">Casa</option>
+          <option value="apartamento">Apartamento</option>
+          <option value="villa">Villa</option>
+          <option value="cabana">Cabaña</option>
+          <option value="glamping">Glamping</option>
+        </select>
 
-        <label for="busqueda-entrada">Fecha de entrada</label>
-        <input type="date" id="busqueda-entrada" name="entrada">
+        <label for="filtro-precio-min">Precio mínimo por noche</label>
+        <input type="number" id="filtro-precio-min" name="precio_min" min="0">
 
-        <label for="busqueda-salida">Fecha de salida</label>
-        <input type="date" id="busqueda-salida" name="salida">
+        <label for="filtro-precio-max">Precio máximo por noche</label>
+        <input type="number" id="filtro-precio-max" name="precio_max" min="0">
 
-        <label for="busqueda-huespedes">Huéspedes</label>
-        <input type="number" id="busqueda-huespedes" name="huespedes" min="1">
+        <label for="filtro-capacidad">Capacidad de huéspedes</label>
+        <input type="number" id="filtro-capacidad" name="capacidad" min="1">
 
-        <button type="submit">Buscar</button>
+        <label for="filtro-destino">Ubicación o destino</label>
+        <input type="text" id="filtro-destino" name="destino" placeholder="Ciudad o región">
+
+        <fieldset>
+          <legend>Servicios</legend>
+
+          <input type="checkbox" id="filtro-wifi" name="servicios" value="wifi">
+          <label for="filtro-wifi">WiFi</label>
+
+          <input type="checkbox" id="filtro-piscina" name="servicios" value="piscina">
+          <label for="filtro-piscina">Piscina</label>
+
+          <input type="checkbox" id="filtro-parqueo" name="servicios" value="parqueo">
+          <label for="filtro-parqueo">Parqueo</label>
+
+          <input type="checkbox" id="filtro-mascotas" name="servicios" value="mascotas">
+          <label for="filtro-mascotas">Admite mascotas</label>
+
+          <input type="checkbox" id="filtro-cocina" name="servicios" value="cocina">
+          <label for="filtro-cocina">Cocina equipada</label>
+        </fieldset>
+
+        <button type="submit">Aplicar filtros</button>
       </fieldset>
     </form>
-  </section>
+  </aside>
 
-  <section aria-labelledby="destacados-heading">
-    <h2 id="destacados-heading">Alojamientos destacados</h2>
-
-    <h3>Propiedades</h3>
+  <section aria-labelledby="resultados-heading">
+    <h3 id="resultados-heading">Resultados</h3>
 
     <article>
       <figure>
@@ -110,64 +136,26 @@
       <a href="propiedad-detalle.html?id=4">Ver detalles y reservar</a>
     </article>
 
-    <h3>Promociones</h3>
-
     <article>
-      <h4>Escapada de temporada seca</h4>
-      <p>15% de descuento en alojamientos de Guanacaste durante diciembre y enero.</p>
+      <figure>
+        <img src="assets/propiedad-5.jpg" alt="Casa de playa en Puntarenas">
+        <figcaption>Casa de playa — Puntarenas, Costa Rica</figcaption>
+      </figure>
+      <h4>Casa de playa</h4>
+      <p>Capacidad para 5 huéspedes · Desde $95 por noche · Valoración 4.5 de 5</p>
+      <a href="propiedad-detalle.html?id=5">Ver detalles y reservar</a>
     </article>
 
     <article>
-      <h4>Estadías largas</h4>
-      <p>Beneficios especiales para reservas de más de 7 noches.</p>
-    </article>
-
-    <article>
-      <h4>Experiencias con anfitrión</h4>
-      <p>Tours y actividades ofrecidas directamente por los anfitriones locales.</p>
+      <figure>
+        <img src="assets/propiedad-6.jpg" alt="Apartamento en Heredia">
+        <figcaption>Apartamento — Heredia, Costa Rica</figcaption>
+      </figure>
+      <h4>Apartamento Heredia</h4>
+      <p>Capacidad para 3 huéspedes · Desde $45 por noche · Valoración 4.4 de 5</p>
+      <a href="propiedad-detalle.html?id=6">Ver detalles y reservar</a>
     </article>
   </section>
-
-  <section aria-labelledby="tipos-heading">
-    <h2 id="tipos-heading">Tipos de alojamiento</h2>
-    <article>
-      <h3>Casa</h3>
-      <p>Espacios completos ideales para familias y grupos.</p>
-    </article>
-    <article>
-      <h3>Apartamento</h3>
-      <p>Opciones compactas en zonas urbanas, ideales para estadías cortas.</p>
-    </article>
-    <article>
-      <h3>Villa</h3>
-      <p>Propiedades amplias con servicios exclusivos.</p>
-    </article>
-    <article>
-      <h3>Cabaña</h3>
-      <p>Alojamientos rústicos en entornos naturales.</p>
-    </article>
-    <article>
-      <h3>Glamping</h3>
-      <p>Experiencias de camping con comodidades de hotel.</p>
-    </article>
-  </section>
-
-  <section aria-labelledby="anfitrion-heading">
-    <h2 id="anfitrion-heading">¿Tienes una propiedad? Publícala en StayBooker 360</h2>
-    <p>Conoce los beneficios, requisitos y el proceso de afiliación para convertirte en anfitrión dentro de la
-    plataforma.</p>
-    <a href="publicar-propiedad.html">Publica tu propiedad</a>
-  </section>
-
-  <aside aria-labelledby="recos-heading">
-    <h2 id="recos-heading">Recomendado para ti según destino y temporada</h2>
-    <ul>
-      <li><a href="propiedad-detalle.html?id=5">Casa de playa — Puntarenas</a></li>
-      <li><a href="propiedad-detalle.html?id=6">Apartamento — Heredia</a></li>
-      <li><a href="propiedad-detalle.html?id=7">Villa con piscina — Guanacaste</a></li>
-      <li><a href="propiedad-detalle.html?id=8">Cabaña de montaña — Monteverde</a></li>
-    </ul>
-  </aside>
 
 </main>
 

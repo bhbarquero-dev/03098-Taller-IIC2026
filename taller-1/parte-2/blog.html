@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StayBooker 360 — Iniciar sesión</title>
+<title>StayBooker 360 — Blog</title>
 </head>
 <body>
 
@@ -13,7 +13,7 @@
   <nav aria-label="Navegación del sitio">
     <ul>
       <li><a href="registro.html">Regístrate</a></li>
-      <li><a href="inicio-sesion.html" aria-current="page">Iniciar sesión</a></li>
+      <li><a href="inicio-sesion.html">Iniciar sesión</a></li>
       <li><a href="perfil.html">Perfil</a></li>
       <li><a href="mis-reservas.html">Mis reservas</a></li>
     </ul>
@@ -22,7 +22,7 @@
       <li><a href="catalogo.html">Explorar</a></li>
       <li><a href="promociones.html">Promociones</a></li>
       <li><a href="agenda.html">Agenda</a></li>
-      <li><a href="blog.html">Blog</a></li>
+      <li><a href="blog.html" aria-current="page">Blog</a></li>
       <li><a href="ayuda.html">Ayuda</a></li>
     </ul>
 
@@ -38,27 +38,45 @@
 
 <main>
 
-  <section aria-labelledby="login-heading">
-    <h2 id="login-heading">Iniciar sesión</h2>
-    <p>Ingresa con tu correo y contraseña para administrar tus reservas, tu perfil y tus alojamientos favoritos
-    dentro de StayBooker 360.</p>
+  <section aria-labelledby="blog-heading">
+    <h2 id="blog-heading">Blog</h2>
+    <p>Contenido sobre destinos, recomendaciones de viaje e información relevante sobre hospedaje.</p>
 
-    <form action="perfil.html" method="post">
-      <fieldset>
-        <legend>Datos de acceso</legend>
+    <article>
+      <figure>
+        <img src="assets/blog-guanacaste.jpg" alt="Playa en Guanacaste, Costa Rica">
+        <figcaption>Guanacaste al atardecer</figcaption>
+      </figure>
+      <h3>5 razones para visitar Guanacaste esta temporada seca</h3>
+      <p>Publicado el 3 de julio de 2026</p>
+      <p>Un recorrido por las playas, el clima y los alojamientos mejor valorados de la zona para quienes
+      buscan sol garantizado entre diciembre y abril.</p>
+      <p><a href="blog-post.html?id=1">Leer más</a></p>
+    </article>
 
-        <label for="login-correo">Correo electrónico</label>
-        <input type="email" id="login-correo" name="correo">
+    <article>
+      <figure>
+        <img src="assets/blog-equipaje.jpg" alt="Maleta de viaje abierta sobre una cama">
+        <figcaption>Preparando el equipaje</figcaption>
+      </figure>
+      <h3>Cómo armar el equipaje ideal para una estadía de fin de semana</h3>
+      <p>Publicado el 22 de junio de 2026</p>
+      <p>Recomendaciones prácticas para viajar liviano sin dejar nada esencial atrás, pensadas para estancias
+      cortas en cabañas y glampings.</p>
+      <p><a href="blog-post.html?id=2">Leer más</a></p>
+    </article>
 
-        <label for="login-clave">Contraseña</label>
-        <input type="password" id="login-clave" name="clave">
-
-        <button type="submit">Iniciar sesión</button>
-      </fieldset>
-    </form>
-
-    <p><a href="ayuda.html">¿Olvidaste tu contraseña? Contacta a soporte</a></p>
-    <p>¿No tienes cuenta todavía? <a href="registro.html">Regístrate aquí</a></p>
+    <article>
+      <figure>
+        <img src="assets/blog-checkin.jpg" alt="Persona registrando su llegada en la entrada de un alojamiento">
+        <figcaption>Proceso de entrada</figcaption>
+      </figure>
+      <h3>Qué preguntar antes de reservar: políticas de cancelación y check-in</h3>
+      <p>Publicado el 10 de junio de 2026</p>
+      <p>Una guía sobre la información de hospedaje que conviene revisar en la ficha de cada propiedad antes
+      de confirmar una reserva.</p>
+      <p><a href="blog-post.html?id=3">Leer más</a></p>
+    </article>
   </section>
 
 </main>

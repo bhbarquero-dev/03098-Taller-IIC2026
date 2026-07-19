@@ -142,9 +142,7 @@ Base: los 13 archivos que `index.html` (Parte 1) ya promete como enlaces, más l
 | `index.html` | General | 1,2,3,7 | Portal (ya hecho, Parte 1) | — |
 | `registro.html` | General | 6,7 | Alta de cuenta | Alta |
 | `inicio-sesion.html` | General | 6,7 | Login | Media |
-| `catalogo.html` | Huésped | 1,2,7 | Listado con filtros | Alta |
-| `resultados-busqueda.html` | Huésped | 2,7 | Resultado de búsqueda del header | Media |
-| `directorio.html` *(nueva)* | General/Huésped | 7 | Listado general de propiedades (nombre, ubicación, tipo, capacidad, valoración) — distinto del catálogo filtrable | Media |
+| `catalogo.html` | Huésped | 1,2,7 | Vista única de exploración: destino tanto del enlace "Explorar" del nav como del resultado de la búsqueda del header (`index.html`); `aside` con filtro detallado (tipo, precio, capacidad, ubicación, servicios) + `section` con listado de propiedades en tarjetas | Alta |
 | `propiedad-detalle.html` | Huésped | 1,7 | Ficha + reseñas + acción reservar (incluye `<video>` de recorrido) | Alta |
 | `reserva.html` *(nueva)* | Huésped | 6,7 | Selección fechas/huéspedes | Alta |
 | `reserva-resumen.html` *(nueva)* | Huésped | 6,7 | Resumen, continuar/modificar | Alta |
@@ -155,6 +153,7 @@ Base: los 13 archivos que `index.html` (Parte 1) ya promete como enlaces, más l
 | `ayuda.html` | General | 7 | FAQ, políticas, contacto | Media |
 | `politicas-privacidad.html` / `terminos-uso.html` / `sobre-nosotros.html` | General | 7 | Texto institucional | Baja |
 | `blog.html` | General | 7 | Listado de artículos | Baja |
+| `blog-post.html` *(nueva)* | General | 7 | Página de post individual del blog (no pedida por el enunciado, decisión propia del proyecto) | Baja |
 | `promociones.html` *(nueva)* | General | 7 | Alojamientos recomendados, ofertas de temporada | Media |
 | `suscripcion.html` | General | 6 | Confirmación boletín | Baja |
 | `publicar-propiedad.html` | Huésped → Anfitrión | 4,6,7 | Contenido institucional (beneficios/requisitos/proceso) + formulario completo de propiedad (mismo formulario que `anfitrion-propiedad-nueva.html`) | Alta |
@@ -176,7 +175,8 @@ Pendiente de decisión aparte: alcance de `index-en.html` / `index-fr.html` (mul
 
 Relectura del `.md` de indicaciones línea por línea para confirmar que el inventario de la sección 5 cubre los "espacios" que el enunciado nombra explícitamente (línea 84: "...administración del sistema, atención al usuario, directorio, promociones, agenda y políticas institucionales"):
 
-- **`directorio.html` y `promociones.html`**: se habían descartado en una primera pasada por considerarlos "narrativos sin criterio propio". Corrección: el enunciado los nombra explícitamente como espacios obligatorios del sitio (línea 84) y cada uno tiene párrafo propio (líneas 108 y 124). Se agregan al inventario.
+- **`directorio.html` y `promociones.html`**: se habían descartado en una primera pasada por considerarlos "narrativos sin criterio propio". Corrección: el enunciado los nombra explícitamente como espacios obligatorios del sitio (línea 84) y cada uno tiene párrafo propio (líneas 108 y 124). `promociones.html` se agrega al inventario como página propia.
+- **Fusión catálogo/directorio (decisión 19-jul-2026):** el enunciado describe catálogo (línea 100) y directorio (línea 108) en párrafos separados, pero al releerlos no hay un caso de uso distinto entre ambos — las dos descripciones apuntan al mismo listado de propiedades con criterios de búsqueda/filtrado. En vez de forzar una distinción artificial, se fusionan en una sola página, `catalogo.html`, que además absorbe el destino de la búsqueda del formulario de `index.html` (eliminando también la necesidad de `resultados-busqueda.html`, que hubiera sido una tercera página redundante con la misma función). `catalogo.html` queda con un `aside` de filtro detallado (tipo, precio, capacidad, ubicación, servicios) y un `section` con las tarjetas de resultado. Nota: sin CSS, `aside` y `section` se apilan verticalmente en el orden del documento (filtro primero, resultados después) en lugar de verse en columnas — la maquetación en columnas reales es tarea del Taller 2.
 - **`agenda.html`**: el enunciado distingue la agenda *general* del sistema (líneas 104–106, relación entre disponibilidad y reservas) del calendario de *gestión* que administra el anfitrión (línea 210). Son espacios distintos nombrados por separado; se agrega `agenda.html` como vista general, separada de `anfitrion-disponibilidad.html`.
 - **Multimedia (línea 132)**: el sitio debe incorporar "texto, imágenes, videos, formularios" directamente en HTML5. Ninguna página tenía planeado un `<video>`; se anota en `propiedad-detalle.html` (video de recorrido de la propiedad).
 - **Resto de la lista de la línea 84** (inicio, exploración, detalle, reservas, cuentas de usuario, área de anfitrión, administración, atención al usuario, políticas institucionales): cubiertos por `index.html`, `catalogo.html`, `propiedad-detalle.html`, el flujo de reserva, `perfil.html`/`mis-reservas.html`, las páginas `anfitrion-*`, las páginas `admin-*`, `ayuda.html` y `politicas-privacidad.html`/`terminos-uso.html` respectivamente.
