@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StayBooker 360 — Publica tu propiedad</title>
+<title>StayBooker 360 — Editar propiedad</title>
 </head>
 <body>
 
@@ -38,40 +38,21 @@
 
 <main>
 
-  <section aria-labelledby="institucional-heading">
-    <h2 id="institucional-heading">Publica tu propiedad en StayBooker 360</h2>
-    <p>Cualquier huésped registrado puede convertirse en anfitrión. Al crear tu primera propiedad, tu cuenta
-    obtiene acceso al panel de anfitrión sin necesidad de un registro aparte.</p>
-
-    <h3>Beneficios</h3>
-    <p>Ingresos adicionales, visibilidad ante huéspedes nacionales e internacionales, y herramientas propias
-    para administrar tus reservas y disponibilidad.</p>
-
-    <h3>Requisitos</h3>
-    <p>Ser mayor de edad, contar con una cuenta activa en StayBooker 360 y disponer de una propiedad habilitada
-    para hospedaje temporal.</p>
-
-    <h3>Proceso</h3>
-    <ol>
-      <li>Crea o inicia sesión en tu cuenta de StayBooker 360.</li>
-      <li>Completa el formulario de tu propiedad.</li>
-      <li>Tu propiedad y tu panel de anfitrión quedan disponibles de inmediato.</li>
-    </ol>
-  </section>
-
   <section aria-labelledby="propiedad-heading">
-    <h2 id="propiedad-heading">Datos de tu propiedad</h2>
+    <h2 id="propiedad-heading">Editar propiedad — Villa Los Sueños</h2>
+
+    <p><a href="anfitrion-disponibilidad.html?id=1">Gestionar disponibilidad</a></p>
 
     <form action="anfitrion-propiedades.html" method="post">
       <fieldset>
         <legend>Datos generales</legend>
 
         <label for="propiedad-nombre">Nombre del alojamiento</label>
-        <input type="text" id="propiedad-nombre" name="nombre">
+        <input type="text" id="propiedad-nombre" name="nombre" value="Villa Los Sueños">
 
         <label for="propiedad-tipo">Tipo de alojamiento</label>
         <select id="propiedad-tipo" name="tipo">
-          <option value="casa">Casa</option>
+          <option value="casa" selected>Casa</option>
           <option value="apartamento">Apartamento</option>
           <option value="villa">Villa</option>
           <option value="cabana">Cabaña</option>
@@ -80,53 +61,53 @@
         </select>
 
         <label for="propiedad-descripcion">Descripción</label>
-        <textarea id="propiedad-descripcion" name="descripcion" rows="4"></textarea>
+        <textarea id="propiedad-descripcion" name="descripcion" rows="4">Villa amplia con piscina privada, a pocos minutos de la playa, ideal para familias y grupos.</textarea>
 
         <label for="propiedad-ubicacion">Ubicación</label>
-        <input type="text" id="propiedad-ubicacion" name="ubicacion" placeholder="Ciudad, provincia">
+        <input type="text" id="propiedad-ubicacion" name="ubicacion" value="Guanacaste, Costa Rica">
 
         <label for="propiedad-capacidad">Capacidad máxima de huéspedes</label>
-        <input type="number" id="propiedad-capacidad" name="capacidad" min="1">
+        <input type="number" id="propiedad-capacidad" name="capacidad" min="1" value="6">
       </fieldset>
 
       <fieldset>
         <legend>Servicios y políticas</legend>
 
-        <label><input type="checkbox" name="servicios" value="wifi"> Wifi</label>
-        <label><input type="checkbox" name="servicios" value="parqueo"> Parqueo</label>
-        <label><input type="checkbox" name="servicios" value="piscina"> Piscina</label>
+        <label><input type="checkbox" name="servicios" value="wifi" checked> Wifi</label>
+        <label><input type="checkbox" name="servicios" value="parqueo" checked> Parqueo</label>
+        <label><input type="checkbox" name="servicios" value="piscina" checked> Piscina</label>
         <label><input type="checkbox" name="servicios" value="cocina"> Cocina equipada</label>
 
         <label for="propiedad-mascotas">¿Se admiten mascotas?</label>
         <select id="propiedad-mascotas" name="mascotas">
-          <option value="si">Sí</option>
+          <option value="si" selected>Sí</option>
           <option value="no">No</option>
         </select>
 
         <label for="propiedad-fumar">¿Se permite fumar?</label>
         <select id="propiedad-fumar" name="fumar">
           <option value="si">Sí</option>
-          <option value="no">No</option>
+          <option value="no" selected>No</option>
         </select>
 
         <label for="propiedad-entrada">Horario de entrada</label>
-        <input type="time" id="propiedad-entrada" name="hora_entrada">
+        <input type="time" id="propiedad-entrada" name="hora_entrada" value="15:00">
 
         <label for="propiedad-salida">Horario de salida</label>
-        <input type="time" id="propiedad-salida" name="hora_salida">
+        <input type="time" id="propiedad-salida" name="hora_salida" value="11:00">
 
         <label for="propiedad-cancelacion">Política de cancelación</label>
-        <textarea id="propiedad-cancelacion" name="politica_cancelacion" rows="3"></textarea>
+        <textarea id="propiedad-cancelacion" name="politica_cancelacion" rows="3">Cancelación gratuita hasta 5 días antes de la fecha de entrada.</textarea>
       </fieldset>
 
       <fieldset>
         <legend>Contacto y multimedia</legend>
 
         <label for="propiedad-contacto-telefono">Teléfono de contacto de la propiedad</label>
-        <input type="tel" id="propiedad-contacto-telefono" name="contacto_telefono">
+        <input type="tel" id="propiedad-contacto-telefono" name="contacto_telefono" value="+506 7000-1234">
 
         <label for="propiedad-contacto-correo">Correo de contacto de la propiedad</label>
-        <input type="email" id="propiedad-contacto-correo" name="contacto_correo">
+        <input type="email" id="propiedad-contacto-correo" name="contacto_correo" value="contacto@villalossuenos.com">
 
         <label for="propiedad-imagenes">Imágenes de la propiedad</label>
         <input type="file" id="propiedad-imagenes" name="imagenes" accept="image/*" multiple>
@@ -135,7 +116,19 @@
         <input type="file" id="propiedad-video" name="video" accept="video/*">
       </fieldset>
 
-      <button type="submit">Publicar propiedad</button>
+      <fieldset>
+        <legend>Estado de la propiedad</legend>
+
+        <label for="propiedad-estado">Estado</label>
+        <select id="propiedad-estado" name="estado">
+          <option value="publicada" selected>Publicada</option>
+          <option value="inactiva">Inactiva</option>
+        </select>
+        <label><input type="checkbox" name="aprobada" checked disabled> Aprobada </label>
+        <p>La aprobación la define el administrador</p>
+      </fieldset>
+
+      <button type="submit">Guardar cambios</button>
     </form>
   </section>
 
