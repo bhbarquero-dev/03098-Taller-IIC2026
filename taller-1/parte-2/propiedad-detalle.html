@@ -21,7 +21,6 @@
     <ul>
       <li><a href="catalogo.html">Explorar</a></li>
       <li><a href="promociones.html">Promociones</a></li>
-      <li><a href="agenda.html">Agenda</a></li>
       <li><a href="blog.html">Blog</a></li>
       <li><a href="ayuda.html">Ayuda</a></li>
     </ul>
@@ -95,7 +94,107 @@
 
     <h3>Costo y disponibilidad</h3>
     <p>Desde $85 por noche · Valoración 4.8 de 5</p>
-    <p>Disponible: consultar fechas en la <a href="agenda.html?id=1">agenda de esta propiedad</a>.</p>
+
+    <form action="propiedad-detalle.html" method="get">
+      <input type="hidden" name="id" value="1">
+
+      <label for="disponibilidad-mes">Mes</label>
+      <select id="disponibilidad-mes" name="mes">
+        <option value="1">Enero</option>
+        <option value="2">Febrero</option>
+        <option value="3">Marzo</option>
+        <option value="4">Abril</option>
+        <option value="5">Mayo</option>
+        <option value="6">Junio</option>
+        <option value="7">Julio</option>
+        <option value="8" selected>Agosto</option>
+        <option value="9">Setiembre</option>
+        <option value="10">Octubre</option>
+        <option value="11">Noviembre</option>
+        <option value="12">Diciembre</option>
+      </select>
+
+      <label for="disponibilidad-anio">Año</label>
+      <select id="disponibilidad-anio" name="anio">
+        <option value="2026" selected>2026</option>
+        <option value="2027">2027</option>
+      </select>
+
+      <button type="submit">Ver mes</button>
+    </form>
+
+    <table>
+      <caption>Disponibilidad — agosto 2026</caption>
+      <thead>
+        <tr>
+          <th scope="col">Lun</th>
+          <th scope="col">Mar</th>
+          <th scope="col">Mié</th>
+          <th scope="col">Jue</th>
+          <th scope="col">Vie</th>
+          <th scope="col">Sáb</th>
+          <th scope="col">Dom</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td><time datetime="2026-08-01">1</time></td>
+          <td><time datetime="2026-08-02">2</time></td>
+        </tr>
+        <tr>
+          <td><time datetime="2026-08-03">3</time></td>
+          <td><time datetime="2026-08-04">4</time></td>
+          <td><time datetime="2026-08-05">5</time></td>
+          <td><time datetime="2026-08-06">6</time></td>
+          <td><time datetime="2026-08-07">7</time></td>
+          <td><time datetime="2026-08-08">8</time></td>
+          <td><time datetime="2026-08-09">9</time></td>
+        </tr>
+        <tr>
+          <td><time datetime="2026-08-10">10</time></td>
+          <td><time datetime="2026-08-11">11</time></td>
+          <td><time datetime="2026-08-12">12</time> — Reservado</td>
+          <td><time datetime="2026-08-13">13</time> — Reservado</td>
+          <td><time datetime="2026-08-14">14</time> — Reservado</td>
+          <td><time datetime="2026-08-15">15</time> — Reservado</td>
+          <td><time datetime="2026-08-16">16</time> — Reservado</td>
+        </tr>
+        <tr>
+          <td><time datetime="2026-08-17">17</time> — Reservado</td>
+          <td><time datetime="2026-08-18">18</time> — Reservado</td>
+          <td><time datetime="2026-08-19">19</time></td>
+          <td><time datetime="2026-08-20">20</time></td>
+          <td><time datetime="2026-08-21">21</time></td>
+          <td><time datetime="2026-08-22">22</time></td>
+          <td><time datetime="2026-08-23">23</time></td>
+        </tr>
+        <tr>
+          <td><time datetime="2026-08-24">24</time></td>
+          <td><time datetime="2026-08-25">25</time></td>
+          <td><time datetime="2026-08-26">26</time></td>
+          <td><time datetime="2026-08-27">27</time></td>
+          <td><time datetime="2026-08-28">28</time></td>
+          <td><time datetime="2026-08-29">29</time></td>
+          <td><time datetime="2026-08-30">30</time></td>
+        </tr>
+        <tr>
+          <td><time datetime="2026-08-31">31</time></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>El resto de las fechas está disponible para reservar.</p>
 
     <p><a href="reserva.html?id=1">Reservar esta propiedad</a></p>
   </section>
