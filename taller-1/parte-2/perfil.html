@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StayBooker 360 — Mi perfil</title>
+</head>
+<body>
+
+<header>
+  <h1>StayBooker 360</h1>
+
+  <nav aria-label="Navegación del sitio">
+    <ul>
+      <li><a href="registro.html">Regístrate</a></li>
+      <li><a href="inicio-sesion.html">Iniciar sesión</a></li>
+      <li><a href="perfil.html" aria-current="page">Perfil</a></li>
+      <li><a href="mis-reservas.html">Mis reservas</a></li>
+    </ul>
+
+    <ul>
+      <li><a href="catalogo.html">Explorar</a></li>
+      <li><a href="directorio.html">Directorio</a></li>
+      <li><a href="promociones.html">Promociones</a></li>
+      <li><a href="agenda.html">Agenda</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="ayuda.html">Ayuda</a></li>
+    </ul>
+
+    <ul>
+      <li><a href="index.html" hreflang="es">ES</a></li>
+      <li><a href="index.html?lang=en" hreflang="en">EN</a></li>
+      <li><a href="index.html?lang=fr" hreflang="fr">FR</a></li>
+      <li><a href="index.html?moneda=crc">Colones (CRC)</a></li>
+      <li><a href="index.html?moneda=usd">Dólares (USD)</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <section aria-labelledby="datos-heading">
+    <h2 id="datos-heading">Datos personales</h2>
+
+    <form action="perfil.html" method="post">
+      <fieldset>
+        <legend>Información básica</legend>
+
+        <label for="perfil-nombre">Nombre completo</label>
+        <input type="text" id="perfil-nombre" name="nombre" value="María Fernández">
+
+        <label for="perfil-correo">Correo electrónico</label>
+        <input type="email" id="perfil-correo" name="correo" value="maria.fernandez@correo.com">
+
+        <label for="perfil-telefono">Teléfono</label>
+        <input type="tel" id="perfil-telefono" name="telefono" value="+506 8888-0000">
+
+        <button type="submit">Guardar cambios</button>
+      </fieldset>
+    </form>
+  </section>
+
+  <section aria-labelledby="preferencias-heading">
+    <h2 id="preferencias-heading">Preferencias</h2>
+
+    <form action="perfil.html" method="post">
+      <fieldset>
+        <legend>Preferencias de reserva</legend>
+
+        <label for="preferencia-idioma">Idioma preferido</label>
+        <select id="preferencia-idioma" name="idioma">
+          <option value="es">Español</option>
+          <option value="en">English</option>
+          <option value="fr">Français</option>
+        </select>
+
+        <label for="preferencia-moneda">Moneda preferida</label>
+        <select id="preferencia-moneda" name="moneda">
+          <option value="crc">Colones (CRC)</option>
+          <option value="usd">Dólares (USD)</option>
+        </select>
+
+        <label for="preferencia-tipo">Tipo de alojamiento preferido</label>
+        <select id="preferencia-tipo" name="tipo_preferido">
+          <option value="casa">Casa</option>
+          <option value="apartamento">Apartamento</option>
+          <option value="villa">Villa</option>
+          <option value="cabana">Cabaña</option>
+          <option value="glamping">Glamping</option>
+        </select>
+
+        <label><input type="checkbox" id="preferencia-notificaciones" name="notificaciones"> Recibir notificaciones por correo</label>
+
+        <button type="submit">Guardar preferencias</button>
+      </fieldset>
+    </form>
+  </section>
+
+  <p><a href="mis-reservas.html">Ver mis reservas</a></p>
+
+  <section aria-labelledby="favoritos-heading">
+    <h2 id="favoritos-heading">Alojamientos favoritos</h2>
+
+    <ul>
+      <li><a href="propiedad-detalle.html?id=1">Villa Los Sueños — Guanacaste, Costa Rica</a></li>
+      <li><a href="propiedad-detalle.html?id=3">Cabaña del Bosque — Monteverde, Costa Rica</a></li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <nav aria-labelledby="compania-heading">
+    <h2 id="compania-heading">Compañía</h2>
+    <ul>
+      <li><a href="politicas-privacidad.html">Políticas de privacidad</a></li>
+      <li><a href="terminos-uso.html">Términos de uso</a></li>
+      <li><a href="ayuda.html">Ayuda y preguntas frecuentes</a></li>
+      <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
+    </ul>
+  </nav>
+
+  <section aria-labelledby="redes-heading">
+    <h2 id="redes-heading">Redes sociales</h2>
+    <ul>
+      <li><a href="https://facebook.com/staybooker360">Facebook</a></li>
+      <li><a href="https://instagram.com/staybooker360">Instagram</a></li>
+      <li><a href="https://x.com/staybooker360">X</a></li>
+      <li><a href="https://linkedin.com/company/staybooker360">LinkedIn</a></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="boletin-heading">
+    <h2 id="boletin-heading">Boletín informativo</h2>
+    <form action="suscripcion.html" method="post">
+      <label for="correo-boletin">Correo electrónico</label>
+      <input type="email" id="correo-boletin" name="correo">
+      <button type="submit">Suscribirse</button>
+    </form>
+  </section>
+
+  <address>
+    <p>Correo: contacto@staybooker360.com</p>
+    <p>Teléfono: +506 0000-0000</p>
+    <p>San José, Costa Rica</p>
+  </address>
+
+  <p>&copy; 2026 StayBooker 360. Todos los derechos reservados.</p>
+</footer>
+
+</body>
+</html>

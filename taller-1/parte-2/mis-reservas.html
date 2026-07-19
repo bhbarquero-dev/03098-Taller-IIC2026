@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StayBooker 360 — Mis reservas</title>
+</head>
+<body>
+
+<header>
+  <h1>StayBooker 360</h1>
+
+  <nav aria-label="Navegación del sitio">
+    <ul>
+      <li><a href="registro.html">Regístrate</a></li>
+      <li><a href="inicio-sesion.html">Iniciar sesión</a></li>
+      <li><a href="perfil.html">Perfil</a></li>
+      <li><a href="mis-reservas.html" aria-current="page">Mis reservas</a></li>
+    </ul>
+
+    <ul>
+      <li><a href="catalogo.html">Explorar</a></li>
+      <li><a href="directorio.html">Directorio</a></li>
+      <li><a href="promociones.html">Promociones</a></li>
+      <li><a href="agenda.html">Agenda</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="ayuda.html">Ayuda</a></li>
+    </ul>
+
+    <ul>
+      <li><a href="index.html" hreflang="es">ES</a></li>
+      <li><a href="index.html?lang=en" hreflang="en">EN</a></li>
+      <li><a href="index.html?lang=fr" hreflang="fr">FR</a></li>
+      <li><a href="index.html?moneda=crc">Colones (CRC)</a></li>
+      <li><a href="index.html?moneda=usd">Dólares (USD)</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <section aria-labelledby="proximas-heading">
+    <h2 id="proximas-heading">Próximas reservas</h2>
+
+    <article>
+      <h3>Villa Los Sueños — Guanacaste, Costa Rica</h3>
+      <ul>
+        <li>Entrada: 10 de agosto de 2026 · Salida: 14 de agosto de 2026</li>
+        <li>Huéspedes: 4</li>
+        <li>Total: $340</li>
+        <li>Estado: Pendiente</li>
+      </ul>
+      <p>
+        <a href="propiedad-detalle.html?id=1">Ver detalle</a> ·
+        <a href="reserva.html?id=1&accion=modificar">Modificar</a> ·
+        <a href="mis-reservas.html?cancelar=101">Cancelar reserva</a>
+      </p>
+    </article>
+
+    <article>
+      <h3>Apartamento Central — San José, Costa Rica</h3>
+      <ul>
+        <li>Entrada: 2 de setiembre de 2026 · Salida: 5 de setiembre de 2026</li>
+        <li>Huéspedes: 2</li>
+        <li>Total: $120</li>
+        <li>Estado: Confirmada</li>
+      </ul>
+      <p>
+        <a href="propiedad-detalle.html?id=2">Ver detalle</a> ·
+        <a href="mis-reservas.html?cancelar=102">Cancelar reserva</a>
+      </p>
+    </article>
+  </section>
+
+  <section aria-labelledby="historial-heading">
+    <h2 id="historial-heading">Historial de reservas</h2>
+
+    <article>
+      <h3>Cabaña del Bosque — Monteverde, Costa Rica</h3>
+      <ul>
+        <li>Entrada: 3 de mayo de 2026 · Salida: 6 de mayo de 2026</li>
+        <li>Huéspedes: 3</li>
+        <li>Total: $180</li>
+        <li>Estado: Finalizada</li>
+      </ul>
+      <p><a href="propiedad-detalle.html?id=3">Ver detalle</a></p>
+
+      <form action="propiedad-detalle.html" method="post">
+        <fieldset>
+          <legend>Dejar reseña de esta estancia</legend>
+
+          <label for="resena-calificacion-3">Calificación</label>
+          <select id="resena-calificacion-3" name="calificacion">
+            <option value="5">5 — Excelente</option>
+            <option value="4">4 — Muy buena</option>
+            <option value="3">3 — Buena</option>
+            <option value="2">2 — Regular</option>
+            <option value="1">1 — Mala</option>
+          </select>
+
+          <label for="resena-comentario-3">Comentario</label>
+          <textarea id="resena-comentario-3" name="comentario" rows="3"></textarea>
+
+          <button type="submit">Enviar reseña</button>
+        </fieldset>
+      </form>
+    </article>
+
+    <article>
+      <h3>Glamping Costa Azul — Puntarenas, Costa Rica</h3>
+      <ul>
+        <li>Entrada: 20 de enero de 2026 · Salida: 22 de enero de 2026</li>
+        <li>Huéspedes: 2</li>
+        <li>Total: $140</li>
+        <li>Estado: Cancelada</li>
+      </ul>
+      <p><a href="propiedad-detalle.html?id=4">Ver detalle</a></p>
+    </article>
+  </section>
+
+</main>
+
+<footer>
+  <nav aria-labelledby="compania-heading">
+    <h2 id="compania-heading">Compañía</h2>
+    <ul>
+      <li><a href="politicas-privacidad.html">Políticas de privacidad</a></li>
+      <li><a href="terminos-uso.html">Términos de uso</a></li>
+      <li><a href="ayuda.html">Ayuda y preguntas frecuentes</a></li>
+      <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
+    </ul>
+  </nav>
+
+  <section aria-labelledby="redes-heading">
+    <h2 id="redes-heading">Redes sociales</h2>
+    <ul>
+      <li><a href="https://facebook.com/staybooker360">Facebook</a></li>
+      <li><a href="https://instagram.com/staybooker360">Instagram</a></li>
+      <li><a href="https://x.com/staybooker360">X</a></li>
+      <li><a href="https://linkedin.com/company/staybooker360">LinkedIn</a></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="boletin-heading">
+    <h2 id="boletin-heading">Boletín informativo</h2>
+    <form action="suscripcion.html" method="post">
+      <label for="correo-boletin">Correo electrónico</label>
+      <input type="email" id="correo-boletin" name="correo">
+      <button type="submit">Suscribirse</button>
+    </form>
+  </section>
+
+  <address>
+    <p>Correo: contacto@staybooker360.com</p>
+    <p>Teléfono: +506 0000-0000</p>
+    <p>San José, Costa Rica</p>
+  </address>
+
+  <p>&copy; 2026 StayBooker 360. Todos los derechos reservados.</p>
+</footer>
+
+</body>
+</html>

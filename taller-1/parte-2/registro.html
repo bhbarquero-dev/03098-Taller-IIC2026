@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StayBooker 360 — Regístrate</title>
+</head>
+<body>
+
+<header>
+  <h1>StayBooker 360</h1>
+
+  <nav aria-label="Navegación del sitio">
+    <ul>
+      <li><a href="registro.html" aria-current="page">Regístrate</a></li>
+      <li><a href="inicio-sesion.html">Iniciar sesión</a></li>
+      <li><a href="perfil.html">Perfil</a></li>
+      <li><a href="mis-reservas.html">Mis reservas</a></li>
+    </ul>
+
+    <ul>
+      <li><a href="catalogo.html">Explorar</a></li>
+      <li><a href="directorio.html">Directorio</a></li>
+      <li><a href="promociones.html">Promociones</a></li>
+      <li><a href="agenda.html">Agenda</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="ayuda.html">Ayuda</a></li>
+    </ul>
+
+    <ul>
+      <li><a href="index.html" hreflang="es">ES</a></li>
+      <li><a href="index.html?lang=en" hreflang="en">EN</a></li>
+      <li><a href="index.html?lang=fr" hreflang="fr">FR</a></li>
+      <li><a href="index.html?moneda=crc">Colones (CRC)</a></li>
+      <li><a href="index.html?moneda=usd">Dólares (USD)</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <section aria-labelledby="registro-heading">
+    <h2 id="registro-heading">Crear cuenta</h2>
+    <p>Regístrate para explorar alojamientos, gestionar reservas y, si lo deseas más adelante, publicar tus
+    propias propiedades como anfitrión.</p>
+
+    <form action="perfil.html" method="post">
+      <fieldset>
+        <legend>Datos de la cuenta</legend>
+
+        <label for="registro-nombre">Nombre completo</label>
+        <input type="text" id="registro-nombre" name="nombre">
+
+        <label for="registro-correo">Correo electrónico</label>
+        <input type="email" id="registro-correo" name="correo">
+
+        <label for="registro-clave">Contraseña</label>
+        <input type="password" id="registro-clave" name="clave">
+
+        <label for="registro-clave-confirmar">Confirmar contraseña</label>
+        <input type="password" id="registro-clave-confirmar" name="clave_confirmar">
+
+        <label for="registro-telefono">Teléfono (opcional)</label>
+        <input type="tel" id="registro-telefono" name="telefono">
+
+        <label for="registro-terminos">
+          <input type="checkbox" id="registro-terminos" name="terminos">
+          Acepto los <a href="terminos-uso.html">términos de uso</a> y las
+          <a href="politicas-privacidad.html">políticas de privacidad</a>
+        </label>
+
+        <button type="submit">Crear cuenta</button>
+      </fieldset>
+    </form>
+
+    <p>¿Ya tienes cuenta? <a href="inicio-sesion.html">Inicia sesión</a></p>
+    <p>¿Quieres publicar tu propiedad? <a href="publicar-propiedad.html">Postúlate como anfitrión</a></p>
+  </section>
+
+</main>
+
+<footer>
+  <nav aria-labelledby="compania-heading">
+    <h2 id="compania-heading">Compañía</h2>
+    <ul>
+      <li><a href="politicas-privacidad.html">Políticas de privacidad</a></li>
+      <li><a href="terminos-uso.html">Términos de uso</a></li>
+      <li><a href="ayuda.html">Ayuda y preguntas frecuentes</a></li>
+      <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
+    </ul>
+  </nav>
+
+  <section aria-labelledby="redes-heading">
+    <h2 id="redes-heading">Redes sociales</h2>
+    <ul>
+      <li><a href="https://facebook.com/staybooker360">Facebook</a></li>
+      <li><a href="https://instagram.com/staybooker360">Instagram</a></li>
+      <li><a href="https://x.com/staybooker360">X</a></li>
+      <li><a href="https://linkedin.com/company/staybooker360">LinkedIn</a></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="boletin-heading">
+    <h2 id="boletin-heading">Boletín informativo</h2>
+    <form action="suscripcion.html" method="post">
+      <label for="correo-boletin">Correo electrónico</label>
+      <input type="email" id="correo-boletin" name="correo">
+      <button type="submit">Suscribirse</button>
+    </form>
+  </section>
+
+  <address>
+    <p>Correo: contacto@staybooker360.com</p>
+    <p>Teléfono: +506 0000-0000</p>
+    <p>San José, Costa Rica</p>
+  </address>
+
+  <p>&copy; 2026 StayBooker 360. Todos los derechos reservados.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StayBooker 360 — Publica tu propiedad</title>
+</head>
+<body>
+
+<header>
+  <h1>StayBooker 360</h1>
+
+  <nav aria-label="Navegación del sitio">
+    <ul>
+      <li><a href="registro.html">Regístrate</a></li>
+      <li><a href="inicio-sesion.html">Iniciar sesión</a></li>
+      <li><a href="perfil.html">Perfil</a></li>
+      <li><a href="mis-reservas.html">Mis reservas</a></li>
+    </ul>
+
+    <ul>
+      <li><a href="catalogo.html">Explorar</a></li>
+      <li><a href="directorio.html">Directorio</a></li>
+      <li><a href="promociones.html">Promociones</a></li>
+      <li><a href="agenda.html">Agenda</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="ayuda.html">Ayuda</a></li>
+    </ul>
+
+    <ul>
+      <li><a href="index.html" hreflang="es">ES</a></li>
+      <li><a href="index.html?lang=en" hreflang="en">EN</a></li>
+      <li><a href="index.html?lang=fr" hreflang="fr">FR</a></li>
+      <li><a href="index.html?moneda=crc">Colones (CRC)</a></li>
+      <li><a href="index.html?moneda=usd">Dólares (USD)</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <section aria-labelledby="institucional-heading">
+    <h2 id="institucional-heading">Publica tu propiedad en StayBooker 360</h2>
+    <p>Cualquier huésped registrado puede convertirse en anfitrión. Al crear tu primera propiedad, tu cuenta
+    obtiene acceso al panel de anfitrión sin necesidad de un registro aparte.</p>
+
+    <h3>Beneficios</h3>
+    <p>Ingresos adicionales, visibilidad ante huéspedes nacionales e internacionales, y herramientas propias
+    para administrar tus reservas y disponibilidad.</p>
+
+    <h3>Requisitos</h3>
+    <p>Ser mayor de edad, contar con una cuenta activa en StayBooker 360 y disponer de una propiedad habilitada
+    para hospedaje temporal.</p>
+
+    <h3>Proceso</h3>
+    <ol>
+      <li>Crea o inicia sesión en tu cuenta de StayBooker 360.</li>
+      <li>Completa el formulario de tu propiedad.</li>
+      <li>Tu propiedad y tu panel de anfitrión quedan disponibles de inmediato.</li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="propiedad-heading">
+    <h2 id="propiedad-heading">Datos de tu propiedad</h2>
+
+    <form action="anfitrion-propiedades.html" method="post">
+      <fieldset>
+        <legend>Datos generales</legend>
+
+        <label for="propiedad-nombre">Nombre del alojamiento</label>
+        <input type="text" id="propiedad-nombre" name="nombre">
+
+        <label for="propiedad-tipo">Tipo de alojamiento</label>
+        <select id="propiedad-tipo" name="tipo">
+          <option value="casa">Casa</option>
+          <option value="apartamento">Apartamento</option>
+          <option value="villa">Villa</option>
+          <option value="cabana">Cabaña</option>
+          <option value="glamping">Glamping</option>
+          <option value="habitacion">Habitación</option>
+        </select>
+
+        <label for="propiedad-descripcion">Descripción</label>
+        <textarea id="propiedad-descripcion" name="descripcion" rows="4"></textarea>
+
+        <label for="propiedad-ubicacion">Ubicación</label>
+        <input type="text" id="propiedad-ubicacion" name="ubicacion" placeholder="Ciudad, provincia">
+
+        <label for="propiedad-capacidad">Capacidad máxima de huéspedes</label>
+        <input type="number" id="propiedad-capacidad" name="capacidad" min="1">
+      </fieldset>
+
+      <fieldset>
+        <legend>Servicios y políticas</legend>
+
+        <label><input type="checkbox" name="servicios" value="wifi"> Wifi</label>
+        <label><input type="checkbox" name="servicios" value="parqueo"> Parqueo</label>
+        <label><input type="checkbox" name="servicios" value="piscina"> Piscina</label>
+        <label><input type="checkbox" name="servicios" value="cocina"> Cocina equipada</label>
+
+        <label for="propiedad-mascotas">¿Se admiten mascotas?</label>
+        <select id="propiedad-mascotas" name="mascotas">
+          <option value="si">Sí</option>
+          <option value="no">No</option>
+        </select>
+
+        <label for="propiedad-fumar">¿Se permite fumar?</label>
+        <select id="propiedad-fumar" name="fumar">
+          <option value="si">Sí</option>
+          <option value="no">No</option>
+        </select>
+
+        <label for="propiedad-entrada">Horario de entrada</label>
+        <input type="time" id="propiedad-entrada" name="hora_entrada">
+
+        <label for="propiedad-salida">Horario de salida</label>
+        <input type="time" id="propiedad-salida" name="hora_salida">
+
+        <label for="propiedad-cancelacion">Política de cancelación</label>
+        <textarea id="propiedad-cancelacion" name="politica_cancelacion" rows="3"></textarea>
+      </fieldset>
+
+      <fieldset>
+        <legend>Contacto y multimedia</legend>
+
+        <label for="propiedad-contacto-telefono">Teléfono de contacto de la propiedad</label>
+        <input type="tel" id="propiedad-contacto-telefono" name="contacto_telefono">
+
+        <label for="propiedad-contacto-correo">Correo de contacto de la propiedad</label>
+        <input type="email" id="propiedad-contacto-correo" name="contacto_correo">
+
+        <label for="propiedad-imagenes">Imágenes de la propiedad</label>
+        <input type="file" id="propiedad-imagenes" name="imagenes" accept="image/*" multiple>
+      </fieldset>
+
+      <button type="submit">Publicar propiedad</button>
+    </form>
+  </section>
+
+</main>
+
+<footer>
+  <nav aria-labelledby="compania-heading">
+    <h2 id="compania-heading">Compañía</h2>
+    <ul>
+      <li><a href="politicas-privacidad.html">Políticas de privacidad</a></li>
+      <li><a href="terminos-uso.html">Términos de uso</a></li>
+      <li><a href="ayuda.html">Ayuda y preguntas frecuentes</a></li>
+      <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
+    </ul>
+  </nav>
+
+  <section aria-labelledby="redes-heading">
+    <h2 id="redes-heading">Redes sociales</h2>
+    <ul>
+      <li><a href="https://facebook.com/staybooker360">Facebook</a></li>
+      <li><a href="https://instagram.com/staybooker360">Instagram</a></li>
+      <li><a href="https://x.com/staybooker360">X</a></li>
+      <li><a href="https://linkedin.com/company/staybooker360">LinkedIn</a></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="boletin-heading">
+    <h2 id="boletin-heading">Boletín informativo</h2>
+    <form action="suscripcion.html" method="post">
+      <label for="correo-boletin">Correo electrónico</label>
+      <input type="email" id="correo-boletin" name="correo">
+      <button type="submit">Suscribirse</button>
+    </form>
+  </section>
+
+  <address>
+    <p>Correo: contacto@staybooker360.com</p>
+    <p>Teléfono: +506 0000-0000</p>
+    <p>San José, Costa Rica</p>
+  </address>
+
+  <p>&copy; 2026 StayBooker 360. Todos los derechos reservados.</p>
+</footer>
+
+</body>
+</html>
