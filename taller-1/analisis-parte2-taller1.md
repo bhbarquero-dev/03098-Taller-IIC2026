@@ -151,11 +151,12 @@ Base: los 13 archivos que `index.html` (Parte 1) ya promete como enlaces, más l
 | `perfil.html` | Huésped | 4,7 | Datos personales, preferencias, favoritos | Alta |
 | `mis-reservas.html` | Huésped | 4,7 | Historial y estado de reservas; formulario para calificar/reseñar reservas ya finalizadas (no en `propiedad-detalle.html`, que solo muestra reseñas de consulta) | Alta |
 | `ayuda.html` | General | 7 | FAQ, políticas, contacto | Media |
-| `politicas-privacidad.html` / `terminos-uso.html` / `sobre-nosotros.html` | General | 7 | Texto institucional | Baja |
+| `politicas-privacidad.html` / `terminos-uso.html` | General | 7 | Texto institucional (contenido inventado, solo las páginas están nombradas en línea 128) | Baja |
+| `sobre-nosotros.html` | General | 7 | Texto institucional 100% inventado (quiénes somos, misión, visión, historia, cobertura) — no está mencionada en el enunciado ni siquiera en línea 128; se mantiene por decisión explícita del usuario | Baja |
 | `blog.html` | General | 7 | Listado de artículos | Baja |
 | `blog-post.html` *(nueva)* | General | 7 | Página de post individual del blog (no pedida por el enunciado, decisión propia del proyecto) | Baja |
 | `promociones.html` *(nueva)* | General | 7 | Alojamientos recomendados, ofertas de temporada | Media |
-| `suscripcion.html` | General | 6 | Confirmación boletín | Baja |
+| ~~`suscripcion.html`~~ | — | — | Descartada (decisión 19-jul-2026): el formulario de boletín en el footer se queda solo como formulario, sin página de confirmación propia | — |
 | `publicar-propiedad.html` | Huésped → Anfitrión | 4,6,7 | Contenido institucional (beneficios/requisitos/proceso) + formulario completo de propiedad (mismo formulario que `anfitrion-propiedad-nueva.html`) | Alta |
 | `anfitrion-panel.html` *(nueva)* | Anfitrión | 7 | Dashboard: resumen (línea 212) + accesos a propiedades/reservas/perfil (línea 226). Es el destino del enlace "Panel de anfitrión" en `perfil.html` (antes apuntaba directo a `anfitrion-propiedades.html`) | Media |
 | `anfitrion-propiedades.html` *(nueva)* | Anfitrión | 4,7 | Listado de propiedades del anfitrión, con enlaces a editar/dar de baja cada una | Alta |
