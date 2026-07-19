@@ -202,6 +202,19 @@
   <section aria-labelledby="resenas-heading">
     <h2 id="resenas-heading">Reseñas de huéspedes</h2>
 
+    <form action="propiedad-detalle.html" method="get">
+      <input type="hidden" name="id" value="1">
+
+      <label for="resenas-orden">Ordenar por</label>
+      <select id="resenas-orden" name="orden">
+        <option value="valoracion">Valoración</option>
+        <option value="recientes">Más recientes</option>
+        <option value="antiguas">Más antiguas</option>
+      </select>
+
+      <button type="submit">Ordenar</button>
+    </form>
+
     <article>
       <blockquote>
         <p>"La casa estaba impecable y la piscina fue el punto favorito de los niños. Volveríamos sin dudarlo."</p>
