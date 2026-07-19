@@ -73,15 +73,38 @@
     </form>
   </section>
 
-  <section aria-labelledby="validar-heading">
-    <h2 id="validar-heading">Validar cancelación o reembolso</h2>
+  <section aria-labelledby="cancelacion-heading">
+    <h2 id="cancelacion-heading">Validar cancelación</h2>
+
+    <p>Motivo de la cancelación indicado por la huésped: "Cambio de planes de último momento."</p>
+
+    <form action="admin-reservas.html" method="post">
+      <fieldset>
+        <legend>Decisión</legend>
+
+        <label for="cancelacion-decision">Decisión</label>
+        <select id="cancelacion-decision" name="decision_cancelacion">
+          <option value="confirmar-cancelacion">Confirmar cancelación</option>
+          <option value="rechazar-cancelacion">Rechazar cancelación</option>
+        </select>
+
+        <label for="cancelacion-motivo">Motivo de la decisión</label>
+        <textarea id="cancelacion-motivo" name="motivo_cancelacion" rows="3"></textarea>
+
+        <button type="submit">Confirmar decisión</button>
+      </fieldset>
+    </form>
+  </section>
+
+  <section aria-labelledby="reembolso-heading">
+    <h2 id="reembolso-heading">Validar reembolso</h2>
 
     <form action="admin-reservas.html" method="post">
       <fieldset>
         <legend>Decisión</legend>
 
         <label for="reserva-decision">Decisión</label>
-        <select id="reserva-decision" name="decision">
+        <select id="reserva-decision" name="decision_reembolso">
           <option value="confirmar-reembolso">Confirmar reembolso</option>
           <option value="rechazar-reembolso">Rechazar reembolso</option>
         </select>
@@ -90,7 +113,7 @@
         <input type="text" id="reserva-monto-reembolso" name="monto_reembolso" value="$170">
 
         <label for="reserva-motivo">Motivo</label>
-        <textarea id="reserva-motivo" name="motivo" rows="3"></textarea>
+        <textarea id="reserva-motivo" name="motivo_reembolso" rows="3"></textarea>
 
         <button type="submit">Confirmar decisión</button>
       </fieldset>
