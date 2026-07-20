@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StayBooker 360 — Panel de anfitrión</title>
+<title>StayBooker 360 — Consultas de huéspedes</title>
 </head>
 <body>
 
@@ -37,27 +37,47 @@
 
 <main>
 
-  <h2>Panel de anfitrión</h2>
+  <h2>Consultas de huéspedes</h2>
 
-  <section aria-labelledby="resumen-heading">
-    <h3 id="resumen-heading">Resumen</h3>
-    <ul>
-      <li>Reservas totales recibidas: 14</li>
-      <li>Alojamiento más consultado: Villa Los Sueños</li>
-      <li>Período de mayor ocupación: diciembre–enero</li>
-      <li>Valoración promedio de tus propiedades: 4.7 de 5</li>
-    </ul>
-  </section>
-
-  <section aria-labelledby="accesos-heading">
-    <h3 id="accesos-heading">Accesos</h3>
-    <ul>
-      <li><a href="anfitrion-propiedades.html">Mis propiedades</a></li>
-      <li><a href="anfitrion-reservas.html">Reservas recibidas</a></li>
-      <li><a href="anfitrion-consultas.html">Consultas de huéspedes</a></li>
-      <li><a href="perfil.html">Mi perfil</a></li>
-    </ul>
-  </section>
+  <table>
+    <caption>Consultas recibidas</caption>
+    <thead>
+      <tr>
+        <th scope="col">Asunto</th>
+        <th scope="col">Propiedad</th>
+        <th scope="col">Huésped</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Consulta sobre llegada tardía</td>
+        <td>Villa Los Sueños</td>
+        <td>Ana Torres</td>
+        <td><time datetime="2026-07-15">15/07/2026</time></td>
+        <td>Pendiente</td>
+        <td><a href="anfitrion-consulta-responder.html?id=401">Responder</a></td>
+      </tr>
+      <tr>
+        <td>¿Aceptan mascotas?</td>
+        <td>Apartamento Central</td>
+        <td>Carlos Jiménez</td>
+        <td><time datetime="2026-07-10">10/07/2026</time></td>
+        <td>Respondida</td>
+        <td><a href="anfitrion-consulta-responder.html?id=402">Responder</a></td>
+      </tr>
+      <tr>
+        <td>Disponibilidad para grupo grande</td>
+        <td>Cabaña del Bosque</td>
+        <td>Sofía Ramírez</td>
+        <td><time datetime="2026-07-05">05/07/2026</time></td>
+        <td>Pendiente</td>
+        <td><a href="anfitrion-consulta-responder.html?id=403">Responder</a></td>
+      </tr>
+    </tbody>
+  </table>
 
 </main>
 
