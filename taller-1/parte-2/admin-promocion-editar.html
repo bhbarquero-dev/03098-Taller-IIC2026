@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StayBooker 360 — Panel de administración</title>
+<title>StayBooker 360 — Editar promoción</title>
 </head>
 <body>
 
@@ -37,27 +37,62 @@
 
 <main>
 
-  <h2>Panel de administración</h2>
+  <section aria-labelledby="promocion-heading">
+    <h2 id="promocion-heading">Editar promoción — Escapada de temporada seca</h2>
 
-  <section aria-labelledby="resumen-heading">
-    <h3 id="resumen-heading">Resumen</h3>
-    <ul>
-      <li>Usuarios registrados: 1,248</li>
-      <li>Alojamientos activos: 312</li>
-      <li>Reservas del mes: 87</li>
-      <li>Propiedades pendientes de aprobación: 5</li>
-    </ul>
+    <form action="admin-promociones.html" method="post">
+      <fieldset>
+        <legend>Datos de la promoción</legend>
+
+        <label for="promocion-titulo">Título</label>
+        <input type="text" id="promocion-titulo" name="titulo" value="Escapada de temporada seca">
+
+        <label for="promocion-descripcion">Descripción</label>
+        <textarea id="promocion-descripcion" name="descripcion" rows="3">15% de descuento en alojamientos de Guanacaste durante diciembre y enero.</textarea>
+
+        <label for="promocion-beneficio">Descuento o beneficio</label>
+        <input type="text" id="promocion-beneficio" name="beneficio" value="15% de descuento">
+
+        <label for="promocion-inicio">Vigencia desde</label>
+        <input type="date" id="promocion-inicio" name="vigencia_inicio" value="2026-12-01">
+
+        <label for="promocion-fin">Vigencia hasta</label>
+        <input type="date" id="promocion-fin" name="vigencia_fin" value="2027-01-31">
+
+        <label for="promocion-estado">Estado</label>
+        <select id="promocion-estado" name="estado">
+          <option value="activa">Activa</option>
+          <option value="inactiva" selected>Inactiva (fuera de temporada)</option>
+          <option value="finalizada">Finalizada</option>
+        </select>
+
+        <button type="submit">Guardar cambios</button>
+      </fieldset>
+    </form>
   </section>
 
-  <section aria-labelledby="accesos-heading">
-    <h3 id="accesos-heading">Accesos</h3>
-    <ul>
-      <li><a href="admin-usuarios.html">Gestión de usuarios</a></li>
-      <li><a href="admin-alojamientos.html">Gestión de alojamientos</a></li>
-      <li><a href="admin-promociones.html">Gestión de promociones</a></li>
-      <li><a href="admin-reservas.html">Reservas y pagos</a></li>
-      <li><a href="admin-reportes.html">Reportes</a></li>
-    </ul>
+  <section aria-labelledby="participantes-heading">
+    <h2 id="participantes-heading">Propiedades participantes</h2>
+
+    <table>
+      <caption>Propiedades que se unieron a esta promoción</caption>
+      <thead>
+        <tr>
+          <th scope="col">Propiedad</th>
+          <th scope="col">Anfitrión</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Villa Los Sueños</td>
+          <td>María Fernández</td>
+        </tr>
+        <tr>
+          <td>Villa con piscina — Guanacaste</td>
+          <td>Roberto Salas</td>
+        </tr>
+      </tbody>
+    </table>
   </section>
 
 </main>
