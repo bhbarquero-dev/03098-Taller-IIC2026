@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StayBooker 360 — Panel de administración</title>
+<title>StayBooker 360 — Editar post del blog</title>
 </head>
 <body>
 
@@ -37,28 +37,39 @@
 
 <main>
 
-  <h2>Panel de administración</h2>
+  <section aria-labelledby="post-heading">
+    <h2 id="post-heading">Editar post — 5 razones para visitar Guanacaste esta temporada seca</h2>
 
-  <section aria-labelledby="resumen-heading">
-    <h3 id="resumen-heading">Resumen</h3>
-    <ul>
-      <li>Usuarios registrados: 1,248</li>
-      <li>Alojamientos activos: 312</li>
-      <li>Reservas del mes: 87</li>
-      <li>Propiedades pendientes de aprobación: 5</li>
-    </ul>
-  </section>
+    <form action="admin-blog.html" method="post">
+      <fieldset>
+        <legend>Datos del post</legend>
 
-  <section aria-labelledby="accesos-heading">
-    <h3 id="accesos-heading">Accesos</h3>
-    <ul>
-      <li><a href="admin-usuarios.html">Gestión de usuarios</a></li>
-      <li><a href="admin-alojamientos.html">Gestión de alojamientos</a></li>
-      <li><a href="admin-promociones.html">Gestión de promociones</a></li>
-      <li><a href="admin-blog.html">Gestión de blog</a></li>
-      <li><a href="admin-reservas.html">Reservas y pagos</a></li>
-      <li><a href="admin-reportes.html">Reportes</a></li>
-    </ul>
+        <label for="post-titulo">Título</label>
+        <input type="text" id="post-titulo" name="titulo" value="5 razones para visitar Guanacaste esta temporada seca">
+
+        <label for="post-autor">Autor</label>
+        <input type="text" id="post-autor" name="autor" value="Camila Rojas">
+
+        <label for="post-fecha">Fecha de publicación</label>
+        <input type="date" id="post-fecha" name="fecha_publicacion" value="2026-07-03">
+
+        <label for="post-imagen">Imagen destacada</label>
+        <input type="file" id="post-imagen" name="imagen" accept="image/*">
+
+        <label for="post-contenido">Contenido</label>
+        <textarea id="post-contenido" name="contenido" rows="8">Entre diciembre y abril, Guanacaste concentra algunos de los días más soleados de todo el país. Para quienes buscan playas extensas, clima estable y una oferta amplia de alojamientos, esta temporada suele ser la más recomendada del año.</textarea>
+
+        <label for="post-estado">Estado</label>
+        <select id="post-estado" name="estado">
+          <option value="publicado" selected>Publicado</option>
+          <option value="borrador">Borrador</option>
+        </select>
+
+        <button type="submit">Guardar cambios</button>
+      </fieldset>
+    </form>
+
+    <p><a href="blog-post.html?id=1">Ver post publicado</a></p>
   </section>
 
 </main>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StayBooker 360 — Panel de administración</title>
+<title>StayBooker 360 — Gestión de blog</title>
 </head>
 <body>
 
@@ -37,29 +37,50 @@
 
 <main>
 
-  <h2>Panel de administración</h2>
+  <h2>Gestión de blog</h2>
 
-  <section aria-labelledby="resumen-heading">
-    <h3 id="resumen-heading">Resumen</h3>
-    <ul>
-      <li>Usuarios registrados: 1,248</li>
-      <li>Alojamientos activos: 312</li>
-      <li>Reservas del mes: 87</li>
-      <li>Propiedades pendientes de aprobación: 5</li>
-    </ul>
-  </section>
-
-  <section aria-labelledby="accesos-heading">
-    <h3 id="accesos-heading">Accesos</h3>
-    <ul>
-      <li><a href="admin-usuarios.html">Gestión de usuarios</a></li>
-      <li><a href="admin-alojamientos.html">Gestión de alojamientos</a></li>
-      <li><a href="admin-promociones.html">Gestión de promociones</a></li>
-      <li><a href="admin-blog.html">Gestión de blog</a></li>
-      <li><a href="admin-reservas.html">Reservas y pagos</a></li>
-      <li><a href="admin-reportes.html">Reportes</a></li>
-    </ul>
-  </section>
+  <table>
+    <caption>Posts del blog</caption>
+    <thead>
+      <tr>
+        <th scope="col">Título</th>
+        <th scope="col">Autor</th>
+        <th scope="col">Fecha de publicación</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>5 razones para visitar Guanacaste esta temporada seca</td>
+        <td>Camila Rojas</td>
+        <td><time datetime="2026-07-03">03/07/2026</time></td>
+        <td>Publicado</td>
+        <td><a href="admin-blog-post-editar.html?id=1">Editar</a></td>
+      </tr>
+      <tr>
+        <td>Cómo armar el equipaje ideal para una estadía de fin de semana</td>
+        <td>Camila Rojas</td>
+        <td><time datetime="2026-06-22">22/06/2026</time></td>
+        <td>Publicado</td>
+        <td><a href="admin-blog-post-editar.html?id=2">Editar</a></td>
+      </tr>
+      <tr>
+        <td>Qué preguntar antes de reservar: políticas de cancelación y check-in</td>
+        <td>Camila Rojas</td>
+        <td><time datetime="2026-06-10">10/06/2026</time></td>
+        <td>Publicado</td>
+        <td><a href="admin-blog-post-editar.html?id=3">Editar</a></td>
+      </tr>
+      <tr>
+        <td>Nuevas normas de convivencia en alojamientos compartidos</td>
+        <td>Camila Rojas</td>
+        <td>Sin publicar</td>
+        <td>Borrador</td>
+        <td><a href="admin-blog-post-editar.html?id=4">Editar</a></td>
+      </tr>
+    </tbody>
+  </table>
 
 </main>
 
