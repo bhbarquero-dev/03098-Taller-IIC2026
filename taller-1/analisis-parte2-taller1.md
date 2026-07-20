@@ -179,7 +179,9 @@ Base: los 13 archivos que `index.html` (Parte 1) ya promete como enlaces, más l
 | `admin-blog-post-editar.html` *(nueva)* | Admin | 4,6,7 | Formulario de edición del post (título, autor, fecha, imagen, contenido, estado) | Media |
 | `admin-reportes.html` *(nueva)* | Admin | 6,7 | Página de solo lectura/consolidación (línea 166): formulario de filtro por tipo de reporte (alojamientos más consultados/reservas del período/comportamiento de usuarios/tendencias/incidencias registradas) + tabla con el resultado de uno de los reportes posibles (ejemplo construido: alojamientos más consultados) + botón "Imprimir reporte" sin función (decisión explícita del usuario: sin JS no puede funcionar, se deja como elemento visual). El registro de incidencias ocurre en el editar de cada entidad (usuarios/alojamientos/reservas); esta pantalla las consolida como uno de los tipos de reporte disponibles | Media |
 
-Pendiente de decisión aparte: alcance de `index-en.html` / `index-fr.html` (multilingüe) — no es criterio explícito de rúbrica pero sí está en la narrativa (línea 130).
+**Decisión (19-jul-2026):** cerrado. El multilingüe (línea 130/168) se queda solo como los enlaces estructurales ES/EN/FR ya presentes en el header (`?lang=en`/`?lang=fr`, sin contenido traducido real) — no se construirán versiones completas `index-en.html`/`index-fr.html` ni equivalentes. No es criterio explícito de la rúbrica.
+
+**Decisión (19-jul-2026):** cerrado. El espacio de orientación para anfitriones (línea 222) no se construye — el propio enunciado lo marca como opcional ("el sistema podrá contemplar").
 
 ## 6. Verificación contra el enunciado completo (no solo la rúbrica)
 
@@ -201,7 +203,7 @@ Relectura del `.md` de indicaciones línea por línea para confirmar que el inve
 ## 8. Pendientes / próximos pasos
 
 1. Confirmar con la profesora la interpretación del criterio 4 ("mantenimiento de perfiles, servicios, pagos, etc.") — se avanza bajo Lectura A mientras tanto.
-2. Definir alcance real del multilingüe (¿3 versiones completas o stub?) antes de que el volumen de páginas se triplique.
+2. ~~Definir alcance real del multilingüe (¿3 versiones completas o stub?) antes de que el volumen de páginas se triplique.~~ Resuelto (19-jul-2026): se queda solo como stub estructural, sin versiones traducidas.
 3. Diseñar el patrón de `header`/`nav`/`footer` reutilizable para todas las páginas secundarias, a partir del ya usado en `index.html`.
 4. Construir las páginas del inventario (sección 5) por bloques, en orden de prioridad.
 5. Revisar continuidad con `index.html` / `arquitectura-home.md` de Parte 1 para mantener nomenclatura y jerarquía de secciones consistente entre Parte 1 y Parte 2.
