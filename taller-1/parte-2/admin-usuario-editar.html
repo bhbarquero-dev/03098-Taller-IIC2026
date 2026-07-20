@@ -97,6 +97,47 @@
     </form>
   </section>
 
+  <section aria-labelledby="incidencia-heading">
+    <h2 id="incidencia-heading">Reportar incidencia</h2>
+
+    <form action="admin-reportes.html" method="post">
+      <fieldset>
+        <legend>Nueva incidencia</legend>
+
+        <label for="incidencia-tipo">Tipo de incidencia</label>
+        <select id="incidencia-tipo" name="tipo_incidencia">
+          <option value="informacion-inconsistente">Información inconsistente</option>
+          <option value="contenido-inapropiado">Contenido inapropiado</option>
+          <option value="pago-sospechoso">Pago o transacción sospechosa</option>
+          <option value="otro">Otro</option>
+        </select>
+
+        <label for="incidencia-descripcion">Descripción</label>
+        <textarea id="incidencia-descripcion" name="descripcion" rows="3"></textarea>
+
+        <button type="submit">Registrar incidencia</button>
+      </fieldset>
+    </form>
+
+    <table>
+      <caption>Incidencias registradas para esta cuenta</caption>
+      <thead>
+        <tr>
+          <th scope="col">Fecha</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><time datetime="2026-06-15">15/06/2026</time></td>
+          <td>Información inconsistente</td>
+          <td>Discrepancia entre el teléfono registrado y el usado en una reserva.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
 </main>
 
 <footer>
