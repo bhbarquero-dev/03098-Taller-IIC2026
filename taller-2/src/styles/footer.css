@@ -1,0 +1,189 @@
+/* Footer */
+
+footer {
+  grid-area: footer;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "compania"
+    "redes"
+    "boletin"
+    "contacto"
+    "copyright";
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background-color: var(--color-text);
+  color: #E2E8F0;
+}
+
+/* Clase base para secciones del footer */
+.footer-seccion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: flex-start;
+}
+
+.footer-compania {
+  grid-area: compania;
+}
+
+.footer-redes {
+  grid-area: redes;
+}
+
+.footer-boletin {
+  grid-area: boletin;
+}
+
+.footer-contacto {
+  grid-area: contacto;
+}
+
+footer address {
+  font-style: normal;
+}
+
+.footer-copyright {
+  grid-area: copyright;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: var(--space-2);
+  margin: 0;
+  font-size: 0.9rem;
+  color: #94A3B8;
+  text-align: center;
+}
+
+/* Encabezados del footer */
+footer h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 var(--space-2) 0;
+  color: var(--color-accent);
+}
+
+/* Listas del footer — selectores específicos por sección */
+.footer-compania ul,
+.footer-redes ul,
+.footer-boletin ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  align-items: flex-start;
+}
+
+.footer-compania li,
+.footer-redes li,
+.footer-boletin li {
+  margin: 0;
+  align-items: flex-start;
+}
+
+footer a {
+  color: #E2E8F0;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color var(--transition-base);
+}
+
+footer a:hover {
+  color: var(--color-accent);
+}
+
+/* Formulario de boletín */
+footer form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+footer form label {
+  font-size: 0.9rem;
+  color: #E2E8F0;
+  font-weight: 500;
+}
+
+footer form input {
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-base);
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  transition: all var(--transition-base);
+}
+
+footer form input::placeholder {
+  color: #94A3B8;
+}
+
+footer form input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 0 3px rgba(242, 166, 90, 0.15);
+}
+
+footer form button {
+  padding: 8px 16px;
+  background-color: var(--color-accent);
+  color: var(--color-text);
+  border: none;
+  border-radius: var(--radius-base);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+footer form button:hover {
+  background-color: #E89A4A;
+  transform: translateY(-1px);
+}
+
+/* Address */
+footer address p {
+  margin: 0 0 var(--space-1) 0;
+  font-size: 0.95rem;
+  color: #E2E8F0;
+}
+
+/* Tablet (640px) */
+@media (min-width: 640px) {
+  footer {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      "compania redes"
+      "boletin boletin"
+      "contacto contacto"
+      "copyright copyright";
+  }
+}
+
+/* Desktop (1024px) */
+@media (min-width: 1024px) {
+  footer {
+    padding: var(--space-3) var(--space-3);
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+      "compania redes boletin contacto"
+      "copyright copyright copyright copyright";
+  }
+
+  footer h2 {
+    font-size: 1.05rem;
+  }
+
+  footer a {
+    font-size: 0.9rem;
+  }
+
+  footer address p {
+    font-size: 0.9rem;
+  }
+}

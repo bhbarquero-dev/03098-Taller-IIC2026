@@ -179,7 +179,21 @@ input.campo-invalido { border-color: var(--color-error); }
 .btn-secundario { background: transparent; border: 1px solid var(--color-primary); color: var(--color-primary); }
 ```
 
-### 3.4 Disposición, espaciado y aspectos responsivos
+### 3.4 Selectores descendentes y scoping CSS
+
+Para evitar conflictos entre estilos y mantener claridad en el código, se emplean selectores descendentes (contextual selectors) que aumentan la especificidad y limitan el alcance de las reglas CSS. Por ejemplo, en lugar de aplicar estilos generales a `footer ul`, se usan selectores más específicos como:
+
+```css
+.footer-compania ul,
+.footer-redes ul,
+.footer-boletin ul {
+  /* estilos aplicables solo a listas dentro de estas secciones */
+}
+```
+
+Esta técnica evita efectos secundarios no deseados: los estilos de la lista de compañía no interfieren con las listas de redes sociales o boletín. Mejora mantenibilidad y legibilidad del código CSS.
+
+### 3.5 Disposición, espaciado y aspectos responsivos
 
 El layout general usa CSS Grid para las cuadrículas de tarjetas (catálogo, destacados, resultados de búsqueda) y Flexbox para los componentes lineales (header, filtros, formularios en fila). El espaciado se controla con las variables `--space-1/2/3`, evitando valores sueltos repetidos por todo el CSS.
 
