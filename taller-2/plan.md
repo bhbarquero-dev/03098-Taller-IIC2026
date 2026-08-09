@@ -45,8 +45,9 @@ Plan vivo, sin fechas objetivo — el orden de las tareas es el orden lógico re
 Cada bloque: migrar HTML semántico de taller-1 → JSX, aplicar/refinar CSS, integrar sesión y validación. Revisar y probar cada bloque contra taller-1 antes de pasar al siguiente. Estructura de archivos: `src/pages/` para rutas de primer nivel, `src/components/` para reutilizables.
 
 - [ ] **Bloque A — Público / institucional**: `index`, `sobre-nosotros`, `ayuda`, `politicas-privacidad`, `terminos-uso`, `blog`, `blog-post`, `promociones`.
-  - Status: stubs vacíos (`Index.jsx`, `Catalogo.jsx` existe pero sin contenido real).
+  - Status: `Index.jsx` migrado (hero+buscador, destacados con cards, tipos de alojamiento, banner anfitrión, recomendaciones) — 09-ago-2026. Resto de páginas del bloque siguen como stubs/pendientes.
 - [ ] **Bloque B — Catálogo, detalle y reserva**: `catalogo`, `propiedad-detalle`, `reserva`, `reserva-resumen`, `reserva-confirmacion`.
+  - Status: `Catalogo.jsx` migrado (filtros vía `useSearchParams` → tipo, precio_min/max, capacidad, valoracion_min, servicios; resultados con `TarjetaPropiedad`) — 09-ago-2026. Falta `propiedad-detalle`, `reserva*` (los links "Ver detalles y reservar" apuntan a `/propiedades/:id`, ruta aún no registrada en `App.jsx`).
 - [ ] **Bloque C — Autenticación y cuenta**: `registro`, `inicio-sesion`, `perfil`, `mis-reservas`, `publicar-propiedad`.
 - [ ] **Bloque D — Panel anfitrión**: `anfitrion-panel`, `anfitrion-propiedades`, `anfitrion-propiedad-editar`, `anfitrion-reservas`, `anfitrion-consultas`, `anfitrion-consulta-responder`, `anfitrion-propiedad-resenas`, `anfitrion-resena-responder`.
 - [ ] **Bloque E — Panel administrador**: `admin-panel`, `admin-usuarios`, `admin-usuario-editar`, `admin-alojamientos`, `admin-alojamiento-editar`, `admin-reservas`, `admin-reserva-editar`, `admin-promociones`, `admin-promocion-editar`, `admin-blog`, `admin-blog-post-editar`, `admin-reportes`.

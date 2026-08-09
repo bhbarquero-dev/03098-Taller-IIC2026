@@ -14,6 +14,28 @@ export function obtenerPropiedades(filtros = {}) {
     propiedades = propiedades.filter(p => p.tipo === filtros.tipo)
   }
 
+  if (filtros.precioMin) {
+    propiedades = propiedades.filter(p => p.precioNoche >= Number(filtros.precioMin))
+  }
+
+  if (filtros.precioMax) {
+    propiedades = propiedades.filter(p => p.precioNoche <= Number(filtros.precioMax))
+  }
+
+  if (filtros.capacidad) {
+    propiedades = propiedades.filter(p => p.capacidad >= Number(filtros.capacidad))
+  }
+
+  if (filtros.valoracionMin) {
+    propiedades = propiedades.filter(p => p.valoracion >= Number(filtros.valoracionMin))
+  }
+
+  if (filtros.servicios && filtros.servicios.length > 0) {
+    propiedades = propiedades.filter(p =>
+      filtros.servicios.every(servicio => p.servicios.includes(servicio))
+    )
+  }
+
   return propiedades
 }
 

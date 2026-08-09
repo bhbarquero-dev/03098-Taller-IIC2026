@@ -1,14 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useDataStore } from '../hooks/useDataStore'
 import TarjetaPropiedad from '../components/TarjetaPropiedad'
-
-const TIPOS_ALOJAMIENTO = [
-  { valor: 'casa', nombre: 'Casa', descripcion: 'Espacios completos ideales para familias y grupos.' },
-  { valor: 'apartamento', nombre: 'Apartamento', descripcion: 'Opciones compactas en zonas urbanas, ideales para estadías cortas.' },
-  { valor: 'villa', nombre: 'Villa', descripcion: 'Propiedades amplias con servicios exclusivos.' },
-  { valor: 'cabaña', nombre: 'Cabaña', descripcion: 'Alojamientos rústicos en entornos naturales.' },
-  { valor: 'glamping', nombre: 'Glamping', descripcion: 'Experiencias de camping con comodidades de hotel.' }
-]
+import { TIPOS_ALOJAMIENTO } from '../utils/tiposAlojamiento'
 
 export default function Index() {
   const navigate = useNavigate()

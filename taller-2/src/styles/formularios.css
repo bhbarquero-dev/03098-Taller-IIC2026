@@ -168,11 +168,22 @@ select {
   padding-right: 32px;
 }
 
-/* Checkbox y radio */
-input[type="checkbox"],
-input[type="radio"] {
+/* Checkbox y radio: inline con su label (a diferencia de text/select, que van en bloque),
+   fluyen en fila y hacen wrap como un grupo de opciones */
+fieldset input[type="checkbox"],
+fieldset input[type="radio"] {
+  display: inline-block;
   width: auto;
-  margin-right: 8px;
+  margin: var(--space-1) 4px var(--space-1) 0;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+fieldset input[type="checkbox"] + label,
+fieldset input[type="radio"] + label {
+  display: inline-block;
+  margin: var(--space-1) var(--space-2) var(--space-1) 0;
+  vertical-align: middle;
   cursor: pointer;
 }
 

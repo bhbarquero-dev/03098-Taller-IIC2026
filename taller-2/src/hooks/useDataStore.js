@@ -55,7 +55,10 @@ export function useDataStore(entidad, opciones = {}) {
     } finally {
       setCargando(false)
     }
-  }, [entidad, opciones])
+    // opciones={} por defecto es un objeto nuevo cada render; depender de sus
+    // campos primitivos (no del objeto) evita que cargar cambie de identidad
+    // en cada render y dispare el useEffect de abajo en loop infinito.
+  }, [entidad, opciones.filtros, opciones.id])
 
   const crear = useCallback(async (nuevosDatos) => {
     setCargando(true)

@@ -268,6 +268,22 @@ legend {
   width: 100%;
 }
 
+/* Legend de un fieldset anidado (ej. "Servicios" dentro de "Filtros"): más liviano */
+fieldset fieldset {
+  border: none;
+  margin: var(--space-1) 0 var(--space-2);
+  padding: 0;
+}
+
+fieldset fieldset legend {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text);
+  border-bottom: none;
+  padding: 0 0 var(--space-1) 0;
+  width: auto;
+}
+
 /* Encabezados responsive */
 @media (min-width: 640px) {
   h1 {

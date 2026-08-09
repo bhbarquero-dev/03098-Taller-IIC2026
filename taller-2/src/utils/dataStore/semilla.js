@@ -41,7 +41,7 @@ export function inicializarDatosEjemplo() {
       capacidad: 4,
       precioNoche: 60,
       valoracion: 4.9,
-      servicios: ['wifi', 'chimenea', 'parking'],
+      servicios: ['wifi', 'chimenea', 'parqueo', 'mascotas'],
       descripcion: 'Cabaña rústica rodeada de naturaleza',
       imagen: 'montaña.jpg'
     },
@@ -65,7 +65,7 @@ export function inicializarDatosEjemplo() {
       capacidad: 8,
       precioNoche: 95,
       valoracion: 4.5,
-      servicios: ['wifi', 'parqueo', 'cocina'],
+      servicios: ['wifi', 'parqueo', 'cocina', 'mascotas'],
       descripcion: 'Casa amplia a pocos pasos de la playa, ideal para grupos',
       imagen: 'playa.jpg'
     },
