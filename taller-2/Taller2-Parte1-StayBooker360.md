@@ -14,72 +14,99 @@ Agosto 2026
 
 ---
 
-> **Estado: BORRADOR.** Este documento se está redactando antes de construir el código de Parte 2. Es probable que cambie mientras se implementa el sitio — cualquier decisión aquí (paleta, arquitectura de carpetas CSS, forma exacta del contexto de sesión, etc.) se ajusta libremente hasta que Parte 2 esté lista. Cuando el contenido quede firme, se convierte a `.docx`/`.pdf` para la entrega.
+> **Estado: sincronizado con el código (09-ago-2026).** La Parte 2 ya está construida, y este documento se actualizó para describir lo que efectivamente se implementó, no lo que se planeaba implementar. Falta únicamente completar los datos de portada y convertirlo a `.pdf` para la entrega.
 
 ## 1. Introducción y objetivo
 
-Este documento presenta la propuesta de capa de presentación del sitio web StayBooker 360, construida sobre la estructura HTML5 semántica desarrollada en el Taller No. 1 (34 páginas: catálogo, detalle de propiedad, reserva, paneles de huésped, anfitrión y administrador, secciones institucionales, entre otras). El Taller No. 1 se centró exclusivamente en el maquetado estructural; este taller incorpora estilos CSS, interactividad, validación de formularios en el lado del cliente y una primera preparación de las páginas para su futura integración con un back-end.
+Este documento presenta la propuesta de capa de presentación del sitio web StayBooker 360, construida sobre la estructura HTML5 semántica desarrollada en el Taller No. 1 (38 páginas: catálogo, detalle de propiedad, reserva, paneles de huésped, anfitrión y administrador, secciones institucionales, entre otras). El Taller No. 1 se centró exclusivamente en el maquetado estructural; este taller incorpora estilos CSS, interactividad, validación de formularios en el lado del cliente y una primera preparación de las páginas para su futura integración con un back-end.
 
 Se documentan cuatro aspectos, siguiendo lo solicitado en el instrumento de evaluación: (1) la estructura general del sitio en HTML5 semántico, (2) la propuesta visual de las hojas de estilo CSS, (3) la estrategia de validación de formularios, interactividad y experiencia de usuario en el front-end, y (4) la preparación de las secciones del sitio para su uso futuro con base de datos y sesiones activas.
 
-**Aclaración de alcance sobre frameworks:** siguiendo el enunciado del taller, la parte responsiva y visual se resuelve con hojas de estilo CSS propias en su totalidad, sin frameworks de CSS (sin Bootstrap, Tailwind ni similares). Para la capa de interactividad y manipulación del DOM del lado del cliente se emplea React, con Vite como herramienta de construcción y React Router para la navegación entre las 34 vistas del sitio. Esta distinción — CSS propio al 100 %, JavaScript con framework — se mantiene de forma consistente en todo el documento.
+**Aclaración de alcance sobre frameworks:** siguiendo el enunciado del taller, la parte responsiva y visual se resuelve con hojas de estilo CSS propias en su totalidad, sin frameworks de CSS (sin Bootstrap, Tailwind ni similares). Para la capa de interactividad y manipulación del DOM del lado del cliente se emplea React, con Vite como herramienta de construcción y React Router para la navegación entre las 38 vistas del sitio. Esta distinción — CSS propio al 100 %, JavaScript con framework — se mantiene de forma consistente en todo el documento.
 
-> ⚠️ *Nota abierta:* no está confirmado con la profesora si React satisface el rubro "Realiza manipulación de objetos del DOM" dado que abstrae el DOM directo. La sección 4.3 documenta cómo se fuerza manipulación directa (refs + `addEventListener`) para cubrir ese rubro explícitamente. Confirmar con la profesora si esto es aceptado antes de dar Parte 2 por cerrada.
+> ⚠️ *Nota abierta:* no está confirmado con la profesora si React satisface el rubro "Realiza manipulación de objetos del DOM" dado que abstrae el DOM directo. La sección 4.3 documenta la manipulación directa efectivamente implementada (referencias + `addEventListener`, `focus()`, `classList`, `document.title` y `document.documentElement.lang`) para cubrir ese rubro explícitamente. Confirmar con la profesora en la video reunión.
+
+**Idiomas:** el sitio se entrega bilingüe, español e inglés (ver sección 6). El Taller No. 1 dejaba declarados tres idiomas —español, inglés y francés— como estructura sin traducción real; para el Taller No. 2 se decidió reducirlos a dos y traducir de verdad, en lugar de mantener tres etiquetas sin contenido detrás.
 
 ## 2. Estructura general del sitio en HTML5 semántico
 
-La arquitectura de información definida en el Taller No. 1 se conserva sin modificaciones: cada una de las 34 páginas mantiene su jerarquía de etiquetas semánticas (`header`, `nav`, `main`, `section`, `article`, `aside`, `figure`/`figcaption`, `form`, `footer`, `address`). El Taller No. 2 no altera esta capa de información; únicamente añade la capa de presentación (CSS) y la capa de comportamiento (JavaScript/React) por encima de ella, respetando la separación entre estructura, presentación y comportamiento.
+La arquitectura de información definida en el Taller No. 1 se conserva sin modificaciones: cada una de las 38 páginas mantiene su jerarquía de etiquetas semánticas (`header`, `nav`, `main`, `section`, `article`, `aside`, `figure`/`figcaption`, `form`, `footer`, `address`). El Taller No. 2 no altera esta capa de información; únicamente añade la capa de presentación (CSS) y la capa de comportamiento (JavaScript/React) por encima de ella, respetando la separación entre estructura, presentación y comportamiento.
 
 ### 2.1 De páginas estáticas a vistas de una aplicación de una sola página (SPA)
 
-Para poder compartir un mismo encabezado, menú de navegación y pie de página entre las 34 páginas sin duplicar código, y para habilitar el manejo de sesión y el paso de datos entre pantallas del lado del cliente, las 34 páginas HTML5 del Taller No. 1 se migran a componentes de React, cada una asociada a una ruta de React Router. La URL de cada vista conserva un nombre equivalente al archivo original (por ejemplo, `catalogo.html` pasa a la ruta `/catalogo`; `propiedad-detalle.html?id=1` pasa a `/propiedades/1`).
+Para poder compartir un mismo encabezado, menú de navegación y pie de página entre las 38 páginas sin duplicar código, y para habilitar el manejo de sesión y el paso de datos entre pantallas del lado del cliente, las 38 páginas HTML5 del Taller No. 1 se migran a componentes de React, cada una asociada a una ruta de React Router. La URL de cada vista conserva un nombre equivalente al archivo original (por ejemplo, `catalogo.html` pasa a la ruta `/catalogo`; `propiedad-detalle.html?id=1` pasa a `/propiedades/1`).
 
-Cada componente de página renderiza el mismo árbol semántico ya validado en Taller No. 1 (`header`, `nav`, `main` con sus `section`/`article`/`aside`, y `footer`), ahora expresado en JSX. El componente compartido `Layout` centraliza header, nav y footer, y las páginas internas se insertan como contenido de `main` mediante el mecanismo de rutas anidadas de React Router (`Outlet`). Esto resuelve, de forma justificada por el propio comportamiento del framework, la repetición de encabezado y pie en cada una de las 34 páginas.
+Cada componente de página renderiza el mismo árbol semántico ya validado en Taller No. 1 (`header`, `nav`, `main` con sus `section`/`article`/`aside`, y `footer`), ahora expresado en JSX. El componente compartido `Layout` centraliza header, nav y footer, y las páginas internas se insertan como contenido de `main` mediante el mecanismo de rutas anidadas de React Router (`Outlet`). Esto resuelve, de forma justificada por el propio comportamiento del framework, la repetición de encabezado y pie en cada una de las 38 páginas.
 
 ```jsx
-// src/layout/Layout.jsx
-import { Outlet, NavLink } from 'react-router-dom';
-
+// src/layout/Layout.jsx (extracto)
 export default function Layout() {
+  const { usuario, estaAutenticado, cerrarSesion } = useSesion();
+  const { t, idioma, cambiarIdioma, moneda, cambiarMoneda } = useIdioma();
+  const refNav = useRef(null);
+  useEfectoMenu(refNav);           // onmouseover / onmouseout nativos
+
   return (
     <>
       <header>
-        <h1>StayBooker 360</h1>
-        <nav aria-label="Navegación del sitio">
-          <ul>
-            <li><NavLink to="/">Inicio</NavLink></li>
-            <li><NavLink to="/catalogo">Explorar</NavLink></li>
-            <li><NavLink to="/promociones">Promociones</NavLink></li>
-          </ul>
+        <h1>{t('header.titulo')}</h1>
+        <nav ref={refNav} aria-label={t('header.navegacion')}>
+          <ul>{/* usuario: saludo, perfil, reservas y cerrar sesión, o registro e inicio de sesión */}</ul>
+          <ul>{/* navegación principal: inicio, explorar, promociones, blog y ayuda */}</ul>
+          <select aria-label={t('header.idioma')} value={idioma} onChange={...}>…</select>
+          <select aria-label={t('header.moneda')} value={moneda} onChange={...}>…</select>
         </nav>
       </header>
       <main>
         <Outlet />
       </main>
-      <footer>{/* enlaces institucionales, redes, boletín */}</footer>
+      <footer>
+        <nav aria-labelledby="compania-heading">…</nav>
+        <section aria-labelledby="redes-heading">…</section>
+        <section aria-labelledby="boletin-heading">{/* formulario de boletín */}</section>
+        <address>…</address>
+        <p>{t('footer.copyright')}</p>
+      </footer>
     </>
   );
 }
 ```
 
+El primer bloque de la navegación cambia según haya sesión iniciada o no, y el pie mantiene la misma estructura del Taller No. 1: el contacto es un `<address>` hijo directo de `<footer>`, sin contenedor de maquetación intermedio.
+
 Las etiquetas semánticas (`header`, `nav`, `main`, `section`, `article`, `aside`, `figure`, `footer`, `address`) se mantienen exactamente igual que en Taller No. 1; JSX solo cambia la sintaxis de escritura, no la semántica del documento renderizado en el navegador.
+
+### 2.2 Inventario de las 38 vistas por bloque
+
+| Bloque | Vistas | Contenido |
+|---|---|---|
+| A — Público e institucional | 8 | Página principal, sobre nosotros, políticas de privacidad, términos de uso, centro de ayuda, blog, artículo de blog y promociones |
+| B — Catálogo y reserva | 5 | Catálogo con filtros, ficha de propiedad, formulario de reserva, resumen y comprobante |
+| C — Cuenta | 5 | Registro, inicio de sesión, perfil, mis reservas y publicar propiedad |
+| D — Panel de anfitrión | 8 | Tablero, listado y edición de propiedades, reservas recibidas, consultas y su respuesta, reseñas y su respuesta |
+| E — Panel de administración | 12 | Tablero, gestión y edición de usuarios, alojamientos, reservas, promociones y blog, más reportes |
+
+Cada vista corresponde a una ruta de React Router cuyo nombre reproduce el del archivo original (`anfitrion-propiedades.html` pasa a `/anfitrion-propiedades`), salvo las que reciben un identificador, que lo llevan como parámetro de ruta (`/propiedades/:id`, `/admin-reserva-editar/:id`). Una ruta comodín atiende cualquier dirección que no exista y muestra una página de error propia en lugar de una pantalla en blanco.
 
 ## 3. Propuesta visual de las hojas de estilo CSS
 
 ### 3.1 Organización de las hojas de estilo
 
-Las hojas de estilo se separan por responsabilidad, en lugar de un único archivo monolítico, para facilitar mantenimiento y reutilización entre las 34 vistas:
+Las hojas de estilo se separan por responsabilidad, en lugar de un único archivo monolítico, para facilitar mantenimiento y reutilización entre las 38 vistas:
+
+**Hojas base**, que aplican a todo el sitio:
 
 - `variables.css` — tokens de diseño: colores, tipografía, espaciado, radios y transiciones.
-- `base.css` — reset ligero, tipografía base y comportamiento por defecto de elementos HTML.
-- `layout.css` — estructura general (grid/flexbox del header, main y footer).
-- `componentes/header-nav.css` — encabezado y menú de navegación, incluidos los efectos hover.
-- `componentes/formularios.css` — campos, etiquetas, estados de error y de foco.
-- `componentes/botones.css` — variantes de botones (primario, secundario, peligro).
-- `componentes/tarjetas.css` — cajas de propiedades, promociones y reseñas (`article`).
-- `responsive.css` — media queries transversales para los breakpoints definidos.
+- `base.css` — reset ligero, tipografía base, rejilla de tres áreas del documento (encabezado, contenido y pie) y comportamiento por defecto de los elementos HTML.
+- `layout.css` — únicamente lo compartido por todas las páginas: ancho máximo y separación del `main`.
+- `header.css` — encabezado, menú de navegación con sus efectos, y jerarquía de títulos `h1`–`h6`.
+- `footer.css` — pie de página en cuadrícula de cuatro columnas.
+- `formularios.css` — campos, etiquetas, estados de foco y de error, variantes de botón y mensajes al usuario.
+- `componentes.css` — componentes reutilizados en dos o más páginas, como la tarjeta de propiedad.
 
-Cada componente de React importa únicamente la hoja de estilo que necesita, pero todas comparten las variables definidas en `variables.css`, garantizando consistencia visual entre las 34 páginas sin recurrir a un framework de CSS.
+**Hojas por página o por área**, una por cada conjunto de vistas con estilos propios: `inicio.css`, `catalogo.css`, `propiedad.css`, `institucional.css`, `blog.css`, `promociones.css`, `reserva.css`, `cuenta.css`, `perfil.css`, `propiedad-formulario.css` y `panel.css` (compartida por las veinte vistas de los paneles de anfitrión y administración).
+
+Son dieciocho archivos en total, todos dentro de `src/styles/` y todos escritos desde cero. La división evita que una hoja general se convierta en un cajón de sastre con estilos de todas las páginas mezclados, y todas comparten las variables de `variables.css`, garantizando consistencia visual entre las 38 páginas sin recurrir a un framework de CSS.
 
 ### 3.2 Paleta de colores y tipografía
 
@@ -91,7 +118,7 @@ La paleta busca transmitir confianza y calidez (hospedaje, viaje) sin perder leg
 - Texto principal: `#1E293B`; fondo general: `#F8FAFC`; superficies (tarjetas, formularios): `#FFFFFF`.
 - Estado de error: `#DC2626`; estado de éxito: `#16A34A`.
 
-Tipografía: **Poppins** (semibold) para títulos (h1–h4) y **Inter** para texto de cuerpo, etiquetas y botones — ambas tipografías sans-serif de Google Fonts, con pila de respaldo a fuentes del sistema (`system-ui`, `Segoe UI`, `Arial`) si no cargan.
+Tipografía: **Poppins** (semibold) para títulos (h1–h4) y **Inter** para texto de cuerpo, etiquetas y botones — dos tipografías sans-serif declaradas en las variables, con pila de respaldo a fuentes del sistema (`system-ui`, `Segoe UI`, `Arial`). La distinción entre familia de títulos y familia de cuerpo se aplica con las variables `--font-heading` y `--font-body` en toda la aplicación.
 
 ```css
 :root {
@@ -220,7 +247,7 @@ Breakpoints definidos: 640px (móvil a tableta) y 1024px (tableta a escritorio),
 
 ### 4.1 Arquitectura de JavaScript
 
-La interactividad se implementa con React (Vite como bundler y servidor de desarrollo, React Router para las rutas de las 34 vistas). Esta decisión se documenta y se asume de forma explícita: el CSS del sitio es 100 % propio y sin frameworks; el framework se usa exclusivamente para JavaScript/DOM, tal como lo permite el Taller No. 1 respecto al uso de frameworks en el Taller No. 2.
+La interactividad se implementa con React (Vite como bundler y servidor de desarrollo, React Router para las rutas de las 38 vistas). Esta decisión se documenta y se asume de forma explícita: el CSS del sitio es 100 % propio y sin frameworks; el framework se usa exclusivamente para JavaScript/DOM, tal como lo permite el Taller No. 1 respecto al uso de frameworks en el Taller No. 2.
 
 ### 4.2 Validación de formularios en el lado del cliente
 
@@ -254,7 +281,27 @@ function manejarEnvio(evento) {
 }
 ```
 
-Se validan, según el formulario: espacios vacíos en campos obligatorios, formato de correo electrónico, longitud y tipo de caracteres en contraseñas y campos numéricos (capacidad, precio, huéspedes), coherencia de fechas de entrada/salida en la reserva, y extensión de archivos en los campos de carga de imágenes del panel de anfitrión (aceptando únicamente `.jpg`, `.jpeg`, `.png` y `.webp`).
+Las funciones de validación se centralizan en un único módulo (`src/utils/validaciones.js`) y devuelven **claves de mensaje**, no textos, de modo que el mensaje mostrado depende del idioma activo. El estado, el foco y los mensajes de cada formulario los gestiona un hook propio (`useFormulario`), que evita repetir el mismo esqueleto en los veinticinco formularios del sitio.
+
+El catálogo completo de validaciones implementadas es:
+
+| Validación | Formularios donde aplica |
+|---|---|
+| Campo vacío o solo espacios | Todos los campos obligatorios |
+| Formato de correo electrónico | Registro, inicio de sesión, perfil, contacto, consulta al anfitrión, boletín, propiedad |
+| Correo ya registrado | Registro |
+| Contraseña de al menos 8 caracteres y confirmación coincidente | Registro y restablecimiento desde el panel de administración |
+| Teléfono con al menos 8 dígitos | Registro, perfil, propiedad, edición de cuenta |
+| Numérico con rango | Capacidad, precio por noche, cantidad de huéspedes, monto de reembolso |
+| Cantidad de huéspedes menor o igual a la capacidad de la propiedad | Reserva |
+| Fecha no anterior a hoy; salida posterior a entrada; vigencia final posterior a la inicial | Buscador, reserva, bloqueo de fechas, promociones |
+| Fechas sin traslape con reservas ya existentes | Reserva |
+| Extensión de imagen `.jpg`, `.jpeg`, `.png`, `.webp` | Propiedad, entrada de blog |
+| Extensión de video `.mp4`, `.webm` | Propiedad |
+| Casilla obligatoria marcada | Aceptación de términos en el registro |
+| Longitud máxima de texto con contador visible | Descripciones, mensajes, respuestas y comentarios |
+| Tarjeta: 16 dígitos, código de 3 o 4 dígitos y vencimiento MM/AA vigente | Reserva |
+| Motivo obligatorio solo cuando se rechaza una publicación | Aprobación de alojamientos |
 
 ### 4.3 Manipulación del DOM
 
@@ -300,33 +347,63 @@ El sitio muestra mensajes generados y controlados enteramente en el navegador, s
 
 El paso de datos de una vista a otra se realiza íntegramente en el cliente, sin backend: los parámetros de ruta de React Router (por ejemplo `/propiedades/1`) identifican la propiedad seleccionada, y el estado de navegación (`location.state`) transporta datos temporales entre pasos de un mismo flujo, como el resumen de una reserva antes de su confirmación.
 
-La sesión activa se maneja mediante una función dedicada y un conjunto de variables de estado, expuestas a toda la aplicación con un contexto de React y persistidas en `sessionStorage` para sobrevivir a la navegación entre las 34 vistas dentro de una misma pestaña:
+La sesión activa se maneja mediante una función dedicada y un conjunto de variables de estado, expuestas a toda la aplicación con un contexto de React (`SesionProvider`) y persistidas en `localStorage`:
 
 ```jsx
-function useSesion() {
-  const [usuario, setUsuario] = useState(() => {
-    const guardado = sessionStorage.getItem('staybooker_usuario');
-    return guardado ? JSON.parse(guardado) : null;
-  });
+export function SesionProvider({ children }) {
+  const [usuario, setUsuario] = useState(leerSesionGuardada);
 
-  function iniciarSesion(nombre, rol) {
-    const datosSesion = { nombre, rol, inicio: new Date().toISOString() };
-    sessionStorage.setItem('staybooker_usuario', JSON.stringify(datosSesion));
-    setUsuario(datosSesion);
-    document.title = `StayBooker 360 — Hola, ${nombre}`;
-  }
+  const iniciarSesion = useCallback((datosUsuario) => {
+    const { clave, ...resto } = datosUsuario;      // la contraseña nunca entra en la sesión
+    const sesion = { ...resto, inicio: new Date().toISOString() };
+    localStorage.setItem('staybooker_usuario', JSON.stringify(sesion));
+    setUsuario(sesion);
+    return sesion;
+  }, []);
 
-  function cerrarSesion() {
-    sessionStorage.removeItem('staybooker_usuario');
+  const cerrarSesion = useCallback(() => {
+    localStorage.removeItem('staybooker_usuario');
     setUsuario(null);
     document.title = 'StayBooker 360';
-  }
+  }, []);
 
-  return { usuario, iniciarSesion, cerrarSesion };
+  const valor = useMemo(() => ({
+    usuario, iniciarSesion, cerrarSesion, actualizarPerfil,
+    estaAutenticado: !!usuario,
+    esAnfitrion: usuario?.rol === 'anfitrion' || usuario?.rol === 'administrador',
+    esAdministrador: usuario?.rol === 'administrador'
+  }), [usuario, iniciarSesion, cerrarSesion, actualizarPerfil]);
+
+  return <SesionContext.Provider value={valor}>{children}</SesionContext.Provider>;
 }
 ```
 
-Esta función y sus variables (`usuario`, `iniciarSesion`, `cerrarSesion`) son, de forma intencional, el punto exacto donde se conectará la lógica de back-end más adelante: hoy simulan la sesión en el navegador; cuando exista un servidor, `iniciarSesion` pasará de escribir en `sessionStorage` a llamar a un endpoint de autenticación, sin cambiar la forma en que el resto de los componentes consumen el contexto de sesión.
+Se eligió `localStorage` sobre `sessionStorage` de forma deliberada: la sesión sobrevive al cierre del navegador, que es el comportamiento de "recordarme" habitual en un sitio de reservas y el que permite demostrar la persistencia sin depender de que la pestaña siga abierta.
+
+El contexto es imprescindible, y no un lujo: si cada componente guardara su propio estado de sesión, iniciar sesión en una vista no actualizaría el menú del encabezado, que ya está montado. Con el contexto, el saludo de bienvenida, los enlaces de usuario y los accesos a los paneles reaccionan de inmediato.
+
+Esta función y sus variables (`usuario`, `iniciarSesion`, `cerrarSesion`) son, de forma intencional, el punto exacto donde se conectará la lógica de back-end más adelante: hoy simulan la sesión en el navegador; cuando exista un servidor, `iniciarSesion` pasará de escribir en `localStorage` a llamar a un endpoint de autenticación y guardar el token devuelto, sin cambiar la forma en que el resto de los componentes consumen el contexto.
+
+### 4.6 Control de acceso por tipo de usuario
+
+Las vistas privadas se envuelven en un componente `RutaProtegida` que comprueba la sesión y el rol antes de renderizar:
+
+```jsx
+export default function RutaProtegida({ roles, children }) {
+  const { usuario } = useSesion();
+  const ubicacion = useLocation();
+
+  if (!usuario) {
+    return <Navigate to="/inicio-sesion" state={{ destino: ubicacion.pathname }} replace />;
+  }
+  if (roles && !roles.includes(usuario.rol)) {
+    return <Navigate to="/perfil" replace />;
+  }
+  return children;
+}
+```
+
+Se aplica a las cinco vistas de cuenta (solo requieren sesión), a las ocho del panel de anfitrión (roles `anfitrion` y `administrador`) y a las doce del panel de administración (rol `administrador`). Cuando alguien intenta abrir una vista privada sin sesión, la ruta de destino se recuerda y, tras iniciar sesión, el usuario aterriza donde quería ir. Esta comprobación es de interfaz: el futuro back-end deberá repetirla del lado del servidor, igual que ocurre con la validación de formularios.
 
 ## 5. Preparación de las secciones del sitio para integración futura con back-end
 
@@ -345,20 +422,45 @@ Aunque el taller no requiere procesamiento real en base de datos, el sitio se es
     "capacidad": 6,
     "precioNoche": 85,
     "valoracion": 4.8,
-    "servicios": ["wifi", "piscina", "parqueo"]
+    "servicios": ["wifi", "piscina", "parqueo"],
+    "imagenes": ["sala.jpg", "cocina.jpg", "cuarto.jpg"],
+    "anfitrionId": 2,
+    "estado": "publicada",
+    "promocionId": 1,
+    "fechasBloqueadas": ["2026-08-29", "2026-08-30"],
+    "consultasContador": 42,
+    "mascotas": false,
+    "fumar": false,
+    "horaEntrada": "15:00",
+    "horaSalida": "11:00",
+    "politicaCancelacion": "Cancelación gratuita hasta 5 días antes de la fecha de entrada.",
+    "contactoCorreo": "anfitrion@ejemplo.com",
+    "contactoTelefono": "+506 8888-0001"
   }
 }
 ```
 
-- **Funciones de acceso a datos aisladas:** operaciones como `listarPropiedades()`, `obtenerPropiedad(id)` o `crearReserva(datos)` se definen ya como funciones independientes de los componentes visuales; hoy devuelven datos de ejemplo en memoria, y más adelante su implementación interna cambiará a llamadas HTTP sin alterar los componentes que las consumen.
-- **Sesión y autenticación extensibles:** el contexto de sesión descrito en la sección 4.5 concentra toda la lógica de usuario activo; al incorporar back-end, `iniciarSesion()` pasará de `sessionStorage` a un token (JWT o cookie de sesión) devuelto por el servidor, manteniendo la misma interfaz para el resto de la aplicación.
-- **Validación cliente como primera capa, no la única:** las funciones de validación (sección 4.2) se documentan como una primera barrera de calidad de datos; se anticipa que el futuro back-end repita esas mismas validaciones del lado del servidor antes de escribir en base de datos, por seguridad.
+- **Data store como única puerta a los datos:** todas las operaciones (`obtenerPropiedades`, `obtenerPropiedad(id)`, `crearReserva(datos)`, `responderConsulta(id, texto)`, …) viven en `src/utils/dataStore/`, un módulo por entidad —propiedades, reservas, usuarios, reseñas, promociones, consultas, entradas de blog e incidencias— reunidos en un índice común. Los componentes importan siempre desde ese índice y no saben de dónde salen los datos. Hoy cada función lee y escribe `localStorage`; cada una lleva anotado el endpoint que la sustituirá (`// TODO: reemplazar con fetch GET /api/propiedades/:id`). Migrar a un servidor real significa reescribir el interior de esos módulos, sin tocar ni un componente.
+- **Estados del ciclo de vida ya modelados:** una propiedad recorre `pendiente → publicada | rechazada | inactiva`, una reserva recorre `pendiente → confirmada → finalizada | cancelada` con un estado de pago independiente (`pendiente`, `pagado`, `reembolsado`), y una cuenta puede estar `activa` o `suspendida`. Estos valores se guardan en español y sin traducir: son datos, no texto de interfaz.
+- **Sesión y autenticación extensibles:** el contexto de sesión descrito en la sección 4.5 concentra toda la lógica de usuario activo; al incorporar back-end, `iniciarSesion()` pasará de `localStorage` a un token (JWT o cookie de sesión) devuelto por el servidor, manteniendo la misma interfaz para el resto de la aplicación.
+- **Validación cliente como primera capa, no la única:** las funciones de validación (sección 4.2) son una primera barrera de calidad de datos; se anticipa que el futuro back-end repita esas mismas validaciones del lado del servidor antes de escribir en base de datos, por seguridad.
+- **Carga de archivos, pendiente por definición:** los campos de imagen y video validan la extensión y registran el nombre del archivo elegido, pero sin servidor no hay dónde subirlo. Ese es el punto exacto donde entrará el almacenamiento real de multimedia.
 
-## 6. Conclusión
+## 6. Sitio bilingüe: español e inglés
 
-La propuesta descrita conserva íntegramente la estructura semántica de HTML5 definida en el Taller No. 1, añade una capa de presentación CSS propia y sin frameworks, y resuelve la interactividad, la validación de formularios y el manejo de sesión mediante React, Vite y React Router, dejando puntos de extensión explícitos (funciones de acceso a datos, contexto de sesión) para la futura integración con un back-end real. El Taller No. 2, en su Parte 2, implementará esta propuesta sobre las 34 páginas construidas en el Taller No. 1.
+Toda la interfaz está disponible en dos idiomas y el selector del encabezado la cambia en caliente, sin recargar la página y sin perder el estado de la vista (filtros aplicados, formulario a medio llenar, paso del flujo de reserva).
 
-## 7. Referencias
+La internacionalización se implementó **sin librerías externas**: dos diccionarios (`src/i18n/es.js` y `src/i18n/en.js`) con la misma estructura de claves —631 cada uno—, una función `t('espacio.clave', { parametros })` de una veintena de líneas que resuelve la clave e interpola marcadores `{nombre}`, y un contexto de React que expone el idioma activo. Un script propio (`npm run i18n:check`) compara ambos diccionarios y reporta claves faltantes, sobrantes o con marcadores de interpolación distintos.
+
+El idioma también gobierna el formato de fechas y números mediante `Intl.DateTimeFormat` e `Intl.NumberFormat`, incluidos los nombres de meses y días del calendario de disponibilidad, que no están escritos a mano. La moneda (colones o dólares) es una preferencia independiente: se puede ver la interfaz en inglés con precios en colones. Ambas preferencias se guardan en el navegador y, si hay sesión iniciada, también en el perfil del usuario —que es exactamente por donde viajarían al back-end—. Al cambiar de idioma se actualiza además el atributo `lang` del documento.
+
+Se traduce la interfaz, no el contenido publicado por los usuarios: nombres y descripciones de alojamientos, comentarios de reseñas y artículos del blog se mantienen en su idioma original, igual que hacen las plataformas reales. Es una decisión de alcance razonada, no un descuido.
+
+## 7. Conclusión
+
+La propuesta descrita conserva íntegramente la estructura semántica de HTML5 definida en el Taller No. 1, añade una capa de presentación CSS propia y sin frameworks, y resuelve la interactividad, la validación de formularios, el manejo de sesión y la versión bilingüe mediante React, Vite y React Router, dejando puntos de extensión explícitos (data store, contexto de sesión, control de acceso por rol) para la futura integración con un back-end real. La Parte 2 de este taller implementa esta propuesta sobre las 38 páginas construidas en el Taller No. 1.
+
+## 8. Referencias
 
 - Moreno, D. (2018). *Diseño Web: Interfaces y código cliente*. EUNED.
 - React. (s.f.). *React documentation*. https://react.dev

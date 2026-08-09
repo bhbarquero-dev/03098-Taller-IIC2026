@@ -2,6 +2,8 @@
 
 Plan complementario de `taller-2/plan.md`. Cubre únicamente la internacionalización del sitio. Se ejecuta **entrelazado** con la migración de páginas (ver «Orden de trabajo»), no como una fase posterior: traducir una página ya migrada cuesta el doble que traducirla mientras se migra.
 
+> **Estado (09-ago-2026): implementado.** Las 38 vistas funcionan en español e inglés. `src/i18n/es.js` y `src/i18n/en.js` tienen 631 claves cada uno y `npm run i18n:check` los reporta sincronizados. El selector del header cambia el idioma en caliente, sin recargar y sin perder el estado de la vista, y la preferencia se guarda en `localStorage` y en el perfil del usuario. Lo único que queda del plan es el repaso manual de las 38 vistas en inglés antes de la entrega (§6) y la subsección del documento de Parte 1 (§8), ya redactada.
+
 ---
 
 ## 1. Decisiones (09-ago-2026)
