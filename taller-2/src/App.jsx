@@ -4,6 +4,7 @@ import Layout from './layout/Layout'
 import Index from './pages/Index'
 import Catalogo from './pages/Catalogo'
 import InicioSesion from './pages/InicioSesion'
+import Perfil from './pages/Perfil'
 import { inicializarDatosEjemplo } from './utils/dataStore'
 import './styles/variables.css'
 import './styles/base.css'
@@ -25,6 +26,7 @@ function App() {
           <Route path="/" element={<Index />} />
           <Route path="/catalogo" element={<Catalogo />} />
           <Route path="/inicio-sesion" element={<InicioSesion />} />
+          <Route path="/perfil" element={<Perfil />} />
         </Route>
       </Routes>
     </BrowserRouter>

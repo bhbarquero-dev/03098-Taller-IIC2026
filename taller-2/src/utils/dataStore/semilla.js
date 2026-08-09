@@ -28,7 +28,8 @@ export function inicializarDatosEjemplo() {
       precioNoche: 40,
       valoracion: 4.6,
       servicios: ['wifi', 'cocina'],
-      descripcion: 'Apartamento moderno en el corazón de la ciudad'
+      descripcion: 'Apartamento moderno en el corazón de la ciudad',
+      anfitrionId: 2
     },
     {
       id: 3,
@@ -49,21 +50,45 @@ export function inicializarDatosEjemplo() {
       nombre: 'Huésped Demo',
       correo: 'huesped@ejemplo.com',
       clave: '123',
-      rol: 'huesped'
+      rol: 'huesped',
+      telefono: '+506 8888-0000',
+      preferencias: {
+        idioma: 'es',
+        moneda: 'crc',
+        tipoPreferido: 'villa',
+        notificaciones: true
+      },
+      favoritos: [1, 3]
     },
     {
       id: 2,
       nombre: 'Anfitrión Demo',
       correo: 'anfitrion@ejemplo.com',
       clave: '123',
-      rol: 'anfitrion'
+      rol: 'anfitrion',
+      telefono: '+506 8888-0001',
+      preferencias: {
+        idioma: 'es',
+        moneda: 'crc',
+        tipoPreferido: 'apartamento',
+        notificaciones: false
+      },
+      favoritos: []
     },
     {
       id: 3,
       nombre: 'Admin Demo',
       correo: 'admin@ejemplo.com',
       clave: '123',
-      rol: 'administrador'
+      rol: 'administrador',
+      telefono: '+506 8888-0002',
+      preferencias: {
+        idioma: 'es',
+        moneda: 'usd',
+        tipoPreferido: 'cabaña',
+        notificaciones: true
+      },
+      favoritos: []
     }
   ]
 
