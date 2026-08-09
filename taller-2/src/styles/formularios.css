@@ -1,9 +1,13 @@
-/* Campos de formulario */
-.campo {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-bottom: var(--space-2);
+/* Campos de formulario: label encima, input debajo (flujo de bloque, sin div envoltorio) */
+fieldset {
+  border: none;
+  margin-bottom: var(--space-3);
+}
+
+fieldset label {
+  display: block;
+  margin-top: var(--space-2);
+  margin-bottom: 4px;
 }
 
 label {
@@ -11,6 +15,13 @@ label {
   font-weight: 500;
   color: var(--color-text);
   font-size: 0.95rem;
+}
+
+fieldset input,
+fieldset select,
+fieldset textarea {
+  display: block;
+  width: 100%;
 }
 
 input,

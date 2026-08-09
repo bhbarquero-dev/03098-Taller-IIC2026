@@ -58,7 +58,7 @@ Dudas pendientes de confirmar con la profesora se marcan con ❗️ en el docume
 
 Taller 2 usa un sistema centralizado de acceso a datos:
 
-- **`src/utils/dataStore.js`** — Funciones abstractas (obtenerPropiedades, crearReserva, etc.). Hoy usa localStorage; futuro: API REST con cambio solo interno.
+- **`src/utils/dataStore/`** — Funciones abstractas (obtenerPropiedades, crearReserva, etc.), un archivo por entidad + `index.js` que centraliza los exports. Hoy usa localStorage (`storage.js`); futuro: API REST con cambio solo interno. El resto del código sigue importando `from '../utils/dataStore'` sin cambios.
 - **`src/hooks/useDataStore.js`** — Hook React con reactividad + `useSesion()` para autenticación/sesión.
 
 **Uso en componentes:**
@@ -124,7 +124,15 @@ src/
 ├── hooks/
 │   └── useDataStore.js    # Hook para datos + useSesion()
 ├── utils/
-│   └── dataStore.js       # Funciones acceso datos (localStorage hoy, API después)
+│   └── dataStore/         # Funciones acceso datos (localStorage hoy, API después)
+│       ├── index.js       # Barrel: re-exporta todo, es lo que el resto del código importa
+│       ├── storage.js     # Helpers internos (leer/guardar/sembrarSiVacio), no se re-exportan
+│       ├── propiedades.js
+│       ├── reservas.js
+│       ├── usuarios.js
+│       ├── resenas.js
+│       ├── promociones.js
+│       └── semilla.js     # inicializarDatosEjemplo, limpiarTodo
 └── styles/
     ├── variables.css
     ├── base.css
@@ -153,10 +161,11 @@ Las 34 páginas HTML de `taller-1/parte-2/` definen la estructura semántica exa
 <header>
   <h1>StayBooker 360</h1>
   <nav aria-label="Navegación del sitio">
-    <!-- 3 uls: usuario, navegación principal, idiomas/moneda -->
-    <ul><!-- usuario: Regístrate, Iniciar sesión, Perfil, Mis reservas --></ul>
+    <!-- 2 uls (usuario, navegación principal) + 2 select (idioma, moneda) -->
+    <ul><!-- usuario: Regístrate + Iniciar sesión (sin sesión) o Perfil + Mis reservas (con sesión), condicional vía useSesion() --></ul>
     <ul><!-- principal: Inicio, Explorar, Promociones, Blog, Ayuda --></ul>
-    <ul><!-- idiomas/moneda: ES, EN, FR, CRC, USD --></ul>
+    <select aria-label="Idioma"><!-- ES, EN, FR --></select>
+    <select aria-label="Moneda"><!-- CRC, USD --></select>
   </nav>
 </header>
 <main>
@@ -192,12 +201,13 @@ Las 34 páginas HTML de `taller-1/parte-2/` definen la estructura semántica exa
 - `<a href="...">` → `<NavLink to="...">` (navegación principal)
 - Atributos data (`data-id`, etc.) → estados React si es necesario
 - IDs únicos si se repiten componentes (ej. `id="campo-1"` en formularios)
+- **Excepción confirmada (09-ago-2026):** selector de idioma/moneda del header pasó de `<ul><li><a>` a dos `<select>` nativos (dropdown funcional). Decisión explícita del usuario, documentada aquí para no revertirla por error en futuras migraciones.
 
 **Qué NO puede cambiar:**
 - Jerarquía de etiquetas semánticas
 - Atributos `aria-*` (accesibilidad)
 - `<fieldset>` / `<legend>` en formularios
-- Estructura de lists (`<ul>` / `<ol>` / `<li>`)
+- Estructura de lists (`<ul>` / `<ol>` / `<li>`) — salvo la excepción de idioma/moneda arriba
 - `<address>` para contacto
 - `<figure>` / `<figcaption>` para imágenes
 - `<article>` para tarjetas de contenido

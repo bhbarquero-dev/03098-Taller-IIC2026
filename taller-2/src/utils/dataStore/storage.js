@@ -1,0 +1,22 @@
+/**
+ * Helpers internos de persistencia (localStorage hoy, API REST después).
+ * No se exportan desde el índice del data store: cada módulo de entidad
+ * los usa para no repetir el patrón getItem/parse/setItem/stringify.
+ */
+
+export const STORAGE_PREFIX = 'staybooker_'
+
+export function leer(clave, porDefecto = []) {
+  const datos = localStorage.getItem(`${STORAGE_PREFIX}${clave}`)
+  return datos ? JSON.parse(datos) : porDefecto
+}
+
+export function guardar(clave, valor) {
+  localStorage.setItem(`${STORAGE_PREFIX}${clave}`, JSON.stringify(valor))
+}
+
+export function sembrarSiVacio(clave, valor) {
+  if (!localStorage.getItem(`${STORAGE_PREFIX}${clave}`)) {
+    guardar(clave, valor)
+  }
+}

@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Layout from './layout/Layout'
 import Index from './pages/Index'
 import Catalogo from './pages/Catalogo'
+import InicioSesion from './pages/InicioSesion'
 import { inicializarDatosEjemplo } from './utils/dataStore'
 import './styles/variables.css'
 import './styles/base.css'
@@ -23,6 +24,7 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Index />} />
           <Route path="/catalogo" element={<Catalogo />} />
+          <Route path="/inicio-sesion" element={<InicioSesion />} />
         </Route>
       </Routes>
     </BrowserRouter>

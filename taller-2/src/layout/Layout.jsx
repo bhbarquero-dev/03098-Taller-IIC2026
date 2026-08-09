@@ -1,16 +1,26 @@
 import { Outlet, NavLink } from 'react-router-dom'
+import { useSesion } from '../hooks/useDataStore'
 
 export default function Layout() {
+  const { estaAutenticado } = useSesion()
+
   return (
     <>
       <header>
         <h1>StayBooker 360</h1>
         <nav aria-label="Navegación del sitio">
           <ul>
-            <li><NavLink to="/registro">Regístrate</NavLink></li>
-            <li><NavLink to="/inicio-sesion">Iniciar sesión</NavLink></li>
-            <li><NavLink to="/perfil">Perfil</NavLink></li>
-            <li><NavLink to="/mis-reservas">Mis reservas</NavLink></li>
+            {estaAutenticado ? (
+              <>
+                <li><NavLink to="/perfil">Perfil</NavLink></li>
+                <li><NavLink to="/mis-reservas">Mis reservas</NavLink></li>
+              </>
+            ) : (
+              <>
+                <li><NavLink to="/registro">Regístrate</NavLink></li>
+                <li><NavLink to="/inicio-sesion">Iniciar sesión</NavLink></li>
+              </>
+            )}
           </ul>
 
           <ul>
@@ -21,13 +31,16 @@ export default function Layout() {
             <li><NavLink to="/ayuda">Ayuda</NavLink></li>
           </ul>
 
-          <ul>
-            <li><a href="#es" hrefLang="es">ES</a></li>
-            <li><a href="#en" hrefLang="en">EN</a></li>
-            <li><a href="#fr" hrefLang="fr">FR</a></li>
-            <li><a href="#crc">CRC</a></li>
-            <li><a href="#usd">USD</a></li>
-          </ul>
+          <select aria-label="Idioma" defaultValue="es">
+            <option value="es" lang="es">ES</option>
+            <option value="en" lang="en">EN</option>
+            <option value="fr" lang="fr">FR</option>
+          </select>
+
+          <select aria-label="Moneda" defaultValue="crc">
+            <option value="crc">Colones (CRC)</option>
+            <option value="usd">Dólares (USD)</option>
+          </select>
         </nav>
       </header>
       <main>

@@ -102,6 +102,20 @@ header nav a.active {
     border: none !important;
   }
 
+  /* Navegación principal pegada al título; usuario + idioma/moneda a la derecha */
+  header nav ul:first-of-type {
+    order: 2;
+    margin-left: auto;
+  }
+
+  header nav ul:nth-of-type(2) {
+    order: 1;
+  }
+
+  header nav select {
+    order: 3;
+  }
+
   header nav li {
     flex-direction: column;
     align-items: center;
