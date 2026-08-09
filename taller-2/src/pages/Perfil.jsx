@@ -1,95 +1,72 @@
-import { useEffect, useRef, useState } from 'react'
-import { Navigate, Link, useNavigate } from 'react-router-dom'
-import { obtenerUsuario, actualizarUsuario, obtenerPropiedad, obtenerPropiedades } from '../utils/dataStore'
-import { useSesion } from '../hooks/useDataStore'
-
-const patronCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
-function validarDatosPersonales(valores) {
-  const errores = {}
-  if (!valores.nombre.trim()) {
-    errores.nombre = 'El nombre es obligatorio.'
-  }
-  if (!valores.correo.trim()) {
-    errores.correo = 'El correo es obligatorio.'
-  } else if (!patronCorreo.test(valores.correo)) {
-    errores.correo = 'Ingresa un correo electrónico válido.'
-  }
-  return errores
-}
+import { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { useSesion } from '../context/SesionContext'
+import { useIdioma } from '../context/IdiomaContext'
+import { useTituloPagina } from '../hooks/useTituloPagina'
+import { useFormulario } from '../hooks/useFormulario'
+import { MensajeError, MensajeExito } from '../components/MensajeCampo'
+import {
+  actualizarUsuario,
+  obtenerPropiedad,
+  obtenerPropiedades,
+  obtenerUsuario,
+  reiniciarDatosEjemplo
+} from '../utils/dataStore'
+import { correoValido, requerido, telefonoValido, validar } from '../utils/validaciones'
+import { TIPOS_DESTACADOS, claveTipo } from '../utils/catalogos'
 
 export default function Perfil() {
-  const { usuario, estaAutenticado, actualizarPerfil, cerrarSesion } = useSesion()
-  const navigate = useNavigate()
-  const [datosPersonales, setDatosPersonales] = useState({ nombre: '', correo: '', telefono: '' })
-  const [preferencias, setPreferencias] = useState({
-    idioma: 'es',
-    moneda: 'crc',
-    tipoPreferido: 'casa',
-    notificaciones: false
-  })
-  const [favoritos, setFavoritos] = useState([])
-  const [errores, setErrores] = useState({})
-  const [mensajeDatos, setMensajeDatos] = useState('')
-  const [mensajePreferencias, setMensajePreferencias] = useState('')
-  const nombreRef = useRef(null)
-  const correoRef = useRef(null)
+  const { usuario, actualizarPerfil } = useSesion()
+  const { t, idioma, cambiarIdioma, moneda, cambiarMoneda, idiomas } = useIdioma()
+  const location = useLocation()
+  useTituloPagina('perfil.datosTitulo')
 
+  const [favoritos, setFavoritos] = useState([])
+  const [mensajePreferencias, setMensajePreferencias] = useState(null)
+  const [mensajeBienvenida, setMensajeBienvenida] = useState(location.state?.mensaje || null)
+  const [preferencias, setPreferencias] = useState({
+    idioma,
+    moneda,
+    tipoPreferido: usuario?.preferencias?.tipoPreferido || 'casa',
+    notificaciones: usuario?.preferencias?.notificaciones || false
+  })
+
+  const datos = useFormulario({
+    prefijoId: 'perfil',
+    valoresIniciales: {
+      nombre: usuario?.nombre || '',
+      correo: usuario?.correo || '',
+      telefono: usuario?.telefono || ''
+    },
+    validarValores: (v) => validar({
+      nombre: requerido(v.nombre),
+      correo: correoValido(v.correo),
+      telefono: v.telefono ? telefonoValido(v.telefono) : null
+    }),
+    alEnviar: (v, { setExito }) => {
+      actualizarPerfil({ nombre: v.nombre.trim(), correo: v.correo.trim(), telefono: v.telefono.trim() })
+      setExito(t('perfil.datosGuardados'))
+    }
+  })
+
+  // Los favoritos se releen del registro persistente, no de la sesión.
   useEffect(() => {
     if (!usuario) return
     const registro = obtenerUsuario(usuario.id)
     if (!registro) return
-    setDatosPersonales({
+    datos.setValores({
       nombre: registro.nombre || '',
       correo: registro.correo || '',
       telefono: registro.telefono || ''
     })
-    setPreferencias({
-      idioma: registro.preferencias?.idioma || 'es',
-      moneda: registro.preferencias?.moneda || 'crc',
-      tipoPreferido: registro.preferencias?.tipoPreferido || 'casa',
-      notificaciones: registro.preferencias?.notificaciones || false
-    })
-    setFavoritos(
-      (registro.favoritos || [])
-        .map((id) => obtenerPropiedad(id))
-        .filter(Boolean)
-    )
-  }, [usuario])
+    setFavoritos((registro.favoritos || []).map((id) => obtenerPropiedad(id)).filter(Boolean))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [usuario?.id])
 
-  if (!estaAutenticado) {
-    return <Navigate to="/inicio-sesion" replace />
-  }
-
-  function manejarCambioDatos(evento) {
-    const { name, value } = evento.target
-    setDatosPersonales((anteriores) => ({ ...anteriores, [name]: value }))
-  }
-
-  function manejarEnvioDatos(evento) {
-    evento.preventDefault()
-    setMensajeDatos('')
-
-    const erroresEncontrados = validarDatosPersonales(datosPersonales)
-    setErrores(erroresEncontrados)
-    if (erroresEncontrados.nombre) {
-      nombreRef.current?.focus()
-      return
-    }
-    if (erroresEncontrados.correo) {
-      correoRef.current?.focus()
-      return
-    }
-
-    actualizarUsuario(usuario.id, datosPersonales)
-    actualizarPerfil({ nombre: datosPersonales.nombre })
-    setMensajeDatos('Cambios guardados.')
-  }
-
-  function manejarCerrarSesion() {
-    cerrarSesion()
-    navigate('/')
-  }
+  // El idioma y la moneda del contexto mandan sobre el estado local del formulario.
+  useEffect(() => {
+    setPreferencias((anteriores) => ({ ...anteriores, idioma, moneda }))
+  }, [idioma, moneda])
 
   function manejarCambioPreferencias(evento) {
     const { name, value, type, checked } = evento.target
@@ -99,141 +76,123 @@ export default function Perfil() {
     }))
   }
 
-  function manejarEnvioPreferencias(evento) {
+  function guardarPreferencias(evento) {
     evento.preventDefault()
+    // Idioma y moneda se aplican de inmediato en toda la aplicación.
+    if (preferencias.idioma !== idioma) cambiarIdioma(preferencias.idioma)
+    if (preferencias.moneda !== moneda) cambiarMoneda(preferencias.moneda)
     actualizarUsuario(usuario.id, { preferencias })
-    setMensajePreferencias('Preferencias guardadas.')
+    actualizarPerfil({ preferencias })
+    setMensajePreferencias(t('perfil.preferenciasGuardadas'))
   }
 
-  const mostrarPanelAnfitrion = obtenerPropiedades().some((p) => p.anfitrionId === usuario.id)
+  function reiniciarDatos() {
+    reiniciarDatosEjemplo()
+    setMensajePreferencias(t('perfil.datosReiniciados'))
+  }
+
+  const mostrarPanelAnfitrion = obtenerPropiedades({ incluirTodas: true })
+    .some((propiedad) => propiedad.anfitrionId === usuario.id)
   const mostrarPanelAdmin = usuario.rol === 'administrador'
+
+  const { valores, errores, exito, setExito, manejarEnvio, propsCampo } = datos
 
   return (
     <>
+      <MensajeExito mensaje={mensajeBienvenida} alOcultar={() => setMensajeBienvenida(null)} />
+
       <section aria-labelledby="datos-heading">
-        <h2 id="datos-heading">Datos personales</h2>
+        <h2 id="datos-heading">{t('perfil.datosTitulo')}</h2>
 
-        <form onSubmit={manejarEnvioDatos} noValidate>
+        <form onSubmit={manejarEnvio} noValidate>
           <fieldset>
-            <legend>Información básica</legend>
+            <legend>{t('perfil.infoLeyenda')}</legend>
 
-            <label htmlFor="perfil-nombre">Nombre completo</label>
-            <input
-              type="text"
-              id="perfil-nombre"
-              name="nombre"
-              value={datosPersonales.nombre}
-              onChange={manejarCambioDatos}
-              ref={nombreRef}
-              className={errores.nombre ? 'campo-invalido' : ''}
-              aria-describedby={errores.nombre ? 'perfil-nombre-error' : undefined}
-              required
-            />
-            {errores.nombre && (
-              <p id="perfil-nombre-error" className="mensaje-error">{errores.nombre}</p>
-            )}
+            <label htmlFor="perfil-nombre">{t('perfil.nombre')}</label>
+            <input type="text" {...propsCampo('nombre')} value={valores.nombre} required />
+            <MensajeError error={errores.nombre} id="perfil-nombre-error" />
 
-            <label htmlFor="perfil-correo">Correo electrónico</label>
-            <input
-              type="email"
-              id="perfil-correo"
-              name="correo"
-              value={datosPersonales.correo}
-              onChange={manejarCambioDatos}
-              ref={correoRef}
-              className={errores.correo ? 'campo-invalido' : ''}
-              aria-describedby={errores.correo ? 'perfil-correo-error' : undefined}
-              required
-            />
-            {errores.correo && (
-              <p id="perfil-correo-error" className="mensaje-error">{errores.correo}</p>
-            )}
+            <label htmlFor="perfil-correo">{t('comun.correo')}</label>
+            <input type="email" {...propsCampo('correo')} value={valores.correo} required />
+            <MensajeError error={errores.correo} id="perfil-correo-error" />
 
-            <label htmlFor="perfil-telefono">Teléfono</label>
-            <input
-              type="tel"
-              id="perfil-telefono"
-              name="telefono"
-              value={datosPersonales.telefono}
-              onChange={manejarCambioDatos}
-            />
+            <label htmlFor="perfil-telefono">{t('comun.telefono')}</label>
+            <input type="tel" {...propsCampo('telefono')} value={valores.telefono} />
+            <MensajeError error={errores.telefono} id="perfil-telefono-error" />
 
-            {mensajeDatos && <p className="mensaje-exito" role="status">{mensajeDatos}</p>}
+            <MensajeExito mensaje={exito} alOcultar={() => setExito(null)} />
 
-            <button type="submit" className="btn-primario">Guardar cambios</button>
+            <button type="submit" className="btn-primario">{t('comun.guardar')}</button>
           </fieldset>
         </form>
       </section>
 
       <section aria-labelledby="preferencias-heading">
-        <h2 id="preferencias-heading">Preferencias</h2>
+        <h2 id="preferencias-heading">{t('perfil.preferenciasTitulo')}</h2>
 
-        <form onSubmit={manejarEnvioPreferencias}>
+        <form onSubmit={guardarPreferencias}>
           <fieldset>
-            <legend>Preferencias de reserva</legend>
+            <legend>{t('perfil.preferenciasLeyenda')}</legend>
 
-            <label htmlFor="preferencia-idioma">Idioma preferido</label>
+            <label htmlFor="preferencia-idioma">{t('perfil.idioma')}</label>
             <select
               id="preferencia-idioma"
               name="idioma"
               value={preferencias.idioma}
               onChange={manejarCambioPreferencias}
             >
-              <option value="es">Español</option>
-              <option value="en">English</option>
-              <option value="fr">Français</option>
+              {idiomas.map((opcion) => (
+                <option value={opcion.codigo} key={opcion.codigo}>{opcion.nombre}</option>
+              ))}
             </select>
 
-            <label htmlFor="preferencia-moneda">Moneda preferida</label>
+            <label htmlFor="preferencia-moneda">{t('perfil.moneda')}</label>
             <select
               id="preferencia-moneda"
               name="moneda"
               value={preferencias.moneda}
               onChange={manejarCambioPreferencias}
             >
-              <option value="crc">Colones (CRC)</option>
-              <option value="usd">Dólares (USD)</option>
+              <option value="crc">{t('header.monedaCrc')}</option>
+              <option value="usd">{t('header.monedaUsd')}</option>
             </select>
 
-            <label htmlFor="preferencia-tipo">Tipo de alojamiento preferido</label>
+            <label htmlFor="preferencia-tipo">{t('perfil.tipoPreferido')}</label>
             <select
               id="preferencia-tipo"
               name="tipoPreferido"
               value={preferencias.tipoPreferido}
               onChange={manejarCambioPreferencias}
             >
-              <option value="casa">Casa</option>
-              <option value="apartamento">Apartamento</option>
-              <option value="villa">Villa</option>
-              <option value="cabaña">Cabaña</option>
-              <option value="glamping">Glamping</option>
+              {TIPOS_DESTACADOS.map((tipo) => (
+                <option value={tipo} key={tipo}>{t(claveTipo(tipo))}</option>
+              ))}
             </select>
 
-            <label>
-              <input
-                type="checkbox"
-                id="preferencia-notificaciones"
-                name="notificaciones"
-                checked={preferencias.notificaciones}
-                onChange={manejarCambioPreferencias}
-              /> Recibir notificaciones por correo
-            </label>
+            <input
+              type="checkbox"
+              id="preferencia-notificaciones"
+              name="notificaciones"
+              checked={preferencias.notificaciones}
+              onChange={manejarCambioPreferencias}
+            />
+            <label htmlFor="preferencia-notificaciones">{t('perfil.notificaciones')}</label>
 
-            {mensajePreferencias && <p className="mensaje-exito" role="status">{mensajePreferencias}</p>}
+            <MensajeExito mensaje={mensajePreferencias} alOcultar={() => setMensajePreferencias(null)} />
 
-            <button type="submit" className="btn-primario">Guardar preferencias</button>
+            <button type="submit" className="btn-primario">{t('perfil.guardarPreferencias')}</button>
           </fieldset>
         </form>
       </section>
 
       <p>
-        <Link to="/mis-reservas">Ver mis reservas</Link>
-        {mostrarPanelAnfitrion && <> · <Link to="/anfitrion-panel">Panel de anfitrión</Link></>}
-        {mostrarPanelAdmin && <> · <Link to="/admin-panel">Panel de administración</Link></>}
+        <Link to="/mis-reservas">{t('perfil.verReservas')}</Link>
+        {mostrarPanelAnfitrion && <> · <Link to="/anfitrion-panel">{t('perfil.panelAnfitrion')}</Link></>}
+        {mostrarPanelAdmin && <> · <Link to="/admin-panel">{t('perfil.panelAdmin')}</Link></>}
       </p>
 
       <section aria-labelledby="favoritos-heading">
-        <h2 id="favoritos-heading">Alojamientos favoritos</h2>
+        <h2 id="favoritos-heading">{t('perfil.favoritosTitulo')}</h2>
 
         {favoritos.length > 0 ? (
           <ul>
@@ -246,13 +205,13 @@ export default function Perfil() {
             ))}
           </ul>
         ) : (
-          <p>Todavía no tienes alojamientos favoritos.</p>
+          <p>{t('perfil.sinFavoritos')}</p>
         )}
       </section>
 
       <p>
-        <button type="button" className="btn-secundario" onClick={manejarCerrarSesion}>
-          Cerrar sesión
+        <button type="button" className="btn-secundario" onClick={reiniciarDatos}>
+          {t('comun.reiniciarDatos')}
         </button>
       </p>
     </>

@@ -1,0 +1,31 @@
+/* Formulario de propiedad, compartido entre publicar y editar */
+
+section[aria-labelledby="propiedad-heading"] form {
+  max-width: 720px;
+}
+
+section[aria-labelledby="propiedad-heading"] fieldset {
+  background-color: var(--color-surface);
+  border: 1px solid #E2E8F0;
+  border-radius: var(--radius-base);
+  padding: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+section[aria-labelledby="propiedad-heading"] legend {
+  padding: 0 var(--space-1);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.ayuda-campo {
+  font-size: 0.8rem;
+  color: #64748B;
+  margin: 2px 0 0 0;
+}
+
+@media (min-width: 1024px) {
+  section[aria-labelledby="propiedad-heading"] fieldset {
+    padding: var(--space-3) var(--space-3) var(--space-2);
+  }
+}

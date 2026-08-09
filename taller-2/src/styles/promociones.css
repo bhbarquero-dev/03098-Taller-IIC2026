@@ -1,0 +1,60 @@
+/* Promociones y experiencias destacadas */
+
+section[aria-labelledby="promociones-heading"] {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
+section[aria-labelledby="promociones-heading"] > h2 {
+  grid-column: 1 / -1;
+}
+
+.tarjeta-promocion {
+  background-color: var(--color-surface);
+  border: 1px solid #E2E8F0;
+  border-left: 4px solid var(--color-accent);
+  border-radius: var(--radius-base);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.tarjeta-promocion:hover {
+  box-shadow: 0 4px 14px rgba(30, 41, 59, 0.1);
+  transform: translateY(-2px);
+}
+
+.tarjeta-promocion h3 {
+  margin: 0;
+  color: var(--color-primary);
+}
+
+.tarjeta-promocion p {
+  margin: 0;
+}
+
+.tarjeta-promocion time {
+  font-size: 0.85rem;
+  color: #64748B;
+}
+
+.tarjeta-promocion a {
+  margin-top: auto;
+  padding-top: var(--space-2);
+  font-weight: 600;
+}
+
+@media (min-width: 640px) {
+  section[aria-labelledby="promociones-heading"] {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  section[aria-labelledby="promociones-heading"] {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

@@ -74,6 +74,44 @@ header nav a.active {
   padding-left: 12px;
 }
 
+/* Clase que agregan y quitan los escuchadores nativos mouseover/mouseout
+   registrados en useEfectoMenu. Refuerza el :hover con un subrayado propio. */
+header nav a.enlace-activo {
+  color: var(--color-primary);
+  border-bottom: 2px solid var(--color-accent);
+}
+
+/* Saludo de bienvenida del usuario en sesión */
+header nav .saludo-usuario {
+  font-weight: 600;
+  color: var(--color-primary);
+  padding: 6px 8px;
+  margin-left: 8px;
+  font-size: 0.95rem;
+}
+
+/* Botón que se comporta visualmente como un enlace del menú (cerrar sesión) */
+header nav .btn-enlace {
+  background: none;
+  border: none;
+  border-left: 3px solid transparent;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 6px 8px;
+  margin-left: 8px;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+header nav .btn-enlace:hover {
+  color: var(--color-primary);
+  background-color: rgba(31, 111, 92, 0.05);
+  border-left-color: var(--color-accent);
+  transform: none;
+}
+
 /* Tablet y superior (640px) */
 @media (min-width: 640px) {
   header {
@@ -90,13 +128,18 @@ header nav a.active {
 
   header nav {
     flex-direction: row;
-    gap: var(--space-3);
+    /* Con sesión iniciada la barra suma saludo, perfil, reservas y cerrar
+       sesión: sin wrap el bloque de idioma/moneda se sale de la pantalla. */
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-3);
     flex: 1;
     align-items: center;
+    justify-content: flex-end;
   }
 
   header nav ul {
     flex-direction: row;
+    flex-wrap: wrap;
     gap: var(--space-2);
     padding: 0 !important;
     border: none !important;
@@ -114,6 +157,9 @@ header nav a.active {
 
   header nav select {
     order: 3;
+    /* Compactos para que idioma y moneda quepan en la misma fila que el menú */
+    font-size: 0.85rem;
+    padding: 6px 28px 6px 10px;
   }
 
   header nav li {
@@ -121,12 +167,21 @@ header nav a.active {
     align-items: center;
   }
 
-  header nav a {
+  header nav a,
+  header nav .btn-enlace,
+  header nav .saludo-usuario {
     margin-left: 0;
     padding: 4px 0;
     border-left: none;
     border-bottom: 2px solid transparent;
     font-size: 0.9rem;
+    white-space: nowrap;
+  }
+
+  header nav .btn-enlace:hover {
+    background-color: transparent;
+    border-bottom-color: var(--color-accent);
+    border-left-color: transparent;
   }
 
   header nav a:hover {

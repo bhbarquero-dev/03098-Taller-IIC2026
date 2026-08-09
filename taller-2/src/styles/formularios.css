@@ -73,6 +73,28 @@ textarea.campo-invalido:focus {
   font-weight: 500;
 }
 
+/* Contador de caracteres restantes en campos de texto largo */
+.contador-caracteres {
+  font-size: 0.8rem;
+  color: #64748B;
+  margin: 2px 0 0 0;
+  text-align: right;
+}
+
+/* Bloque de confirmación para acciones destructivas (sustituye a window.confirm) */
+.confirmacion {
+  background-color: #FEF2F2;
+  border: 1px solid var(--color-error);
+  border-radius: var(--radius-base);
+  padding: var(--space-2);
+  margin: var(--space-2) 0;
+}
+
+.confirmacion p {
+  margin-bottom: var(--space-2);
+  font-weight: 500;
+}
+
 /* Botones — también aplica a <a> usados como botón (ej. Link de React Router) */
 button,
 a.btn-primario,

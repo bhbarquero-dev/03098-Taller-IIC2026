@@ -1,20 +1,20 @@
-import { Fragment, useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { Fragment, useEffect, useMemo } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
 import { useDataStore } from '../hooks/useDataStore'
+import { useIdioma } from '../context/IdiomaContext'
+import { useTituloPagina } from '../hooks/useTituloPagina'
 import TarjetaPropiedad from '../components/TarjetaPropiedad'
-import { TIPOS_ALOJAMIENTO } from '../utils/tiposAlojamiento'
-
-const SERVICIOS = [
-  { valor: 'wifi', nombre: 'WiFi' },
-  { valor: 'piscina', nombre: 'Piscina' },
-  { valor: 'parqueo', nombre: 'Parqueo' },
-  { valor: 'mascotas', nombre: 'Admite mascotas' },
-  { valor: 'cocina', nombre: 'Cocina equipada' }
-]
+import { SERVICIOS_FILTRO, TIPOS_ALOJAMIENTO, claveServicio, claveTipo } from '../utils/catalogos'
 
 export default function Catalogo() {
   const [searchParams, setSearchParams] = useSearchParams()
+  const { t } = useIdioma()
+  useTituloPagina('catalogo.titulo')
+
   const { datos: propiedades, cargando, cargar } = useDataStore('propiedades')
+  const { datos: promociones } = useDataStore('promociones')
+
+  const consulta = searchParams.toString()
 
   useEffect(() => {
     cargar({
@@ -24,10 +24,11 @@ export default function Catalogo() {
       precioMax: searchParams.get('precio_max') || undefined,
       capacidad: searchParams.get('capacidad') || undefined,
       valoracionMin: searchParams.get('valoracion_min') || undefined,
+      promocionId: searchParams.get('promocion') || undefined,
       servicios: searchParams.getAll('servicios')
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams.toString(), cargar])
+  }, [consulta, cargar])
 
   function aplicarFiltros(evento) {
     evento.preventDefault()
@@ -41,78 +42,87 @@ export default function Catalogo() {
 
   const resultados = propiedades || []
   const serviciosActivos = searchParams.getAll('servicios')
+  const promocionActiva = useMemo(() => {
+    const id = searchParams.get('promocion')
+    return id ? (promociones || []).find((p) => p.id === Number(id)) : null
+  }, [searchParams, promociones])
 
   return (
     <>
-      <h2>Catálogo de alojamientos</h2>
+      <h2>{t('catalogo.titulo')}</h2>
+
+      {promocionActiva && <p>{promocionActiva.titulo} — {promocionActiva.beneficio}</p>}
 
       <aside className="filtro-aside" aria-labelledby="filtro-heading">
-        <h3 id="filtro-heading">Filtrar resultados</h3>
+        <h3 id="filtro-heading">{t('catalogo.filtrarTitulo')}</h3>
 
         <form onSubmit={aplicarFiltros}>
           <fieldset>
-            <legend>Filtros</legend>
+            <legend>{t('catalogo.filtros')}</legend>
 
-            <label htmlFor="filtro-tipo">Tipo de alojamiento</label>
+            <label htmlFor="filtro-tipo">{t('catalogo.tipo')}</label>
             <select id="filtro-tipo" name="tipo" defaultValue={searchParams.get('tipo') || ''}>
-              <option value="">Cualquiera</option>
-              {TIPOS_ALOJAMIENTO.map(tipo => (
-                <option value={tipo.valor} key={tipo.valor}>{tipo.nombre}</option>
+              <option value="">{t('catalogo.cualquiera')}</option>
+              {TIPOS_ALOJAMIENTO.map((tipo) => (
+                <option value={tipo} key={tipo}>{t(claveTipo(tipo))}</option>
               ))}
             </select>
 
-            <label htmlFor="filtro-precio-min">Precio mínimo por noche</label>
+            <label htmlFor="filtro-precio-min">{t('catalogo.precioMin')}</label>
             <input type="number" id="filtro-precio-min" name="precio_min" min="0" defaultValue={searchParams.get('precio_min') || ''} />
 
-            <label htmlFor="filtro-precio-max">Precio máximo por noche</label>
+            <label htmlFor="filtro-precio-max">{t('catalogo.precioMax')}</label>
             <input type="number" id="filtro-precio-max" name="precio_max" min="0" defaultValue={searchParams.get('precio_max') || ''} />
 
-            <label htmlFor="filtro-capacidad">Capacidad de huéspedes</label>
+            <label htmlFor="filtro-capacidad">{t('catalogo.capacidad')}</label>
             <input type="number" id="filtro-capacidad" name="capacidad" min="1" defaultValue={searchParams.get('capacidad') || ''} />
 
-            <label htmlFor="filtro-destino">Ubicación o destino</label>
-            <input type="text" id="filtro-destino" name="destino" placeholder="Ciudad o región" defaultValue={searchParams.get('destino') || ''} />
+            <label htmlFor="filtro-destino">{t('catalogo.destino')}</label>
+            <input type="text" id="filtro-destino" name="destino" placeholder={t('catalogo.destinoPlaceholder')} defaultValue={searchParams.get('destino') || ''} />
 
-            <label htmlFor="filtro-valoracion">Valoración mínima</label>
+            <label htmlFor="filtro-valoracion">{t('catalogo.valoracion')}</label>
             <select id="filtro-valoracion" name="valoracion_min" defaultValue={searchParams.get('valoracion_min') || ''}>
-              <option value="">Cualquiera</option>
-              <option value="4">4 o más</option>
-              <option value="4.5">4.5 o más</option>
-              <option value="5">5</option>
+              <option value="">{t('catalogo.cualquiera')}</option>
+              <option value="4">{t('catalogo.valoracion4')}</option>
+              <option value="4.5">{t('catalogo.valoracion45')}</option>
+              <option value="5">{t('catalogo.valoracion5')}</option>
             </select>
 
             <fieldset>
-              <legend>Servicios</legend>
+              <legend>{t('catalogo.serviciosLeyenda')}</legend>
 
-              {SERVICIOS.map(servicio => (
-                <Fragment key={servicio.valor}>
+              {SERVICIOS_FILTRO.map((servicio) => (
+                <Fragment key={servicio}>
                   <input
                     type="checkbox"
-                    id={`filtro-${servicio.valor}`}
+                    id={`filtro-${servicio}`}
                     name="servicios"
-                    value={servicio.valor}
-                    defaultChecked={serviciosActivos.includes(servicio.valor)}
+                    value={servicio}
+                    defaultChecked={serviciosActivos.includes(servicio)}
                   />
-                  <label htmlFor={`filtro-${servicio.valor}`}>{servicio.nombre}</label>
+                  <label htmlFor={`filtro-${servicio}`}>{t(claveServicio(servicio))}</label>
                 </Fragment>
               ))}
             </fieldset>
 
-            <button type="submit" className="btn-primario">Aplicar filtros</button>
+            <button type="submit" className="btn-primario">{t('catalogo.aplicar')}</button>
+            <Link className="btn-secundario" to="/catalogo">{t('catalogo.limpiar')}</Link>
           </fieldset>
         </form>
       </aside>
 
       <section className="resultados-lista" aria-labelledby="resultados-heading">
-        <h3 id="resultados-heading">Resultados</h3>
+        <h3 id="resultados-heading">{t('catalogo.resultados')}</h3>
 
-        {cargando && <p>Cargando propiedades...</p>}
+        {cargando && <p>{t('comun.cargando')}</p>}
 
-        {!cargando && resultados.length === 0 && (
-          <p>No se encontraron propiedades con esos filtros.</p>
+        {!cargando && resultados.length === 0 && <p>{t('catalogo.sinResultados')}</p>}
+
+        {!cargando && resultados.length > 0 && (
+          <p>{t('catalogo.contador', { n: resultados.length })}</p>
         )}
 
-        {resultados.map(propiedad => (
+        {resultados.map((propiedad) => (
           <TarjetaPropiedad propiedad={propiedad} key={propiedad.id} />
         ))}
       </section>

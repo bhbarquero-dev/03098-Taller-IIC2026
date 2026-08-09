@@ -75,6 +75,10 @@ img {
 
 body {
   display: grid;
+  /* minmax(0, 1fr) impide que un hijo ancho (una tabla del panel, por ejemplo)
+     estire la columna del grid y provoque desplazamiento horizontal de toda la
+     página: el desbordamiento se queda dentro del elemento que lo produce. */
+  grid-template-columns: minmax(0, 1fr);
   grid-template-rows: auto 1fr auto;
   grid-template-areas:
     "header"

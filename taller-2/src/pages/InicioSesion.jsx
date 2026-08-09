@@ -1,113 +1,82 @@
-import { useRef, useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useIdioma } from '../context/IdiomaContext'
+import { useSesion } from '../context/SesionContext'
+import { useTituloPagina } from '../hooks/useTituloPagina'
+import { useFormulario } from '../hooks/useFormulario'
+import { MensajeError } from '../components/MensajeCampo'
 import { verificarCredenciales } from '../utils/dataStore'
-import { useSesion } from '../hooks/useDataStore'
-
-const patronCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
-function validarInicioSesion(valores) {
-  const errores = {}
-  if (!valores.correo.trim()) {
-    errores.correo = 'El correo es obligatorio.'
-  } else if (!patronCorreo.test(valores.correo)) {
-    errores.correo = 'Ingresa un correo electrónico válido.'
-  }
-  if (!valores.clave) {
-    errores.clave = 'La contraseña es obligatoria.'
-  }
-  return errores
-}
+import { correoValido, requerido, validar } from '../utils/validaciones'
 
 export default function InicioSesion() {
-  const [valores, setValores] = useState({ correo: '', clave: '' })
-  const [errores, setErrores] = useState({})
-  const [errorCredenciales, setErrorCredenciales] = useState('')
-  const correoRef = useRef(null)
-  const claveRef = useRef(null)
-  const navigate = useNavigate()
+  const { t } = useIdioma()
   const { iniciarSesion } = useSesion()
+  const navigate = useNavigate()
+  const location = useLocation()
+  useTituloPagina('login.titulo')
 
-  function manejarCambio(evento) {
-    const { name, value } = evento.target
-    setValores((anteriores) => ({ ...anteriores, [name]: value }))
-  }
+  const [errorAcceso, setErrorAcceso] = useState(null)
 
-  function manejarEnvio(evento) {
-    evento.preventDefault()
-    setErrorCredenciales('')
+  const { valores, errores, manejarEnvio, propsCampo } = useFormulario({
+    prefijoId: 'login',
+    valoresIniciales: { correo: '', clave: '' },
+    validarValores: (v) => validar({
+      correo: correoValido(v.correo),
+      clave: requerido(v.clave)
+    }),
+    alEnviar: (v) => {
+      setErrorAcceso(null)
+      const usuario = verificarCredenciales(v.correo, v.clave)
 
-    const erroresEncontrados = validarInicioSesion(valores)
-    setErrores(erroresEncontrados)
-    if (erroresEncontrados.correo) {
-      correoRef.current?.focus()
-      return
+      if (!usuario) {
+        setErrorAcceso({ clave: 'login.credencialesInvalidas' })
+        return
+      }
+      if (usuario.estado === 'suspendida') {
+        setErrorAcceso({ clave: 'login.cuentaSuspendida' })
+        return
+      }
+
+      iniciarSesion(usuario)
+      // Si el usuario había intentado entrar a una ruta protegida, vuelve ahí.
+      navigate(location.state?.destino || '/perfil')
     }
-    if (erroresEncontrados.clave) {
-      claveRef.current?.focus()
-      return
-    }
-
-    const usuario = verificarCredenciales(valores.correo, valores.clave)
-    if (!usuario) {
-      setErrorCredenciales('Correo o contraseña incorrectos.')
-      correoRef.current?.focus()
-      return
-    }
-
-    iniciarSesion(usuario.nombre, usuario.rol, usuario.id)
-    navigate('/perfil')
-  }
+  })
 
   return (
     <section aria-labelledby="login-heading">
-      <h2 id="login-heading">Iniciar sesión</h2>
-      <p>Ingresa con tu correo y contraseña para administrar tus reservas, tu perfil y tus alojamientos favoritos
-      dentro de StayBooker 360.</p>
+      <h2 id="login-heading">{t('login.titulo')}</h2>
+      <p>{t('login.intro')}</p>
 
       <form onSubmit={manejarEnvio} noValidate>
         <fieldset>
-          <legend>Datos de acceso</legend>
+          <legend>{t('login.leyenda')}</legend>
 
-          <label htmlFor="login-correo">Correo electrónico</label>
-          <input
-            type="email"
-            id="login-correo"
-            name="correo"
-            value={valores.correo}
-            onChange={manejarCambio}
-            ref={correoRef}
-            className={errores.correo ? 'campo-invalido' : ''}
-            aria-describedby={errores.correo ? 'login-correo-error' : undefined}
-            required
-          />
-          {errores.correo && (
-            <p id="login-correo-error" className="mensaje-error">{errores.correo}</p>
-          )}
+          <label htmlFor="login-correo">{t('comun.correo')}</label>
+          <input type="email" {...propsCampo('correo')} value={valores.correo} required />
+          <MensajeError error={errores.correo} id="login-correo-error" />
 
-          <label htmlFor="login-clave">Contraseña</label>
-          <input
-            type="password"
-            id="login-clave"
-            name="clave"
-            value={valores.clave}
-            onChange={manejarCambio}
-            ref={claveRef}
-            className={errores.clave ? 'campo-invalido' : ''}
-            aria-describedby={errores.clave ? 'login-clave-error' : undefined}
-            required
-          />
-          {errores.clave && (
-            <p id="login-clave-error" className="mensaje-error">{errores.clave}</p>
-          )}
+          <label htmlFor="login-clave">{t('login.clave')}</label>
+          <input type="password" {...propsCampo('clave')} value={valores.clave} required />
+          <MensajeError error={errores.clave} id="login-clave-error" />
 
-          {errorCredenciales && <p className="mensaje-error">{errorCredenciales}</p>}
+          <MensajeError error={errorAcceso} id="login-acceso-error" />
 
-          <button type="submit" className="btn-primario">Iniciar sesión</button>
+          <button type="submit" className="btn-primario">{t('login.entrar')}</button>
         </fieldset>
       </form>
 
-      <p><Link to="/ayuda">¿Olvidaste tu contraseña? Contacta a soporte</Link></p>
-      <p>¿No tienes cuenta todavía? <Link to="/registro">Regístrate aquí</Link></p>
+      <p><Link to="/ayuda">{t('login.olvidaste')}</Link></p>
+      <p>{t('login.sinCuenta')} <Link to="/registro">{t('login.registrate')}</Link></p>
+
+      <aside aria-labelledby="demo-heading">
+        <h3 id="demo-heading">{t('login.demoTitulo')}</h3>
+        <ul>
+          <li>{t('login.demoHuesped')}</li>
+          <li>{t('login.demoAnfitrion')}</li>
+          <li>{t('login.demoAdmin')}</li>
+        </ul>
+      </aside>
     </section>
   )
 }

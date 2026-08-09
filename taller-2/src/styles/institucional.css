@@ -1,0 +1,57 @@
+/* Páginas de texto institucional: sobre nosotros, privacidad, términos y ayuda.
+   Comparten el mismo ritmo de lectura: columna estrecha y jerarquía clara. */
+
+.pagina-institucional {
+  max-width: 70ch;
+}
+
+.pagina-institucional h3 {
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-1);
+  color: var(--color-primary);
+}
+
+.pagina-institucional p {
+  text-align: justify;
+}
+
+/* Preguntas frecuentes (details/summary nativos, sin JavaScript) */
+main details {
+  background-color: var(--color-surface);
+  border: 1px solid #E2E8F0;
+  border-radius: var(--radius-base);
+  padding: var(--space-2);
+  margin-bottom: var(--space-1);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+main details:hover {
+  border-color: var(--color-primary);
+}
+
+main details[open] {
+  box-shadow: 0 2px 8px rgba(30, 41, 59, 0.06);
+}
+
+main summary {
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--color-text);
+  list-style-position: outside;
+}
+
+main summary:hover {
+  color: var(--color-primary);
+}
+
+main details p {
+  margin-top: var(--space-2);
+  margin-bottom: 0;
+}
+
+@media (min-width: 1024px) {
+  .pagina-institucional p {
+    font-size: 1.02rem;
+  }
+}

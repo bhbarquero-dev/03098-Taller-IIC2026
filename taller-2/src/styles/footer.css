@@ -36,11 +36,14 @@ footer {
   grid-area: boletin;
 }
 
-.footer-contacto {
-  grid-area: contacto;
-}
-
+/* El contacto es un <address> hijo directo de <footer>, sin envoltorio de
+   maquetación: se le dan aquí las mismas propiedades de la clase base. */
 footer address {
+  grid-area: contacto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  align-items: flex-start;
   font-style: normal;
 }
 
@@ -148,7 +151,7 @@ footer form button:hover {
 
 /* Address */
 footer address p {
-  margin: 0 0 var(--space-1) 0;
+  margin: 0;
   font-size: 0.95rem;
   color: #E2E8F0;
 }
@@ -173,6 +176,12 @@ footer address p {
     grid-template-areas:
       "compania redes boletin contacto"
       "copyright copyright copyright copyright";
+  }
+
+  /* El contacto no lleva encabezado (igual que en Taller 1): se compensa el
+     alto del h2 de las otras columnas para que las cuatro alineen arriba. */
+  footer address {
+    padding-top: calc(1.05rem * 1.5 + var(--space-2));
   }
 
   footer h2 {
