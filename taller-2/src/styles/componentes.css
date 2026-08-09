@@ -1,0 +1,82 @@
+/* TarjetaPropiedad (src/components/TarjetaPropiedad.jsx) — usada en Inicio y Catálogo */
+.tarjeta-propiedad {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-base);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+  overflow: hidden;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.tarjeta-propiedad:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+}
+
+.tarjeta-propiedad figure {
+  margin: 0;
+}
+
+.tarjeta-propiedad img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.tarjeta-propiedad h4,
+.tarjeta-propiedad p {
+  margin-left: var(--space-2);
+  margin-right: var(--space-2);
+}
+
+.tarjeta-propiedad h4 {
+  margin-top: var(--space-2);
+  margin-bottom: 4px;
+}
+
+.tarjeta-propiedad p {
+  font-size: 0.9rem;
+  margin-bottom: var(--space-1);
+}
+
+.tarjeta-propiedad .btn-secundario {
+  margin: auto var(--space-2) var(--space-2);
+  text-align: center;
+}
+
+/* Tarjeta de enlace simple (tipo de alojamiento), tarjeta completa clickeable */
+.tarjeta-tipo {
+  position: relative;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-base);
+  padding: var(--space-2);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.tarjeta-tipo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+}
+
+.tarjeta-tipo h3 {
+  margin-top: 0;
+}
+
+.tarjeta-tipo h3 a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.tarjeta-tipo h3 a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.tarjeta-tipo p {
+  margin-bottom: 0;
+  color: var(--color-text);
+  font-size: 0.9rem;
+}

@@ -32,6 +32,7 @@ Plan vivo, sin fechas objetivo — el orden de las tareas es el orden lógico re
 - [x] `footer.css` — 4 columnas Grid en desktop, 2 en tablet, 1 móvil; `.footer-seccion` clase base (flex), específicas (`footer-compania`, `footer-redes`, `footer-boletin`, `footer-contacto`) solo definen grid-area.
 - [x] `formularios.css` — campo flex, inputs/selects/textareas, variantes de botón (primario/secundario/peligro/éxito).
 - **Decisión (06-ago-2026):** descendant selectors + base classes pattern (ej. `.footer-seccion` + `.footer-compania`). No responsive.css separado — media queries inline en cada archivo. Breakpoints 640px (tablet) y 1024px (desktop), mobile-first.
+- **Decisión (09-ago-2026):** CSS por página además de los 6 archivos base — `componentes.css` (componentes reutilizables en 2+ páginas, ej. `.tarjeta-propiedad`) + un archivo por página con estilos propios (`inicio.css`, `catalogo.css`, `propiedad.css`, ...). Evita que `layout.css` se vuelva cajón de sastre conforme se migran más bloques. Detalle en `CLAUDE.md` sección "Arquitectura CSS".
 
 ### 2b. Arquitectura de datos (abstraction layer, listo para reemplazar con API)
 
@@ -47,7 +48,7 @@ Cada bloque: migrar HTML semántico de taller-1 → JSX, aplicar/refinar CSS, in
 - [ ] **Bloque A — Público / institucional**: `index`, `sobre-nosotros`, `ayuda`, `politicas-privacidad`, `terminos-uso`, `blog`, `blog-post`, `promociones`.
   - Status: `Index.jsx` migrado (hero+buscador, destacados con cards, tipos de alojamiento, banner anfitrión, recomendaciones) — 09-ago-2026. Resto de páginas del bloque siguen como stubs/pendientes.
 - [ ] **Bloque B — Catálogo, detalle y reserva**: `catalogo`, `propiedad-detalle`, `reserva`, `reserva-resumen`, `reserva-confirmacion`.
-  - Status: `Catalogo.jsx` migrado (filtros vía `useSearchParams` → tipo, precio_min/max, capacidad, valoracion_min, servicios; resultados con `TarjetaPropiedad`) — 09-ago-2026. Falta `propiedad-detalle`, `reserva*` (los links "Ver detalles y reservar" apuntan a `/propiedades/:id`, ruta aún no registrada en `App.jsx`).
+  - Status: `Catalogo.jsx` y `PropiedadDetalle.jsx` migrados (ruta `/propiedades/:id` registrada) — 09-ago-2026. `PropiedadDetalle` incluye galería (`propiedad.imagenes[]`, nuevo campo — antes era `imagen` singular), calendario de disponibilidad calculado contra `reservas` (sembradas para propiedad id 1), reseñas (`resenas.js`, ahora con datos de ejemplo sembrados), favoritos con persistencia real vía `actualizarUsuario`, y form de consulta (solo UI, sin entidad "consultas" en el data store). Falta `reserva`, `reserva-resumen`, `reserva-confirmacion` — el botón "Reservar esta propiedad" apunta a `/reserva?id=X`, ruta aún no registrada.
 - [ ] **Bloque C — Autenticación y cuenta**: `registro`, `inicio-sesion`, `perfil`, `mis-reservas`, `publicar-propiedad`.
 - [ ] **Bloque D — Panel anfitrión**: `anfitrion-panel`, `anfitrion-propiedades`, `anfitrion-propiedad-editar`, `anfitrion-reservas`, `anfitrion-consultas`, `anfitrion-consulta-responder`, `anfitrion-propiedad-resenas`, `anfitrion-resena-responder`.
 - [ ] **Bloque E — Panel administrador**: `admin-panel`, `admin-usuarios`, `admin-usuario-editar`, `admin-alojamientos`, `admin-alojamiento-editar`, `admin-reservas`, `admin-reserva-editar`, `admin-promociones`, `admin-promocion-editar`, `admin-blog`, `admin-blog-post-editar`, `admin-reportes`.

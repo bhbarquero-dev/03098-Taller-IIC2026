@@ -194,27 +194,3 @@ input[type="file"] {
   border-bottom: 1px solid #CBD5E1;
 }
 
-/* Form de búsqueda del hero (Inicio): en escritorio, campos en una sola línea horizontal */
-@media (min-width: 1024px) {
-  .formulario-busqueda fieldset {
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-rows: auto auto;
-    align-items: end;
-    gap: var(--space-2);
-  }
-
-  .formulario-busqueda fieldset label {
-    margin-top: 0;
-  }
-
-  .formulario-busqueda fieldset input {
-    width: auto;
-    min-width: 160px;
-  }
-
-  .formulario-busqueda button {
-    grid-row: 1 / span 2;
-    align-self: end;
-  }
-}

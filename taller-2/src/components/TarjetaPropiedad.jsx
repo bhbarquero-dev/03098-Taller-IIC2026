@@ -4,7 +4,7 @@ export default function TarjetaPropiedad({ propiedad }) {
   return (
     <article className="tarjeta-propiedad">
       <figure>
-        <img src={`/imagenes/${propiedad.imagen}`} alt={`Vista de ${propiedad.nombre} en ${propiedad.ubicacion}`} />
+        <img src={`/imagenes/${propiedad.imagenes[0]}`} alt={`Vista de ${propiedad.nombre} en ${propiedad.ubicacion}`} />
         <figcaption className="sr-only">{propiedad.nombre} — {propiedad.ubicacion}</figcaption>
       </figure>
       <h4>{propiedad.nombre}</h4>

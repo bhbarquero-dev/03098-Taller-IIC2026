@@ -83,10 +83,12 @@ Los estilos se dividen por responsabilidad, no en un archivo monolítico:
 
 - **`variables.css`** — Tokens de diseño: colores (`--color-primary`, `--color-accent`), tipografía (`--font-heading`, `--font-body`), espaciado (`--space-1/2/3`), radio (`--radius-base`), transiciones.
 - **`base.css`** — Reset ligero, estilos globales de elementos HTML (p, a, ul, button, input).
-- **`layout.css`** — Estructura de grid body (header/main/footer), `main` padding/max-width.
+- **`layout.css`** — Solo lo compartido entre TODAS las páginas: grid body (header/main/footer), `main` padding/max-width/margin entre secciones. Nada específico de una página va aquí.
 - **`header.css`** — Encabezado, navegación del header, estilos de h1-h6 (títulos en toda la app).
 - **`footer.css`** — Footer, secciones (compañía, redes, boletín, contacto), clases base `.footer-seccion`.
-- **`formularios.css`** — Campos (input, select, textarea), labels, botones (.btn-primario, .btn-secundario), validación.
+- **`formularios.css`** — Campos (input, select, textarea), labels, botones (.btn-primario, .btn-secundario), validación. Solo lo genérico/reutilizable en cualquier form — un form específico de una página (ej. layout especial del buscador de Inicio) va en el CSS de esa página, no aquí.
+- **`componentes.css`** — Estilos de componentes reutilizables de `src/components/` usados en 2+ páginas (ej. `.tarjeta-propiedad` de `TarjetaPropiedad.jsx`, usado en Inicio y Catálogo). Si un componente solo se usa en una página, su estilo va en el CSS de esa página, no aquí.
+- **CSS por página** (`inicio.css`, `catalogo.css`, `propiedad.css`, ...) — **Decisión (09-ago-2026):** cada página con estilos propios (grids de sección, layouts específicos, tablas, banners) tiene su propio archivo en `src/styles/`, importado en `App.jsx`. Evita que `layout.css` se vuelva un cajón de sastre con estilos de todas las páginas mezclados. Un archivo nuevo por página a medida que se migra (Bloques C/D/E pendientes tendrán los suyos: `perfil.css`, `anfitrion-panel.css`, etc. según aplique).
 
 ### Selectores descendentes y specificity
 
@@ -140,10 +142,14 @@ src/
 └── styles/
     ├── variables.css
     ├── base.css
-    ├── layout.css
+    ├── layout.css      # Solo lo compartido (body grid, main)
     ├── header.css
     ├── footer.css
-    └── formularios.css
+    ├── formularios.css # Solo lo genérico de forms
+    ├── componentes.css # Componentes reutilizables en 2+ páginas
+    ├── inicio.css      # Estilos propios de Index.jsx
+    ├── catalogo.css    # Estilos propios de Catalogo.jsx
+    └── propiedad.css   # Estilos propios de PropiedadDetalle.jsx
 ```
 
 ## Control de versiones

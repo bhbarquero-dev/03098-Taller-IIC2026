@@ -1,0 +1,141 @@
+/* Form de búsqueda del hero: en escritorio, campos en una sola línea horizontal */
+@media (min-width: 1024px) {
+  .formulario-busqueda fieldset {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: auto auto;
+    align-items: end;
+    gap: var(--space-2);
+  }
+
+  .formulario-busqueda fieldset label {
+    margin-top: 0;
+  }
+
+  .formulario-busqueda fieldset input {
+    width: auto;
+    min-width: 160px;
+  }
+
+  .formulario-busqueda button {
+    grid-row: 1 / span 2;
+    align-self: end;
+  }
+}
+
+/* Alojamientos destacados: grid, headings/promociones a ancho completo */
+.destacados {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-content: start;
+  row-gap: var(--space-3);
+  column-gap: var(--space-2);
+}
+
+.destacados h2,
+.destacados h3 {
+  grid-column: 1 / -1;
+}
+
+/* Promociones: tarjeta de color sólido, sin imagen */
+.tarjeta-promocion {
+  border-radius: var(--radius-base);
+  padding: var(--space-2);
+  color: #fff;
+  background-color: var(--color-primary);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.tarjeta-promocion:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.18);
+}
+
+.tarjeta-promocion:nth-of-type(even) {
+  background-color: var(--color-accent);
+}
+
+.tarjeta-promocion h4 {
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+
+.tarjeta-promocion p {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}
+
+.tarjeta-promocion-badge {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.85rem;
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: var(--radius-base);
+  padding: 2px 8px;
+  margin-bottom: var(--space-1) !important;
+}
+
+/* CTA anfitrión: banner de color sólido */
+.banner-anfitrion {
+  background-color: var(--color-accent);
+  border-radius: var(--radius-base);
+  padding: var(--space-3);
+  text-align: center;
+}
+
+.banner-anfitrion h2 {
+  color: #fff;
+  border-bottom-color: rgba(255, 255, 255, 0.4);
+}
+
+.banner-anfitrion p {
+  color: #fff;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.banner-anfitrion .btn-primario {
+  font-size: 1.05rem;
+  padding: 14px 32px;
+}
+
+/* Tipos de alojamiento y recomendaciones — grillas de .tarjeta-tipo / .tarjeta-propiedad */
+.tipos-lista,
+.recomendaciones {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-content: start;
+  row-gap: var(--space-3);
+  column-gap: var(--space-2);
+}
+
+.tipos-lista h2,
+.recomendaciones h2 {
+  grid-column: 1 / -1;
+}
+
+/* Tablet (640px) */
+@media (min-width: 640px) {
+  .tipos-lista {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .destacados,
+  .recomendaciones {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop (1024px) */
+@media (min-width: 1024px) {
+  .tipos-lista {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .destacados,
+  .recomendaciones {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
