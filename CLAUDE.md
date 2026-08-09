@@ -2,6 +2,8 @@
 
 Contexto para trabajar en cualquiera de los talleres de este curso. Instrucciones específicas de cada taller viven en su propio `README.md` (`taller-1/README.md`, `taller-2/README.md`); esto es lo que aplica a ambos.
 
+**Alcance activo de trabajo: solo `taller-2/`.** `taller-1/` es referencia — se lee, se consulta su estructura semántica, no se modifica (ver regla dura abajo).
+
 ## Curso
 
 - **03098 – Programación Web**, Ingeniería Informática, UNED. II Cuatrimestre 2026.
@@ -22,7 +24,9 @@ Contexto para trabajar en cualquiera de los talleres de este curso. Instruccione
 
 ## Regla dura: `taller-1/` no se toca
 
-`taller-1/` es la base entregada y evaluada de forma independiente. **No se edita, no se refactoriza, no se le agregan archivos** salvo que el usuario lo pida explícitamente. `taller-2/` construye sobre lo que hay ahí (las 34 páginas HTML de `taller-1/parte-2/` son el punto de partida real, pese a que `taller-1/README.md` diga "Parte 2 pendiente" — ese README quedó desactualizado y no se corrige porque implicaría tocar taller-1).
+`taller-1/` es la base entregada y evaluada de forma independiente. **No se edita, no se refactoriza, no se le agregan archivos** salvo que el usuario lo pida explícitamente. Es fuente de referencia, no de trabajo: se lee para extraer estructura semántica (ver sección "Estructura semántica vinculante de Taller 1" abajo), nunca se escribe en ella. `taller-2/` construye sobre lo que hay ahí (las 34 páginas HTML de `taller-1/parte-2/` son el punto de partida real, pese a que `taller-1/README.md` diga "Parte 2 pendiente" — ese README quedó desactualizado y no se corrige porque implicaría tocar taller-1).
+
+Toda modificación de código en este repo ocurre en `taller-2/`. Si una tarea pareciera requerir tocar algo dentro de `taller-1/`, detenerse y confirmar con el usuario antes de escribir ahí.
 
 ## Reglas de integridad académica (aplican a ambos talleres)
 

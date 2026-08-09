@@ -17,7 +17,8 @@ export function inicializarDatosEjemplo() {
       precioNoche: 85,
       valoracion: 4.8,
       servicios: ['wifi', 'piscina', 'parqueo'],
-      descripcion: 'Villa lujosa con vistas al océano'
+      descripcion: 'Villa lujosa con vistas al océano',
+      imagen: 'sala.jpg'
     },
     {
       id: 2,
@@ -29,7 +30,8 @@ export function inicializarDatosEjemplo() {
       valoracion: 4.6,
       servicios: ['wifi', 'cocina'],
       descripcion: 'Apartamento moderno en el corazón de la ciudad',
-      anfitrionId: 2
+      anfitrionId: 2,
+      imagen: 'cocina.jpg'
     },
     {
       id: 3,
@@ -40,7 +42,68 @@ export function inicializarDatosEjemplo() {
       precioNoche: 60,
       valoracion: 4.9,
       servicios: ['wifi', 'chimenea', 'parking'],
-      descripcion: 'Cabaña rústica rodeada de naturaleza'
+      descripcion: 'Cabaña rústica rodeada de naturaleza',
+      imagen: 'montaña.jpg'
+    },
+    {
+      id: 4,
+      nombre: 'Glamping Costa Azul',
+      tipo: 'glamping',
+      ubicacion: 'Puntarenas, Costa Rica',
+      capacidad: 3,
+      precioNoche: 70,
+      valoracion: 4.7,
+      servicios: ['wifi', 'vista al mar', 'desayuno'],
+      descripcion: 'Glamping frente al mar con comodidades de hotel',
+      imagen: 'playa.jpg'
+    },
+    {
+      id: 5,
+      nombre: 'Casa de playa',
+      tipo: 'casa',
+      ubicacion: 'Puntarenas, Costa Rica',
+      capacidad: 8,
+      precioNoche: 95,
+      valoracion: 4.5,
+      servicios: ['wifi', 'parqueo', 'cocina'],
+      descripcion: 'Casa amplia a pocos pasos de la playa, ideal para grupos',
+      imagen: 'playa.jpg'
+    },
+    {
+      id: 6,
+      nombre: 'Apartamento',
+      tipo: 'apartamento',
+      ubicacion: 'Heredia, Costa Rica',
+      capacidad: 2,
+      precioNoche: 35,
+      valoracion: 4.4,
+      servicios: ['wifi', 'cocina'],
+      descripcion: 'Apartamento acogedor cerca del Valle Central, ideal para estadías cortas',
+      imagen: 'cuarto.jpg'
+    },
+    {
+      id: 7,
+      nombre: 'Villa con piscina',
+      tipo: 'villa',
+      ubicacion: 'Guanacaste, Costa Rica',
+      capacidad: 6,
+      precioNoche: 110,
+      valoracion: 4.9,
+      servicios: ['wifi', 'piscina', 'parqueo'],
+      descripcion: 'Villa exclusiva con piscina privada en Guanacaste',
+      imagen: 'sala.jpg'
+    },
+    {
+      id: 8,
+      nombre: 'Cabaña de montaña',
+      tipo: 'cabaña',
+      ubicacion: 'Monteverde, Costa Rica',
+      capacidad: 4,
+      precioNoche: 65,
+      valoracion: 4.8,
+      servicios: ['wifi', 'chimenea'],
+      descripcion: 'Cabaña tranquila rodeada de montaña, sugerida por destinos de montaña',
+      imagen: 'montaña.jpg'
     }
   ]
 
@@ -107,6 +170,18 @@ export function inicializarDatosEjemplo() {
       titulo: 'Estadías largas',
       descripcion: 'Beneficios especiales para reservas de más de 7 noches.',
       descuento: 20
+    },
+    {
+      id: 3,
+      titulo: 'Experiencias con anfitrión',
+      descripcion: 'Tours y actividades ofrecidas directamente por los anfitriones locales.',
+      descuento: 0
+    },
+    {
+      id: 4,
+      titulo: 'Primera reserva',
+      descripcion: '10% de descuento en tu primera reserva en StayBooker 360.',
+      descuento: 10
     }
   ]
 

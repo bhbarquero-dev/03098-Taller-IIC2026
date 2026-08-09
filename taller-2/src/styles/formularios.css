@@ -73,8 +73,13 @@ textarea.campo-invalido:focus {
   font-weight: 500;
 }
 
-/* Botones */
-button {
+/* Botones — también aplica a <a> usados como botón (ej. Link de React Router) */
+button,
+a.btn-primario,
+a.btn-secundario,
+a.btn-peligro,
+a.btn-exito {
+  display: inline-block;
   border: none;
   border-radius: var(--radius-base);
   font-family: var(--font-body);
@@ -85,11 +90,19 @@ button {
   transition: background-color var(--transition-base), color var(--transition-base), transform 120ms ease;
 }
 
-button:hover {
+button:hover,
+a.btn-primario:hover,
+a.btn-secundario:hover,
+a.btn-peligro:hover,
+a.btn-exito:hover {
   transform: translateY(-1px);
 }
 
-button:active {
+button:active,
+a.btn-primario:active,
+a.btn-secundario:active,
+a.btn-peligro:active,
+a.btn-exito:active {
   transform: translateY(0);
 }
 
@@ -168,4 +181,29 @@ input[type="file"] {
   padding: 8px 0;
   border: none;
   border-bottom: 1px solid #CBD5E1;
+}
+
+/* Form de búsqueda del hero (Inicio): en escritorio, campos en una sola línea horizontal */
+@media (min-width: 1024px) {
+  .formulario-busqueda fieldset {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: auto auto;
+    align-items: end;
+    gap: var(--space-2);
+  }
+
+  .formulario-busqueda fieldset label {
+    margin-top: 0;
+  }
+
+  .formulario-busqueda fieldset input {
+    width: auto;
+    min-width: 160px;
+  }
+
+  .formulario-busqueda button {
+    grid-row: 1 / span 2;
+    align-self: end;
+  }
 }

@@ -2,13 +2,18 @@ import { leer, guardar } from './storage'
 
 export function obtenerPropiedades(filtros = {}) {
   // TODO: reemplazar con fetch GET /api/propiedades?...
-  const propiedades = leer('propiedades')
+  let propiedades = leer('propiedades')
 
   if (filtros.destino) {
-    return propiedades.filter(p =>
+    propiedades = propiedades.filter(p =>
       p.ubicacion.toLowerCase().includes(filtros.destino.toLowerCase())
     )
   }
+
+  if (filtros.tipo) {
+    propiedades = propiedades.filter(p => p.tipo === filtros.tipo)
+  }
+
   return propiedades
 }
 
