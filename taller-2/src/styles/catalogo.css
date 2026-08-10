@@ -5,8 +5,16 @@ main:has(> aside) {
   gap: var(--space-3);
 }
 
-main:has(> aside) > h2 {
+main:has(> aside) > h2,
+main:has(> aside) > .promocion-activa {
   grid-column: 1 / -1;
+}
+
+.promocion-activa {
+  background-color: var(--color-surface);
+  border-left: 4px solid var(--color-accent);
+  border-radius: var(--radius-base);
+  padding: var(--space-2);
 }
 
 .filtro-aside {

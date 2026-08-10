@@ -49,7 +49,6 @@ export default function Layout() {
           <ul>
             {estaAutenticado ? (
               <>
-                <li className="saludo-usuario">{t('header.saludo', { nombre: usuario.nombre })}</li>
                 <li><NavLink to="/perfil">{t('header.perfil')}</NavLink></li>
                 <li><NavLink to="/mis-reservas">{t('header.misReservas')}</NavLink></li>
                 <li>

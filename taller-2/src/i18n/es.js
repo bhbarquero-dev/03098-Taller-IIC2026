@@ -103,7 +103,6 @@ export default {
     moneda: 'Moneda',
     monedaCrc: 'Colones (CRC)',
     monedaUsd: 'Dólares (USD)',
-    saludo: 'Hola, {nombre}',
     tituloConSaludo: 'StayBooker 360 — Hola, {nombre}'
   },
 
@@ -183,6 +182,7 @@ export default {
     capacidad: 'Capacidad de huéspedes',
     destino: 'Ubicación o destino',
     destinoPlaceholder: 'Ciudad o región',
+    promocion: 'Promoción',
     valoracion: 'Valoración mínima',
     valoracion4: '4 o más',
     valoracion45: '4.5 o más',

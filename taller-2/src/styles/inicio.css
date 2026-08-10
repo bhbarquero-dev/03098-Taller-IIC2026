@@ -37,8 +37,10 @@
   grid-column: 1 / -1;
 }
 
-/* Promociones: tarjeta de color sólido, sin imagen */
-.tarjeta-promocion {
+/* Promociones: tarjeta de color sólido, sin imagen.
+   Escopado bajo .destacados: .tarjeta-promocion también existe en promociones.css
+   (tarjeta clara con borde) y sin este scope gana por orden de import en App.jsx. */
+.destacados .tarjeta-promocion {
   border-radius: var(--radius-base);
   padding: var(--space-2);
   color: #fff;
@@ -46,26 +48,31 @@
   transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
-.tarjeta-promocion:hover {
+.destacados .tarjeta-promocion:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.18);
 }
 
-.tarjeta-promocion:nth-of-type(even) {
+.destacados .tarjeta-promocion:nth-of-type(even) {
   background-color: var(--color-accent);
+  color: var(--color-text);
 }
 
-.tarjeta-promocion h4 {
+.destacados .tarjeta-promocion:nth-of-type(even) .tarjeta-promocion-badge {
+  background-color: rgba(15, 23, 42, 0.12);
+}
+
+.destacados .tarjeta-promocion h4 {
   margin-top: 0;
   margin-bottom: 4px;
 }
 
-.tarjeta-promocion p {
+.destacados .tarjeta-promocion p {
   margin-bottom: 0;
   font-size: 0.9rem;
 }
 
-.tarjeta-promocion-badge {
+.destacados .tarjeta-promocion-badge {
   display: inline-block;
   font-family: var(--font-heading);
   font-weight: 700;

@@ -51,7 +51,9 @@ export default function Catalogo() {
     <>
       <h2>{t('catalogo.titulo')}</h2>
 
-      {promocionActiva && <p>{promocionActiva.titulo} — {promocionActiva.beneficio}</p>}
+      {promocionActiva && (
+        <p className="promocion-activa">{promocionActiva.titulo} — {promocionActiva.beneficio}</p>
+      )}
 
       <aside className="filtro-aside" aria-labelledby="filtro-heading">
         <h3 id="filtro-heading">{t('catalogo.filtrarTitulo')}</h3>
@@ -79,6 +81,14 @@ export default function Catalogo() {
 
             <label htmlFor="filtro-destino">{t('catalogo.destino')}</label>
             <input type="text" id="filtro-destino" name="destino" placeholder={t('catalogo.destinoPlaceholder')} defaultValue={searchParams.get('destino') || ''} />
+
+            <label htmlFor="filtro-promocion">{t('catalogo.promocion')}</label>
+            <select id="filtro-promocion" name="promocion" defaultValue={searchParams.get('promocion') || ''}>
+              <option value="">{t('catalogo.cualquiera')}</option>
+              {(promociones || []).map((promocion) => (
+                <option value={promocion.id} key={promocion.id}>{promocion.titulo}</option>
+              ))}
+            </select>
 
             <label htmlFor="filtro-valoracion">{t('catalogo.valoracion')}</label>
             <select id="filtro-valoracion" name="valoracion_min" defaultValue={searchParams.get('valoracion_min') || ''}>
