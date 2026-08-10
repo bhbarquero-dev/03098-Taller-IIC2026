@@ -8,7 +8,6 @@ import { leer, guardar, siguienteId } from './storage'
 export const TIPOS_INCIDENCIA = ['contenido', 'pago', 'convivencia', 'tecnica', 'otra']
 
 export function obtenerIncidencias(filtros = {}) {
-  // TODO: reemplazar con fetch GET /api/incidencias
   let incidencias = leer('incidencias')
 
   if (filtros.entidad) {
@@ -22,7 +21,6 @@ export function obtenerIncidencias(filtros = {}) {
 }
 
 export function crearIncidencia(datos) {
-  // TODO: reemplazar con fetch POST /api/incidencias
   const incidencias = leer('incidencias')
 
   const nueva = {

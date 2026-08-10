@@ -1,7 +1,6 @@
 import { leer, guardar, siguienteId } from './storage'
 
 export function obtenerResenas(filtros = {}) {
-  // TODO: reemplazar con fetch GET /api/resenas
   let resenas = leer('resenas')
 
   if (filtros.propiedadId) {
@@ -19,12 +18,10 @@ export function obtenerResenas(filtros = {}) {
 }
 
 export function obtenerResena(id) {
-  // TODO: reemplazar con fetch GET /api/resenas/:id
   return leer('resenas').find(r => r.id === parseInt(id))
 }
 
 export function crearResena(datos) {
-  // TODO: reemplazar con fetch POST /api/resenas
   const resenas = leer('resenas')
 
   const nueva = {
@@ -41,7 +38,6 @@ export function crearResena(datos) {
 }
 
 export function actualizarResena(id, datos) {
-  // TODO: reemplazar con fetch PATCH /api/resenas/:id
   const resenas = leer('resenas')
   const indice = resenas.findIndex(r => r.id === parseInt(id))
   if (indice === -1) return null

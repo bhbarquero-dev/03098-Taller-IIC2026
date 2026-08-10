@@ -8,7 +8,6 @@ import { leer, guardar, siguienteId } from './storage'
 export const ESTADOS_PROPIEDAD = ['pendiente', 'publicada', 'rechazada', 'inactiva']
 
 export function obtenerPropiedades(filtros = {}) {
-  // TODO: reemplazar con fetch GET /api/propiedades?...
   let propiedades = leer('propiedades')
 
   // El catálogo público solo ve propiedades aprobadas; los paneles piden todas.
@@ -64,12 +63,10 @@ export function obtenerPropiedades(filtros = {}) {
 }
 
 export function obtenerPropiedad(id) {
-  // TODO: reemplazar con fetch GET /api/propiedades/:id
   return leer('propiedades').find(p => p.id === parseInt(id))
 }
 
 export function crearPropiedad(datos) {
-  // TODO: reemplazar con fetch POST /api/propiedades
   const propiedades = leer('propiedades')
 
   const nueva = {
@@ -90,7 +87,6 @@ export function crearPropiedad(datos) {
 }
 
 export function actualizarPropiedad(id, datos) {
-  // TODO: reemplazar con fetch PATCH /api/propiedades/:id
   const propiedades = leer('propiedades')
   const indice = propiedades.findIndex(p => p.id === parseInt(id))
   if (indice === -1) return null
@@ -101,7 +97,6 @@ export function actualizarPropiedad(id, datos) {
 }
 
 export function eliminarPropiedad(id) {
-  // TODO: reemplazar con fetch DELETE /api/propiedades/:id
   const propiedades = leer('propiedades')
   guardar('propiedades', propiedades.filter(p => p.id !== parseInt(id)))
 }

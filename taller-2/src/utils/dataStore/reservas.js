@@ -4,7 +4,6 @@ export const ESTADOS_RESERVA = ['pendiente', 'confirmada', 'finalizada', 'cancel
 export const ESTADOS_PAGO = ['pendiente', 'pagado', 'reembolsado']
 
 export function obtenerReservas(filtros = {}) {
-  // TODO: reemplazar con fetch GET /api/reservas
   let reservas = leer('reservas')
 
   if (filtros.usuarioId) {
@@ -27,12 +26,10 @@ export function obtenerReservas(filtros = {}) {
 }
 
 export function obtenerReserva(id) {
-  // TODO: reemplazar con fetch GET /api/reservas/:id
   return leer('reservas').find(r => r.id === parseInt(id))
 }
 
 export function crearReserva(datos) {
-  // TODO: reemplazar con fetch POST /api/reservas
   const reservas = leer('reservas')
 
   const nueva = {
@@ -49,7 +46,6 @@ export function crearReserva(datos) {
 }
 
 export function actualizarReserva(id, datos) {
-  // TODO: reemplazar con fetch PATCH /api/reservas/:id
   const reservas = leer('reservas')
   const indice = reservas.findIndex(r => r.id === parseInt(id))
   if (indice === -1) return null
@@ -60,7 +56,6 @@ export function actualizarReserva(id, datos) {
 }
 
 export function cancelarReserva(id, motivo = '') {
-  // TODO: reemplazar con fetch PATCH /api/reservas/:id/cancelar
   return actualizarReserva(id, { estado: 'cancelada', motivoCancelacion: motivo })
 }
 

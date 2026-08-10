@@ -76,7 +76,7 @@ const { usuario, iniciarSesion, cerrarSesion } = useSesion()
 const { t, formatearMoneda, formatearFecha } = useIdioma()
 ```
 
-**Migración a backend:** Reemplazar solo el interior de los módulos de entidad (fetch en lugar de localStorage). Componentes sin cambios; firmas de función idénticas. Cada función lleva su `// TODO: reemplazar con fetch …`.
+**Migración a backend:** Reemplazar solo el interior de los módulos de entidad (fetch en lugar de localStorage). Componentes sin cambios; firmas de función idénticas.
 
 **Inicialización:** `App.jsx` llama `inicializarDatosEjemplo()`. La semilla está versionada con la clave `staybooker_version_datos`: si no coincide con la constante `VERSION_DATOS` de `semilla.js`, se limpia el storage y se vuelve a sembrar — **subir la versión también cierra la sesión activa**, porque el borrado alcanza a todas las claves con el prefijo.
 

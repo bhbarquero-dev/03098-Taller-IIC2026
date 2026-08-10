@@ -5,9 +5,6 @@
  * `{ clave, params }` con la clave del mensaje en el diccionario de i18n.
  * Se devuelven claves y no textos para que la validación sea independiente del
  * idioma activo: el componente traduce al renderizar.
- *
- * TODO (back-end): estas mismas reglas deberán repetirse del lado del servidor;
- * la validación de cliente es la primera barrera, no la única.
  */
 
 export const PATRON_CORREO = /^[^\s@]+@[^\s@]+\.[^\s@]+$/

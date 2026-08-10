@@ -1,7 +1,6 @@
 import { leer, guardar, siguienteId } from './storage'
 
 export function obtenerUsuarios(filtros = {}) {
-  // TODO: reemplazar con fetch GET /api/usuarios
   let usuarios = leer('usuarios')
 
   if (filtros.rol) {
@@ -15,7 +14,6 @@ export function obtenerUsuarios(filtros = {}) {
 }
 
 export function obtenerUsuario(id) {
-  // TODO: reemplazar con fetch GET /api/usuarios/:id
   return obtenerUsuarios().find(u => u.id === parseInt(id))
 }
 
@@ -24,7 +22,6 @@ export function obtenerUsuarioPorCorreo(correo) {
 }
 
 export function crearUsuario(datos) {
-  // TODO: reemplazar con fetch POST /api/usuarios (registro)
   const usuarios = obtenerUsuarios()
 
   const nuevo = {
@@ -43,7 +40,6 @@ export function crearUsuario(datos) {
 }
 
 export function actualizarUsuario(id, datos) {
-  // TODO: reemplazar con fetch PATCH /api/usuarios/:id
   const usuarios = obtenerUsuarios()
   const indice = usuarios.findIndex(u => u.id === parseInt(id))
   if (indice === -1) return null
@@ -54,13 +50,11 @@ export function actualizarUsuario(id, datos) {
 }
 
 export function eliminarUsuario(id) {
-  // TODO: reemplazar con fetch DELETE /api/usuarios/:id
   const usuarios = obtenerUsuarios()
   guardar('usuarios', usuarios.filter(u => u.id !== parseInt(id)))
 }
 
 export function verificarCredenciales(correo, clave) {
-  // TODO: reemplazar con fetch POST /api/auth/login
   return obtenerUsuarios().find(u => (
     u.correo.toLowerCase() === String(correo).toLowerCase() && u.clave === clave
   ))

@@ -6,7 +6,6 @@ import { leer, guardar, siguienteId } from './storage'
  */
 
 export function obtenerConsultas(filtros = {}) {
-  // TODO: reemplazar con fetch GET /api/consultas
   let consultas = leer('consultas')
 
   if (filtros.anfitrionId) {
@@ -23,12 +22,10 @@ export function obtenerConsultas(filtros = {}) {
 }
 
 export function obtenerConsulta(id) {
-  // TODO: reemplazar con fetch GET /api/consultas/:id
   return leer('consultas').find(c => c.id === parseInt(id))
 }
 
 export function crearConsulta(datos) {
-  // TODO: reemplazar con fetch POST /api/consultas
   const consultas = leer('consultas')
 
   const nueva = {
@@ -45,7 +42,6 @@ export function crearConsulta(datos) {
 }
 
 export function responderConsulta(id, respuesta) {
-  // TODO: reemplazar con fetch PATCH /api/consultas/:id/responder
   const consultas = leer('consultas')
   const indice = consultas.findIndex(c => c.id === parseInt(id))
   if (indice === -1) return null
