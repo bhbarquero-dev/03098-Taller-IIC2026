@@ -1,10 +1,11 @@
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useDataStore } from '../hooks/useDataStore'
+import { useSesion } from '../context/SesionContext'
 import { useIdioma } from '../context/IdiomaContext'
 import { useTituloPagina } from '../hooks/useTituloPagina'
 import { useFormulario } from '../hooks/useFormulario'
 import { MensajeError } from '../components/MensajeCampo'
-import { hayTraslape } from '../utils/dataStore'
+import { hayTraslape, obtenerMetodosPago } from '../utils/dataStore'
 import { contarNoches } from '../utils/calendario'
 import {
   fechaNoPasada,
@@ -21,6 +22,7 @@ export default function Reserva() {
   const { propiedadId } = useParams()
   const navigate = useNavigate()
   const location = useLocation()
+  const { usuario } = useSesion()
   const { t, formatearMoneda } = useIdioma()
 
   const { datos: propiedad, cargando } = useDataStore('propiedad', { id: propiedadId })
@@ -29,6 +31,7 @@ export default function Reserva() {
 
   // Al volver desde el resumen con "Modificar", los valores vuelven precargados.
   const previos = location.state?.reserva
+  const metodosGuardados = obtenerMetodosPago({ usuarioId: usuario.id })
 
   const formulario = useFormulario({
     prefijoId: 'reserva',
@@ -36,27 +39,35 @@ export default function Reserva() {
       entrada: previos?.entrada || '',
       salida: previos?.salida || '',
       huespedes: previos?.huespedes || '',
+      pago_metodo: metodosGuardados.length > 0 ? String(metodosGuardados[0].id) : 'nueva',
       pago_nombre: previos?.pagoNombre || '',
       pago_numero: '',
       pago_vencimiento: '',
       pago_cvv: ''
     },
-    validarValores: (valores) => validar({
-      entrada: fechaNoPasada(valores.entrada),
-      salida: fechaPosterior(valores.entrada, valores.salida) ||
-        (hayTraslape(Number(propiedadId), valores.entrada, valores.salida)
-          ? { clave: 'validacion.fechasOcupadas' }
-          : null),
-      huespedes: numeroEnRango(valores.huespedes, { min: 1, max: propiedad?.capacidad }) ||
-        (Number(valores.huespedes) > (propiedad?.capacidad || 0)
-          ? { clave: 'validacion.capacidadExcedida', params: { n: propiedad?.capacidad } }
-          : null),
-      pago_nombre: requerido(valores.pago_nombre),
-      pago_numero: tarjetaNumeroValido(valores.pago_numero),
-      pago_vencimiento: tarjetaVencimientoValido(valores.pago_vencimiento),
-      pago_cvv: tarjetaCvvValido(valores.pago_cvv)
-    }),
+    validarValores: (valores) => {
+      const usaGuardado = valores.pago_metodo !== 'nueva'
+      return validar({
+        entrada: fechaNoPasada(valores.entrada),
+        salida: fechaPosterior(valores.entrada, valores.salida) ||
+          (hayTraslape(Number(propiedadId), valores.entrada, valores.salida)
+            ? { clave: 'validacion.fechasOcupadas' }
+            : null),
+        huespedes: numeroEnRango(valores.huespedes, { min: 1, max: propiedad?.capacidad }) ||
+          (Number(valores.huespedes) > (propiedad?.capacidad || 0)
+            ? { clave: 'validacion.capacidadExcedida', params: { n: propiedad?.capacidad } }
+            : null),
+        pago_nombre: usaGuardado ? null : requerido(valores.pago_nombre),
+        pago_numero: usaGuardado ? null : tarjetaNumeroValido(valores.pago_numero),
+        pago_vencimiento: usaGuardado ? null : tarjetaVencimientoValido(valores.pago_vencimiento),
+        pago_cvv: tarjetaCvvValido(valores.pago_cvv)
+      })
+    },
     alEnviar: (valores) => {
+      const metodoGuardado = valores.pago_metodo !== 'nueva'
+        ? metodosGuardados.find((metodo) => metodo.id === Number(valores.pago_metodo))
+        : null
+
       // El paso de datos entre vistas se hace del lado del cliente, con el
       // estado de navegación de React Router: nada viaja a un servidor.
       navigate('/reserva-resumen', {
@@ -66,8 +77,10 @@ export default function Reserva() {
             entrada: valores.entrada,
             salida: valores.salida,
             huespedes: Number(valores.huespedes),
-            pagoNombre: valores.pago_nombre,
-            ultimosDigitos: String(valores.pago_numero).replace(/\D/g, '').slice(-4),
+            pagoNombre: metodoGuardado ? metodoGuardado.nombreTitular : valores.pago_nombre,
+            ultimosDigitos: metodoGuardado
+              ? metodoGuardado.ultimosDigitos
+              : String(valores.pago_numero).replace(/\D/g, '').slice(-4),
             noches: contarNoches(valores.entrada, valores.salida)
           }
         }
@@ -133,31 +146,53 @@ export default function Reserva() {
         <fieldset>
           <legend>{t('reserva.pagoLeyenda')}</legend>
 
-          <label htmlFor="reserva-pago_nombre">{t('reserva.pagoNombre')}</label>
-          <input type="text" {...propsCampo('pago_nombre')} value={valores.pago_nombre} required />
-          <MensajeError error={errores.pago_nombre} id="reserva-pago_nombre-error" />
+          {metodosGuardados.length > 0 && (
+            <>
+              <label htmlFor="reserva-pago_metodo">{t('reserva.pagoMetodoGuardado')}</label>
+              <select id="reserva-pago_metodo" {...propsCampo('pago_metodo')} value={valores.pago_metodo}>
+                {metodosGuardados.map((metodo) => (
+                  <option value={String(metodo.id)} key={metodo.id}>
+                    {t('reserva.pagoMetodoEtiqueta', {
+                      alias: metodo.alias || metodo.nombreTitular,
+                      digitos: metodo.ultimosDigitos,
+                      vencimiento: metodo.vencimiento
+                    })}
+                  </option>
+                ))}
+                <option value="nueva">{t('reserva.pagoMetodoNueva')}</option>
+              </select>
+            </>
+          )}
 
-          <label htmlFor="reserva-pago_numero">{t('reserva.pagoNumero')}</label>
-          <input
-            type="text"
-            {...propsCampo('pago_numero')}
-            value={valores.pago_numero}
-            inputMode="numeric"
-            maxLength={19}
-            required
-          />
-          <MensajeError error={errores.pago_numero} id="reserva-pago_numero-error" />
+          {valores.pago_metodo === 'nueva' && (
+            <>
+              <label htmlFor="reserva-pago_nombre">{t('reserva.pagoNombre')}</label>
+              <input type="text" {...propsCampo('pago_nombre')} value={valores.pago_nombre} required />
+              <MensajeError error={errores.pago_nombre} id="reserva-pago_nombre-error" />
 
-          <label htmlFor="reserva-pago_vencimiento">{t('reserva.pagoVencimiento')}</label>
-          <input
-            type="text"
-            {...propsCampo('pago_vencimiento')}
-            value={valores.pago_vencimiento}
-            placeholder="MM/AA"
-            maxLength={5}
-            required
-          />
-          <MensajeError error={errores.pago_vencimiento} id="reserva-pago_vencimiento-error" />
+              <label htmlFor="reserva-pago_numero">{t('reserva.pagoNumero')}</label>
+              <input
+                type="text"
+                {...propsCampo('pago_numero')}
+                value={valores.pago_numero}
+                inputMode="numeric"
+                maxLength={19}
+                required
+              />
+              <MensajeError error={errores.pago_numero} id="reserva-pago_numero-error" />
+
+              <label htmlFor="reserva-pago_vencimiento">{t('reserva.pagoVencimiento')}</label>
+              <input
+                type="text"
+                {...propsCampo('pago_vencimiento')}
+                value={valores.pago_vencimiento}
+                placeholder="MM/AA"
+                maxLength={5}
+                required
+              />
+              <MensajeError error={errores.pago_vencimiento} id="reserva-pago_vencimiento-error" />
+            </>
+          )}
 
           <label htmlFor="reserva-pago_cvv">{t('reserva.pagoCvv')}</label>
           <input

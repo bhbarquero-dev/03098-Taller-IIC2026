@@ -44,6 +44,11 @@ const OPERACIONES = {
     crear: dataStore.crearResena,
     actualizar: dataStore.actualizarResena
   },
+  metodosPago: { listar: (filtros) => dataStore.obtenerMetodosPago(filtros) },
+  metodoPago: {
+    crear: dataStore.crearMetodoPago,
+    eliminar: dataStore.eliminarMetodoPago
+  },
   promociones: { listar: (filtros) => dataStore.obtenerPromociones(filtros) },
   promocion: {
     obtener: dataStore.obtenerPromocion,

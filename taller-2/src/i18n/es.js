@@ -264,6 +264,9 @@ export default {
     resumenDescuento: 'Promoción aplicada: {titulo} ({descuento}% de descuento)',
     resumenPago: 'Método de pago: tarjeta de crédito terminada en {digitos}',
     resumenCancelacion: 'Política de cancelación: {politica}',
+    pagoMetodoGuardado: 'Método de pago guardado',
+    pagoMetodoEtiqueta: '{alias} · terminada en {digitos} · vence {vencimiento}',
+    pagoMetodoNueva: 'Usar otra tarjeta',
     modificar: 'Modificar datos de la reserva',
     confirmar: 'Confirmar reserva',
     sinDatos: 'No hay una reserva en curso. Empezá eligiendo un alojamiento en el catálogo.',
@@ -331,7 +334,19 @@ export default {
     panelAdmin: 'Panel de administración',
     favoritosTitulo: 'Alojamientos favoritos',
     sinFavoritos: 'Todavía no tienes alojamientos favoritos.',
-    datosReiniciados: 'Los datos de ejemplo se restauraron.'
+    datosReiniciados: 'Los datos de ejemplo se restauraron.',
+    metodosPagoTitulo: 'Métodos de pago',
+    metodosPagoLeyenda: 'Agregar tarjeta',
+    metodosPagoAlias: 'Alias (opcional)',
+    metodosPagoNombreTitular: 'Nombre en la tarjeta',
+    metodosPagoNumero: 'Número de tarjeta de crédito',
+    metodosPagoVencimiento: 'Fecha de vencimiento',
+    metodosPagoAgregar: 'Agregar método de pago',
+    metodosPagoGuardado: 'Método de pago guardado.',
+    metodosPagoSinGuardados: 'Todavía no tienes métodos de pago guardados.',
+    metodosPagoEtiqueta: '{alias} · terminada en {digitos} · vence {vencimiento}',
+    metodosPagoEliminar: 'Eliminar',
+    metodosPagoConfirmarEliminar: '¿Seguro que quieres eliminar este método de pago?'
   },
 
   misReservas: {

@@ -1,6 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useDataStore } from '../hooks/useDataStore'
-import { useSesion } from '../context/SesionContext'
 import { useIdioma } from '../context/IdiomaContext'
 import { useTituloPagina } from '../hooks/useTituloPagina'
 
@@ -11,7 +10,6 @@ function numeroComprobante(id) {
 
 export default function ReservaConfirmacion() {
   const location = useLocation()
-  const { usuario } = useSesion()
   const { t, formatearMoneda, formatearFecha } = useIdioma()
   useTituloPagina('reserva.confirmacionTitulo')
 
@@ -36,8 +34,6 @@ export default function ReservaConfirmacion() {
   return (
     <section aria-labelledby="confirmacion-heading">
       <h2 id="confirmacion-heading">{t('reserva.confirmacionTitulo')}</h2>
-
-      <p className="mensaje-exito" role="status">{t('header.saludo', { nombre: usuario.nombre })}</p>
 
       <article>
         <h3>{t('reserva.comprobanteTitulo')}</h3>

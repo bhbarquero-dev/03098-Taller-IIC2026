@@ -263,6 +263,9 @@ export default {
     resumenDescuento: 'Deal applied: {titulo} ({descuento}% off)',
     resumenPago: 'Payment method: credit card ending in {digitos}',
     resumenCancelacion: 'Cancellation policy: {politica}',
+    pagoMetodoGuardado: 'Saved payment method',
+    pagoMetodoEtiqueta: '{alias} · ending in {digitos} · expires {vencimiento}',
+    pagoMetodoNueva: 'Use another card',
     modificar: 'Edit booking details',
     confirmar: 'Confirm booking',
     sinDatos: 'There is no booking in progress. Start by choosing a place in the catalogue.',
@@ -330,7 +333,19 @@ export default {
     panelAdmin: 'Admin dashboard',
     favoritosTitulo: 'Saved properties',
     sinFavoritos: 'You have not saved any properties yet.',
-    datosReiniciados: 'The sample data has been restored.'
+    datosReiniciados: 'The sample data has been restored.',
+    metodosPagoTitulo: 'Payment methods',
+    metodosPagoLeyenda: 'Add a card',
+    metodosPagoAlias: 'Nickname (optional)',
+    metodosPagoNombreTitular: 'Name on the card',
+    metodosPagoNumero: 'Credit card number',
+    metodosPagoVencimiento: 'Expiry date',
+    metodosPagoAgregar: 'Add payment method',
+    metodosPagoGuardado: 'Payment method saved.',
+    metodosPagoSinGuardados: 'You have not saved any payment methods yet.',
+    metodosPagoEtiqueta: '{alias} · ending in {digitos} · expires {vencimiento}',
+    metodosPagoEliminar: 'Remove',
+    metodosPagoConfirmarEliminar: 'Are you sure you want to remove this payment method?'
   },
 
   misReservas: {

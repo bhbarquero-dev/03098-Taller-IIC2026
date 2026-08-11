@@ -7,12 +7,22 @@ import { useFormulario } from '../hooks/useFormulario'
 import { MensajeError, MensajeExito } from '../components/MensajeCampo'
 import {
   actualizarUsuario,
+  crearMetodoPago,
+  eliminarMetodoPago,
+  obtenerMetodosPago,
   obtenerPropiedad,
   obtenerPropiedades,
   obtenerUsuario,
   reiniciarDatosEjemplo
 } from '../utils/dataStore'
-import { correoValido, requerido, telefonoValido, validar } from '../utils/validaciones'
+import {
+  correoValido,
+  requerido,
+  tarjetaNumeroValido,
+  tarjetaVencimientoValido,
+  telefonoValido,
+  validar
+} from '../utils/validaciones'
 import { TIPOS_DESTACADOS, claveTipo } from '../utils/catalogos'
 
 export default function Perfil() {
@@ -22,6 +32,8 @@ export default function Perfil() {
   useTituloPagina('perfil.datosTitulo')
 
   const [favoritos, setFavoritos] = useState([])
+  const [metodosPago, setMetodosPago] = useState([])
+  const [confirmandoEliminarPago, setConfirmandoEliminarPago] = useState(null)
   const [mensajePreferencias, setMensajePreferencias] = useState(null)
   const [mensajeBienvenida, setMensajeBienvenida] = useState(location.state?.mensaje || null)
   const [preferencias, setPreferencias] = useState({
@@ -49,7 +61,35 @@ export default function Perfil() {
     }
   })
 
-  // Los favoritos se releen del registro persistente, no de la sesión.
+  const formularioPago = useFormulario({
+    prefijoId: 'metodo-pago',
+    valoresIniciales: { alias: '', nombreTitular: '', numero: '', vencimiento: '' },
+    validarValores: (v) => validar({
+      nombreTitular: requerido(v.nombreTitular),
+      numero: tarjetaNumeroValido(v.numero),
+      vencimiento: tarjetaVencimientoValido(v.vencimiento)
+    }),
+    alEnviar: (v, { setExito, setValores }) => {
+      crearMetodoPago({
+        usuarioId: usuario.id,
+        alias: v.alias.trim(),
+        nombreTitular: v.nombreTitular.trim(),
+        ultimosDigitos: String(v.numero).replace(/\D/g, '').slice(-4),
+        vencimiento: v.vencimiento
+      })
+      setMetodosPago(obtenerMetodosPago({ usuarioId: usuario.id }))
+      setExito(t('perfil.metodosPagoGuardado'))
+      setValores({ alias: '', nombreTitular: '', numero: '', vencimiento: '' })
+    }
+  })
+
+  function eliminarMetodo(id) {
+    eliminarMetodoPago(id)
+    setMetodosPago(obtenerMetodosPago({ usuarioId: usuario.id }))
+    setConfirmandoEliminarPago(null)
+  }
+
+  // Los favoritos y los métodos de pago se releen del registro persistente, no de la sesión.
   useEffect(() => {
     if (!usuario) return
     const registro = obtenerUsuario(usuario.id)
@@ -60,6 +100,7 @@ export default function Perfil() {
       telefono: registro.telefono || ''
     })
     setFavoritos((registro.favoritos || []).map((id) => obtenerPropiedad(id)).filter(Boolean))
+    setMetodosPago(obtenerMetodosPago({ usuarioId: usuario.id }))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [usuario?.id])
 
@@ -96,6 +137,14 @@ export default function Perfil() {
   const mostrarPanelAdmin = usuario.rol === 'administrador'
 
   const { valores, errores, exito, setExito, manejarEnvio, propsCampo } = datos
+  const {
+    valores: valoresPago,
+    errores: erroresPago,
+    exito: exitoPago,
+    setExito: setExitoPago,
+    manejarEnvio: manejarEnvioPago,
+    propsCampo: propsCampoPago
+  } = formularioPago
 
   return (
     <>
@@ -123,6 +172,89 @@ export default function Perfil() {
             <MensajeExito mensaje={exito} alOcultar={() => setExito(null)} />
 
             <button type="submit" className="btn-primario">{t('comun.guardar')}</button>
+          </fieldset>
+        </form>
+      </section>
+
+      <section aria-labelledby="metodos-pago-heading">
+        <h2 id="metodos-pago-heading">{t('perfil.metodosPagoTitulo')}</h2>
+
+        {metodosPago.length > 0 ? (
+          <ul>
+            {metodosPago.map((metodo) => (
+              <li key={metodo.id}>
+                {t('perfil.metodosPagoEtiqueta', {
+                  alias: metodo.alias || metodo.nombreTitular,
+                  digitos: metodo.ultimosDigitos,
+                  vencimiento: metodo.vencimiento
+                })}
+                {' '}
+                {confirmandoEliminarPago === metodo.id ? (
+                  <span className="grupo-botones" role="alert">
+                    {t('perfil.metodosPagoConfirmarEliminar')}
+                    <button type="button" className="btn-peligro" onClick={() => eliminarMetodo(metodo.id)}>
+                      {t('comun.seguroSi')}
+                    </button>
+                    <button
+                      type="button"
+                      className="btn-secundario"
+                      onClick={() => setConfirmandoEliminarPago(null)}
+                    >
+                      {t('comun.seguroNo')}
+                    </button>
+                  </span>
+                ) : (
+                  <button
+                    type="button"
+                    className="btn-peligro"
+                    onClick={() => setConfirmandoEliminarPago(metodo.id)}
+                  >
+                    {t('perfil.metodosPagoEliminar')}
+                  </button>
+                )}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>{t('perfil.metodosPagoSinGuardados')}</p>
+        )}
+
+        <form onSubmit={manejarEnvioPago} noValidate>
+          <fieldset>
+            <legend>{t('perfil.metodosPagoLeyenda')}</legend>
+
+            <label htmlFor="metodo-pago-alias">{t('perfil.metodosPagoAlias')}</label>
+            <input type="text" {...propsCampoPago('alias')} value={valoresPago.alias} />
+
+            <label htmlFor="metodo-pago-nombreTitular">{t('perfil.metodosPagoNombreTitular')}</label>
+            <input type="text" {...propsCampoPago('nombreTitular')} value={valoresPago.nombreTitular} required />
+            <MensajeError error={erroresPago.nombreTitular} id="metodo-pago-nombreTitular-error" />
+
+            <label htmlFor="metodo-pago-numero">{t('perfil.metodosPagoNumero')}</label>
+            <input
+              type="text"
+              {...propsCampoPago('numero')}
+              value={valoresPago.numero}
+              inputMode="numeric"
+              maxLength={19}
+              required
+            />
+            <MensajeError error={erroresPago.numero} id="metodo-pago-numero-error" />
+
+            <label htmlFor="metodo-pago-vencimiento">{t('perfil.metodosPagoVencimiento')}</label>
+            <input
+              type="text"
+              {...propsCampoPago('vencimiento')}
+              value={valoresPago.vencimiento}
+              placeholder="MM/AA"
+              maxLength={5}
+              required
+            />
+            <MensajeError error={erroresPago.vencimiento} id="metodo-pago-vencimiento-error" />
+
+            <MensajeExito mensaje={exitoPago} alOcultar={() => setExitoPago(null)} />
+
+            <button type="submit" className="btn-primario">{t('perfil.metodosPagoAgregar')}</button>
           </fieldset>
         </form>
       </section>
